@@ -457,8 +457,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -560,6 +560,9 @@ namespace Monitor
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox_clientTX = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox_CommandActivation = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.button_SendProtocolSerialPort = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
             this.groupBox41 = new System.Windows.Forms.GroupBox();
@@ -811,9 +814,6 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_CommandActivation = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1381,6 +1381,7 @@ namespace Monitor
             // 
             // tabPage_SerialPort
             // 
+            this.tabPage_SerialPort.Controls.Add(this.button_OpenPort);
             this.tabPage_SerialPort.Controls.Add(this.groupBox_SendSerialOrMonitorCommands);
             this.tabPage_SerialPort.Controls.Add(this.gbPortSettings);
             this.tabPage_SerialPort.Controls.Add(this.groupBox5);
@@ -1485,7 +1486,6 @@ namespace Monitor
             // 
             // gbPortSettings
             // 
-            this.gbPortSettings.Controls.Add(this.button_OpenPort);
             this.gbPortSettings.Controls.Add(this.button_ReScanComPort);
             this.gbPortSettings.Controls.Add(this.cmb_PortName);
             this.gbPortSettings.Controls.Add(this.cmbBaudRate);
@@ -1501,17 +1501,17 @@ namespace Monitor
             this.gbPortSettings.Margin = new System.Windows.Forms.Padding(2);
             this.gbPortSettings.Name = "gbPortSettings";
             this.gbPortSettings.Padding = new System.Windows.Forms.Padding(2);
-            this.gbPortSettings.Size = new System.Drawing.Size(557, 83);
+            this.gbPortSettings.Size = new System.Drawing.Size(465, 83);
             this.gbPortSettings.TabIndex = 10;
             this.gbPortSettings.TabStop = false;
             this.gbPortSettings.Text = "COM Serial Port Settings";
             // 
             // button_OpenPort
             // 
-            this.button_OpenPort.Location = new System.Drawing.Point(463, 33);
+            this.button_OpenPort.Location = new System.Drawing.Point(1321, 25);
             this.button_OpenPort.Margin = new System.Windows.Forms.Padding(2);
             this.button_OpenPort.Name = "button_OpenPort";
-            this.button_OpenPort.Size = new System.Drawing.Size(83, 32);
+            this.button_OpenPort.Size = new System.Drawing.Size(83, 71);
             this.button_OpenPort.TabIndex = 11;
             this.button_OpenPort.Text = "Open ";
             this.button_OpenPort.UseVisualStyleBackColor = true;
@@ -2146,6 +2146,40 @@ namespace Monitor
             this.groupBox_clientTX.Text = "Send Data";
             this.groupBox_clientTX.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.groupBox_clientTX_PreviewKeyDown);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Maroon;
+            this.label14.Location = new System.Drawing.Point(257, 85);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 21);
+            this.label14.TabIndex = 19;
+            this.label14.Text = "01, 02, 04";
+            // 
+            // textBox_CommandActivation
+            // 
+            this.textBox_CommandActivation.Location = new System.Drawing.Point(156, 83);
+            this.textBox_CommandActivation.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_CommandActivation.MaxLength = 5;
+            this.textBox_CommandActivation.Name = "textBox_CommandActivation";
+            this.textBox_CommandActivation.Size = new System.Drawing.Size(92, 26);
+            this.textBox_CommandActivation.TabIndex = 17;
+            this.textBox_CommandActivation.Text = "01";
+            this.textBox_CommandActivation.TextChanged += new System.EventHandler(this.textBox_CommandActivation_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 87);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(133, 18);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Command activation";
+            // 
             // button_SendProtocolSerialPort
             // 
             this.button_SendProtocolSerialPort.Location = new System.Drawing.Point(120, 151);
@@ -2495,7 +2529,7 @@ namespace Monitor
             this.textBox_CommandHelp.Size = new System.Drawing.Size(359, 437);
             this.textBox_CommandHelp.TabIndex = 114;
             this.textBox_CommandHelp.TabStop = false;
-            this.textBox_CommandHelp.Text = "General Format:\r\nCommand arg1 arg2 arg3...\r\n\r\nFor example:\r\nRunCommand 12 abc\r\n";
+            this.textBox_CommandHelp.Text = "General Format:\r\nCommand arg1 arg2 arg3...\r\n\r\nFor example:\r\nCommand 12 abc\r\n";
             // 
             // listBox_CLI_ALLCommands
             // 
@@ -2900,17 +2934,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea3.AxisX.Title = "Freq";
-            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.AxisY.Title = "Power [dBm]";
-            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend3);
+            chartArea2.AxisX.Title = "Freq";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.AxisY.Title = "Power [dBm]";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -4841,40 +4875,6 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
-            // 
-            // textBox_CommandActivation
-            // 
-            this.textBox_CommandActivation.Location = new System.Drawing.Point(156, 83);
-            this.textBox_CommandActivation.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_CommandActivation.MaxLength = 5;
-            this.textBox_CommandActivation.Name = "textBox_CommandActivation";
-            this.textBox_CommandActivation.Size = new System.Drawing.Size(92, 26);
-            this.textBox_CommandActivation.TabIndex = 17;
-            this.textBox_CommandActivation.Text = "01";
-            this.textBox_CommandActivation.TextChanged += new System.EventHandler(this.textBox_CommandActivation_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 87);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(133, 18);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Command activation";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Maroon;
-            this.label14.Location = new System.Drawing.Point(257, 85);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 21);
-            this.label14.TabIndex = 19;
-            this.label14.Text = "01, 02, 04";
             // 
             // MainForm
             // 
@@ -7853,7 +7853,7 @@ namespace Monitor
 
                             KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
                             KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
-                            KratosProtocolLogger.LogMessage(Color.Blue, Color.LightGray, Result.ToString(), true, false);
+                            KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, Result.ToString(), true, false);
 
 
 
@@ -8099,15 +8099,15 @@ namespace Monitor
 
 
 
-            if (CloseSerialPortTimer == true)
-            {
-                CloseSerialPortConter++;
-                if (CloseSerialPortConter > 1)
-                {
-                    SerialPort_DataReceived(null, null);
-                    CloseSerialPortConter = 0;
-                }
-            }
+            //if (CloseSerialPortTimer == true)
+            //{
+            //    CloseSerialPortConter++;
+            //    if (CloseSerialPortConter > 1)
+            //    {
+            //        SerialPort_DataReceived(null, null);
+            //        CloseSerialPortConter = 0;
+            //    }
+            //}
             try
             {
                 if (m_Server != null)
@@ -8193,9 +8193,9 @@ namespace Monitor
         }
 
         private static int LastConNum = 0;
-        private static int CloseSerialPortConter = 0;
-        private bool CloseSerialPortTimer = false;
-        private bool ComPortClosing = false;
+        //private static int CloseSerialPortConter = 0;
+        //private bool CloseSerialPortTimer = false;
+        //private bool ComPortClosing = false;
 
         //List<byte> temp_serialBuff = new List<byte>();
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -8207,36 +8207,36 @@ namespace Monitor
                 return;
             }
 
-            if (ComPortClosing == true)
-            {
-                //Thread.Sleep(400);
-                serialPort.Close();
-                ComPortClosing = false;
+            //if (ComPortClosing == true)
+            //{
+            //    //Thread.Sleep(400);
+            //    serialPort.Close();
+            //    ComPortClosing = false;
 
-                //checkBox_ComportOpen.Checked = false;
+            //    //checkBox_ComportOpen.Checked = false;
 
-                cmbBaudRate.Invoke(new EventHandler(delegate
-                {
-                    //button_OpenPort.Checked = false;
-                    button_OpenPort.Enabled = true;
-                    gbPortSettings.Enabled = true;
+            //    cmbBaudRate.Invoke(new EventHandler(delegate
+            //    {
+            //        //button_OpenPort.Checked = false;
+            //        button_OpenPort.Enabled = true;
+            //        gbPortSettings.Enabled = true;
 
-                    button_OpenPort.BackColor = default;
-                    label_SerialPortConnected.BackColor = default;
-                    label_SerialPortStatus.Text = "";
+            //        button_OpenPort.BackColor = default;
+            //        label_SerialPortConnected.BackColor = default;
+            //        label_SerialPortStatus.Text = "";
 
-                    cmbBaudRate.Enabled = true;
-                    cmbDataBits.Enabled = true;
-                    cmbParity.Enabled = true;
-                    cmb_PortName.Enabled = true;
-                    cmb_StopBits.Enabled = true;
-                }));
+            //        //cmbBaudRate.Enabled = true;
+            //        //cmbDataBits.Enabled = true;
+            //        //cmbParity.Enabled = true;
+            //        //cmb_PortName.Enabled = true;
+            //        //cmb_StopBits.Enabled = true;
+            //    }));
 
-                CloseSerialPortTimer = false;
+            //    CloseSerialPortTimer = false;
 
-                SerialPortLogger.LogMessage(Color.Orange, Color.LightGray, "Serial port Closed", New_Line = true, Show_Time = true);
-                return;
-            }
+            //    SerialPortLogger.LogMessage(Color.Orange, Color.LightGray, "Serial port Closed", New_Line = true, Show_Time = true);
+            //    return;
+            //}
 
             // This method will be called when there is data waiting in the port's buffer
             Thread.Sleep(300);
@@ -8265,7 +8265,7 @@ namespace Monitor
 
                 string IncomingHexMessage = ConvertByteArraytToString(buffer);
 
-                SerialPortLogger.LogMessage(Color.Blue, Color.LightGray, IncomingHexMessage, New_Line = true, Show_Time = false);
+                SerialPortLogger.LogMessage(Color.Blue, Color.Azure, IncomingHexMessage, New_Line = true, Show_Time = false);
 
                 ParseKratosIncomeFrame(buffer);
             }
@@ -8281,7 +8281,7 @@ namespace Monitor
 
                 foreach (string line in lines)
                 {
-                    SerialPortLogger.LogMessage(Color.Blue, Color.LightGray, line, New_Line = true, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Azure, line, New_Line = true, Show_Time = false);
                 }
 
 
@@ -11072,16 +11072,17 @@ namespace Monitor
 
         private void Button_OpenPort_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (serialPort.IsOpen == false)
             {
-                try
-                {
+                
                     button_OpenPort.BackColor = Color.Yellow;
                     label_SerialPortConnected.BackColor = Color.Yellow;
 
-                    ComPortClosing = false;
+                //    ComPortClosing = false;
 
-                    CloseSerialPortTimer = false;
+                  //  CloseSerialPortTimer = false;
 
 
 
@@ -11098,16 +11099,9 @@ namespace Monitor
                     serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), cmb_StopBits.Text);
                     serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), cmbParity.Text);
                     serialPort.PortName = cmb_PortName.Text;
-
-
-
-
                     serialPort.WriteTimeout = 500;
-                    serialPort.Open();
 
-                    //ListenBox.Checked = false;
-                    //groupBox_ServerSettings.Enabled = false;
-                    IsTimedOutTimerEnabled = false;
+                    serialPort.Open();
 
                     SerialPortLogger.LogMessage(Color.Green, Color.LightGray,
                      " Serial port Opened with  " + " ,PortName = " + serialPort.PortName
@@ -11123,11 +11117,7 @@ namespace Monitor
                     label_SerialPortStatus.Text = cmb_PortName.Text + "   \n" + cmbBaudRate.Text;
 
 
-                    cmbBaudRate.Enabled = false;
-                    cmbDataBits.Enabled = false;
-                    cmbParity.Enabled = false;
-                    cmb_PortName.Enabled = false;
-                    cmb_StopBits.Enabled = false;
+                    gbPortSettings.Enabled = false;
 
                     Monitor.Properties.Settings.Default.Comport_BaudRate = cmbBaudRate.Text;
                     Monitor.Properties.Settings.Default.Comport_DataBits = cmbDataBits.Text;
@@ -11138,16 +11128,7 @@ namespace Monitor
                     Monitor.Properties.Settings.Default.Save();
 
 
-                }
-                catch (Exception ex)
-                {
-                    //checkBox_ComportOpen.Checked = false;
-
-                    //SerialException = true;
-
-                    SerialPortLogger.LogMessage(Color.Red, Color.LightGray, ex.Message.ToString(), New_Line = true, Show_Time = true);
-                    return;
-                }
+               
 
 
 
@@ -11156,21 +11137,34 @@ namespace Monitor
             else
             {
 
-                ComPortClosing = true;
+                //  ComPortClosing = true;
+                
                 button_OpenPort.BackColor = default;
                 label_SerialPortConnected.BackColor = default;
                 label_SerialPortStatus.Text = "";
-                gbPortSettings.Enabled = false;
+                gbPortSettings.Enabled = true;
+                serialPort.Close();
                 //checkBox_ComportOpen.Enabled = false;
                 //button_OpenPort.Text = "Open";
 
-                CloseSerialPortTimer = true;
-                CloseSerialPortConter = 0;
+                //CloseSerialPortTimer = true;
+                //CloseSerialPortConter = 0;
 
 
 
 
                 //groupBox_ServerSettings.Enabled = true;
+            }
+
+            }
+            catch (Exception ex)
+            {
+                //checkBox_ComportOpen.Checked = false;
+
+                //SerialException = true;
+
+                SerialPortLogger.LogMessage(Color.Red, Color.LightGray, ex.Message.ToString(), New_Line = true, Show_Time = true);
+                return;
             }
         }
 
@@ -16613,6 +16607,7 @@ This Process can take 1 minute.";
                 else
                 {
                     SerialPortLogger.LogMessage(Color.Red, Color.LightGray, "Not Hex data format for example: aabbcc is 0xAA 0xBB 0xCC", New_Line = true, Show_Time = false);
+                    return;
                 }
 
                 if (IsSent == true)
@@ -16632,7 +16627,7 @@ This Process can take 1 minute.";
                     SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
                     SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, ConvertByteArraytToString(buffer), true, false);
 
-
+                    TxLabelTimerBlink = 5;
 
                 }
 
@@ -16661,15 +16656,17 @@ This Process can take 1 minute.";
 
 
 
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Azure, "", New_Line = false, Show_Time = true);
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Azure, "Tx:>", false, false);
+                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
+                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
                     SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, Encoding.ASCII.GetString(buffer), true, false);
+
+                    TxLabelTimerBlink = 5;
 
                 }
 
 
             }
-            TxLabelTimerBlink = 5;
+            
         }
 
         private void serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
