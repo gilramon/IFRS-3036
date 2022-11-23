@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mIFRS_3036", "mIFRS_3036.csproj", "{CF77DA73-EF59-409A-9BF3-8E26451D2593}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainForm", "MainForm.csproj", "{CF77DA73-EF59-409A-9BF3-8E26451D2593}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gil_Server", "Gil_Server\Gil_Server.csproj", "{BFC4E17B-94ED-4AFA-9DD9-59245E641BEC}"
 EndProject
