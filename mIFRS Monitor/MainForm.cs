@@ -17250,7 +17250,7 @@ ReadReg 48BF ---> Read from Register 48BF
                 //{
                 //    version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 //}
-
+                Text = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
                 label_Projectname.Text = Text;
                 Text = Text + " [ " + ", Version: " + version + ", Compiled: " + RetrieveLinkerTimestamp().ToString() + " ]";
                 
