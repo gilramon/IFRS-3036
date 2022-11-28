@@ -403,6 +403,7 @@ namespace Monitor
         private TextBox textBox_CommandActivation;
         private Label label12;
         private Label label14;
+        private CheckBox checkBox_WriteTotalbytes;
         private static readonly string PREAMBLE = "23";
 
 
@@ -814,6 +815,7 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_WriteTotalbytes = new System.Windows.Forms.CheckBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1666,6 +1668,7 @@ namespace Monitor
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.checkBox_WriteTotalbytes);
             this.groupBox5.Controls.Add(this.groupBox_Timer);
             this.groupBox5.Controls.Add(this.groupBox_Stopwatch);
             this.groupBox5.Controls.Add(this.checkBox_RxHex);
@@ -4876,6 +4879,17 @@ namespace Monitor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
             // 
+            // checkBox_WriteTotalbytes
+            // 
+            this.checkBox_WriteTotalbytes.AutoSize = true;
+            this.checkBox_WriteTotalbytes.Location = new System.Drawing.Point(710, 18);
+            this.checkBox_WriteTotalbytes.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox_WriteTotalbytes.Name = "checkBox_WriteTotalbytes";
+            this.checkBox_WriteTotalbytes.Size = new System.Drawing.Size(137, 23);
+            this.checkBox_WriteTotalbytes.TabIndex = 108;
+            this.checkBox_WriteTotalbytes.Text = "Write total bytes";
+            this.checkBox_WriteTotalbytes.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -6844,6 +6858,7 @@ namespace Monitor
 
         private byte[] StringToByteArray(string hex)
         {
+            hex = Regex.Replace(hex, @"\s+", "");
             try
             {
                 return Enumerable.Range(0, hex.Length)
@@ -8198,6 +8213,10 @@ namespace Monitor
         //private bool ComPortClosing = false;
 
         //List<byte> temp_serialBuff = new List<byte>();
+        void WriteBufferInfo(byte[] i_buffer)
+        {
+            SerialPortLogger.LogMessage(Color.Green, Color.White, String.Format("Data: [{0}] ,Total bytes: [{1}]",ConvertByteArraytToString(i_buffer) ,i_buffer.Length.ToString()), New_Line = true, Show_Time = false);
+        }
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
@@ -8267,6 +8286,8 @@ namespace Monitor
 
                 SerialPortLogger.LogMessage(Color.Blue, Color.Azure, IncomingHexMessage, New_Line = true, Show_Time = false);
 
+
+
                 ParseKratosIncomeFrame(buffer);
             }
             else
@@ -8286,6 +8307,11 @@ namespace Monitor
 
 
                 ParseSerialPortString(IncomingString);
+            }
+
+            if (checkBox_WriteTotalbytes.Checked == true)
+            {
+                WriteBufferInfo(buffer);
             }
 
 
@@ -8927,244 +8953,12 @@ namespace Monitor
             }
         }
 
-        private void Button2_Click_1(object sender, EventArgs e)
-        {
-            bool IsSent = false;
-            if (checkBox_SendHexdata.Checked == true)
-            {
-                string tempStr = textBox_SendSerialPort.Text.Replace(" ", "");
 
-                byte[] buffer = StringToByteArray(tempStr);
+      
 
-                if (buffer != null)
-                {
-                    IsSent = SerialPortSendData(buffer);
-                }
-                else
-                {
-                    SerialPortLogger.LogMessage(Color.Red, Color.LightGray, "Not Hex data format for example: aabbcc is 0xAA 0xBB 0xCC", New_Line = true, Show_Time = false);
-                }
 
-                if (IsSent == true)
-                {
-                    UpdateSerialPortHistory(textBox_SendSerialPort.Text);
 
-                    //    UpdateSerialPortComboBox();
-
-                    if (checkBox_DeleteCommand.Checked == true)
-                    {
-                        textBox_SendSerialPort.Text = "";
-                    }
-
-
-
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, ConvertByteArraytToString(buffer), true, false);
-
-
-
-                }
-
-
-            }
-            else
-            {
-
-
-                string tempStr = textBox_SendSerialPort.Text.Replace("\\n", "\n");
-                tempStr = tempStr.Replace("\\r", "\r");
-                byte[] buffer = Encoding.ASCII.GetBytes(tempStr);
-
-                IsSent = SerialPortSendData(buffer);
-
-                if (IsSent == true)
-                {
-                    UpdateSerialPortHistory(textBox_SendSerialPort.Text);
-
-                    //    UpdateSerialPortComboBox();
-
-                    if (checkBox_DeleteCommand.Checked == true)
-                    {
-                        textBox_SendSerialPort.Text = "";
-                    }
-
-
-
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                    SerialPortLogger.LogMessage(Color.Purple, Color.Yellow, Encoding.ASCII.GetString(buffer), true, false);
-
-                }
-
-
-            }
-            TxLabelTimerBlink = 5;
-
-
-
-
-
-
-        }
-
-        private void Button29_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox_GenerateConfigFile_Clear();
-                bool IsAllGreen = CheckAllTextboxConfig();
-
-                if (IsAllGreen == false)
-                {
-                    //textBox_GenerateConfigFile.Text = " Some Of filds are Red!!!";
-                    //textBox_GenerateConfigFile.BackColor = Color.Red;
-                    return;
-                }
-                else
-                {
-                    //textBox_GenerateConfigFile.BackColor = Color.LightGreen;
-                }
-
-                //  string UnitID = textBox_ConfigUnitID.Text;
-                string UnitID = "00000000000";
-                string Config_file_name = "Config_Date-" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + "_UnitID-" + UnitID + ".txt";
-
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog
-                {
-                    Filter = "Text Files | *.txt",
-                    FilterIndex = 1,
-                    RestoreDirectory = true
-                };
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    File.Delete(saveFileDialog1.FileName);
-                    using (StreamWriter sw = File.AppendText(saveFileDialog1.FileName))
-                    {
-                        //List<S1_Protocol.S1_Messege_Builder.Command_Description> ret = S1_Protocol.S1_Messege_Builder.NonCommand_GetALLconfigCommandsDescription();
-
-                        sw.WriteLine("// " + "Date: " + DateTime.Now.ToString() + "  Unit ID: " + UnitID);
-                        sw.WriteLine();
-                        sw.WriteLine();
-
-                        string SendStr = GenerateConfigCommand();
-
-                        SendStr = SendStr.Replace(";", ",");
-
-                        byte[] buf = Encoding.ASCII.GetBytes(SendStr);
-                        int Size = buf.Length;
-                        byte CheckSum = CalcCheckSumbufferSize(buf);
-
-
-                        SendStr = ";{CONFIG_START}," + SendStr + "," + Size + "," + CheckSum + ",{CONFIG_END};";
-
-                        sw.Write(SendStr);
-
-                    }
-                }
-
-                // This text is always added, making the file longer over time 
-                // if it is not deleted. 
-
-
-                //textBox_GenerateConfigFile.BackColor = Color.Green;
-                //textBox_GenerateConfigFile.Text = "File has been saved: \n" + saveFileDialog1.FileName ;
-                //textBox_GenerateConfigFile.BackColor = Color.LightGreen;
-            }
-            catch (Exception ex)
-            {
-
-                ex.ToString(); //Gil: just remove warning.
-                //textBox_GenerateConfigFile.Text = ex.ToString();
-            }
-        }
-
-        private void Button31_Click(object sender, EventArgs e)
-        {
-            //TextBox_SourceConfig_Clear();
-
-
-
-
-
-            //ParseConfigString(";23421342134,CONFIG=,12321321,434343434,656565656,55554,43434,66665,6565645456,6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,3,3,3,3,6,6,6,41,3;");
-
-        }
-
-        private bool ParseConfigString(string i_Config)
-        {
-            try
-            {
-
-                string[] StringSplit = i_Config.Replace(";", "").Split(',');
-
-                if (StringSplit[0].Length > 17 || StringSplit[0].Length < 12)
-                {
-                    return false;
-                }
-
-
-
-                // Store keys in a List
-                //List<string> list = new List<string>(Dictionary_ConfigurationTextBoxes.Keys);
-                //// Loop through list
-                //int i = 2;
-                //foreach (string k in list)
-                //{
-                //    TextBox temp = Dictionary_ConfigurationTextBoxes[k];
-
-                //    temp.Invoke(new EventHandler(delegate
-                //    {
-                //        if (i < StringSplit.Length)
-                //        {
-                //            temp.Text = StringSplit[i];
-                //        }
-                //    }));
-                //    i++;
-                //}
-                //textBox_Config1.Text = StringSplit[2];
-                //textBox_Config2.Text = StringSplit[3];
-                //textBox_Config3.Text = StringSplit[4];
-                //textBox_Config4.Text = StringSplit[5];
-                //textBox_Config5.Text = StringSplit[6];
-                //textBox_Config6.Text = StringSplit[7];
-                //textBox_Config7.Text = StringSplit[8];
-                //textBox_Config8.Text = StringSplit[9];
-                //textBox_Config9.Text = StringSplit[10];
-                //textBox_Config10.Text = StringSplit[11];
-                //textBox_Config11.Text = StringSplit[12];
-                //textBox_Config12.Text = StringSplit[13];
-                //textBox_Config13.Text = StringSplit[14];
-                //textBox_Config14.Text = StringSplit[15];
-                //textBox_Config15.Text = StringSplit[16];
-                //textBox_Config16.Text = StringSplit[17];
-                //textBox_Config17.Text = StringSplit[18];
-                //textBox_Config18.Text = StringSplit[19];
-                //textBox_Config19.Text = StringSplit[20];
-                //textBox_Config20.Text = StringSplit[21];
-                //textBox_Config21.Text = StringSplit[22];
-                //textBox_Config22.Text = StringSplit[23];
-                //textBox_Config23.Text = StringSplit[24];
-                //textBox_Config24.Text = StringSplit[25];
-                //textBox_Config25.Text = StringSplit[26];
-                //textBox_Config26.Text = StringSplit[27];
-                //textBox_Config27.Text = StringSplit[28];
-
-                return true;
-            }
-            catch
-            {
-                //textBox_SourceConfig.Invoke(new EventHandler(delegate
-                //{
-                //    textBox_SourceConfig.Text = ex.ToString();
-                //    textBox_SourceConfig.BackColor = Color.Red;
-                //}));
-
-
-                return false;
-            }
-        }
+   
 
         private void Button3_Click_1(object sender, EventArgs e)
         {
@@ -9188,21 +8982,8 @@ namespace Monitor
 
         }
 
-        private void TextBox_GenerateConfigFile_TextChanged(object sender, EventArgs e)
-        {
 
-        }
 
-        //bool IsDigitsOnly(string str)
-        //{
-        //    foreach (char c in str)
-        //    {
-        //        if (c < '0' || c > '9')
-        //            return false;
-        //    }
-
-        //    return true;
-        //}
 
         private enum ConfigDataType
         {
@@ -11479,9 +11260,13 @@ namespace Monitor
             if (serialPort.IsOpen == false)
             {
                 SystemLogger.LogMessage(Color.Red, Color.White, "Serial Port is not open", true, true);
-                textBox_SystemStatus.Text = "Serial Port is not open";
-                textBox_SystemStatus.BackColor = Color.Orange;
-                textBox_SystemStatus_Timer = 3;
+
+                
+
+
+                //textBox_SystemStatus.Text = "Serial Port is not open";
+                //textBox_SystemStatus.BackColor = Color.Orange;
+                //textBox_SystemStatus_Timer = 3;
                 return;
             }
             else
@@ -13867,75 +13652,15 @@ Note: eStatus enum 
 
 
             }
-            catch
+            catch(Exception ex)
             {
+
+                KratosProtocolLogger.LogMessage(Color.Orange, Color.White, ex.Message, New_Line = false, Show_Time = true);
                 //MessageBox.Show (se.Message );
 
             }
         }
 
-        private void button108_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "80";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button59_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "01";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button61_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "02";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button62_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "03";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "04";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button68_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "25";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
 
 
 
@@ -13948,36 +13673,6 @@ Note: eStatus enum 
 
 
 
-
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "90";
-            // textBox_data.Text = textBox_TxInhibit.Text;
-
-            SendDataToSystem();
-        }
-
-
-
-        private void button50_Click_1(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "92";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "93";
-            //      textBox_data.Text = textBox4.Text;
-
-            SendDataToSystem();
-        }
 
         private void button53_Click_1(object sender, EventArgs e)
         {
@@ -13988,395 +13683,9 @@ Note: eStatus enum 
             SendDataToSystem();
         }
 
-
-
-
-
-
-
-        private void button57_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "98";
-            //      textBox_data.Text = textBox_PulseGenParms.Text;
-
-            SendDataToSystem();
-        }
-
-
-
-        private void button110_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9A";
-            //      textBox_data.Text = textBox_RFGenParms.Text;
-
-            SendDataToSystem();
-        }
-
-        private void button111_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9B";
-            //      textBox_data.Text = textBox12.Text;
-
-            SendDataToSystem();
-        }
-
-        private void button112_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9C";
-            //        textBox_data.Text = textBox13.Text;
-
-            SendDataToSystem();
-        }
-
-        private void button113_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9D";
-            //      textBox_data.Text = textBox14.Text;
-
-            SendDataToSystem();
-        }
-
-
-
-        private void button115_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9F";
-            //        textBox_data.Text = textBox15.Text;
-
-            SendDataToSystem();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label71_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox56_TextChanged(object sender, EventArgs e)
-        {
-            SetTextBoxTextChangedColor((TextBox)sender);
-        }
-
-        private void textBox58_TextChanged(object sender, EventArgs e)
-        {
-            SetTextBoxTextChangedColor((TextBox)sender);
-        }
-
-        private void label72_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label68_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox57_TextChanged(object sender, EventArgs e)
-        {
-            SetTextBoxTextChangedColor((TextBox)sender);
-        }
-
-        private void textBox59_TextChanged(object sender, EventArgs e)
-        {
-            SetTextBoxTextChangedColor((TextBox)sender);
-        }
-
-        private void label73_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label74_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox60_TextChanged(object sender, EventArgs e)
-        {
-            SetTextBoxTextChangedColor((TextBox)sender);
-        }
-
-        private string[] GetDataStringFromTextbox()
-        {
-            return richTextBox_SSPA.Text.Split(new string[] { "<<", ">>" }, StringSplitOptions.RemoveEmptyEntries);
-        }
-        private async void button70_Click_1(object sender, EventArgs e)
-        {
-            await Task.Delay(500);
-            Read_Register_From_UUT(" 00 8A", "00 04");
-            await Task.Delay(500);
-            Read_Register_From_UUT(" 00 90", "00 08");
-            await Task.Delay(500);
-            Read_Register_From_UUT(" 00 94", "00 08");
-            await Task.Delay(500);
-            Read_Register_From_UUT(" 00 80");
-
-
-        }
-
-
-
-
-
-
-
-        private async void button31_Click_1(object sender, EventArgs e)
-        {
-            await Task.Delay(500);
-            Read_Register_From_Simulator(" 00 8A", "00 04");
-            await Task.Delay(500);
-            Read_Register_From_Simulator(" 00 90", "00 08");
-            await Task.Delay(500);
-            Read_Register_From_Simulator(" 00 94", "00 08");
-            await Task.Delay(500);
-            Read_Register_From_Simulator(" 00 80");
-            await Task.Delay(500);
-        }
-
-        private void ClearVersions()
-        {
-
-        }
-
-
-
-        
-       
-
-        private string LittleBigEndian_Change(string i_HexNumber)
-        {
-            byte[] bytes = StringToByteArray(i_HexNumber);
-            bytes = bytes.Reverse().ToArray();
-            string retval = ConvertByteArraytToString(bytes);
-
-            return retval;
-        }
-
-      
-
-
-
-
-     
-
-
-
-        private async void textBox25_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    // SetU19Values();
-
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 12", "FF FF");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "40 00");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 14", int.Parse(m_TextBox.Text).ToString("X4"));
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "08 00");
-
-                }
-            }
-        }
-
-
-
-        private async void textBox27_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    //SetU19Values();
-
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 12", "FF FF");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "40 00");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 16", int.Parse(m_TextBox.Text).ToString("X4"));
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "08 00");
-
-                }
-
-            }
-        }
-
-        private void textBox31_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            if (int.TryParse(txtbox.Text, out int Num) == true)
-            {
-                if (Num >= 0 && Num <= 99999999)
-                {
-                    txtbox.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    txtbox.BackColor = Color.Red;
-                }
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
-
-        private async void textBox31_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    Write_Register_To_UUT(" 00 11", hexValue);
-
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "08 00");
-                }
-
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-        void SetControlGenerators()
-        {
-
-        }
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-
-            CheckBox Checkbx = (CheckBox)sender;
-            if (Checkbx.Checked == true)
-            {
-
-
-                Checkbx.BackColor = Color.LightGreen;
-            }
-            else
-            {
-
-                Checkbx.BackColor = default;
-            }
-
-
-            SetControlGenerators();
-
-        }
-
-        private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
-        {
-            CheckBox Checkbx = (CheckBox)sender;
-            if (Checkbx.Checked == true)
-            {
-                Write_Register_To_Simulator(" 00 09", "00 01");
-
-                Checkbx.BackColor = Color.LightGreen;
-            }
-            else
-            {
-
-                Write_Register_To_Simulator(" 00 09", "00 00");
-                Checkbx.BackColor = default;
-            }
-
-
-
-
-
-
-        }
-
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         void Not_Implemented()
         {
-            string message = "Gil: Not Implemented";
+            string message = "Gil Ramon: Not Implemented";
             MessageBox.Show(message);
         }
         private void checkBox3_CheckedChanged_1(object sender, EventArgs e)
@@ -14384,42 +13693,8 @@ Note: eStatus enum 
             CheckBox Checkbx = (CheckBox)sender;
             Not_Implemented();
 
-            //if (Checkbx.Checked == true)
-            //{
-            //    textBox16.Text = "01";
-
-            //    Checkbx.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox16.Text = "00";
-            //    Checkbx.BackColor = default;
-            //}
-
-            //button117_Click(null, null);
         }
 
-        private void checkBox4_CheckedChanged_1(object sender, EventArgs e)
-        {
-            CheckBox Checkbx = (CheckBox)sender;
-            if (Checkbx.Checked == true)
-            {
-                Write_Register_To_Simulator(" 00 03", "00 20");
-
-                Checkbx.BackColor = Color.LightGreen;
-            }
-            else
-            {
-
-                Write_Register_To_Simulator(" 00 03", "00 10");
-                Checkbx.BackColor = default;
-            }
-        }
-
-        private void button73_Click_3(object sender, EventArgs e)
-        {
-            button53_Click_1(null, null);
-        }
 
 
         private void textBox24_TextChanged(object sender, EventArgs e)
@@ -16594,11 +15869,20 @@ This Process can take 1 minute.";
         private void button_SendSerialPort_Click(object sender, EventArgs e)
         {
             bool IsSent = false;
+
+            if(serialPort.IsOpen == false)
+            {
+                WriteToSystemStatus("Serial Port is not open", 3, Color.Orange);
+                return;
+            }
+
+            byte[] buffer = null;
+
             if (checkBox_SendHexdata.Checked == true)
             {
                 string tempStr = textBox_SendSerialPort.Text.Replace(" ", "");
 
-                byte[] buffer = StringToByteArray(tempStr);
+                buffer = StringToByteArray(tempStr);
 
                 if (buffer != null)
                 {
@@ -16639,7 +15923,7 @@ This Process can take 1 minute.";
 
                 string tempStr = textBox_SendSerialPort.Text.Replace("\\n", "\n");
                 tempStr = tempStr.Replace("\\r", "\r");
-                byte[] buffer = Encoding.ASCII.GetBytes(tempStr);
+                buffer = Encoding.ASCII.GetBytes(tempStr);
 
                 IsSent = SerialPortSendData(buffer);
 
@@ -16666,7 +15950,12 @@ This Process can take 1 minute.";
 
 
             }
-            
+
+            if (checkBox_WriteTotalbytes.Checked == true)
+            {
+                WriteBufferInfo(buffer);
+            }
+
         }
 
         private void serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -16822,10 +16111,118 @@ This Process can take 1 minute.";
             }
         }
 
+        public static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return origin.AddSeconds(timestamp);
+        }
+
+        public static int ConvertToUnixTimestamp(DateTime date)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan diff = date.ToUniversalTime() - origin;
+            return (int)diff.Ticks;
+        }
+
+
+        int MessageCounter = 0;
         String WriteToRegister(String i_Command, bool i_OnlyCheckValidity)
         {
-            String ret = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            // 
+            String ret = "";
+
+
+            String[] tempStr = i_Command.Split(' ');
+
+            /////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            //Init all the commands
+            String Command = tempStr[0];
+            String RegisterAddress32bits = tempStr[1];
+            String DataToWrite32bits = tempStr[2];
+
+
+            /////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            //Check Validity of the command first and retuen string error if something wrong.
+
+
+
+
+
+            /////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            // Excute the command
+            List<byte> ListBytes = new List<byte>();
+
+            String output = "";
+
+            //Preamble
+            String Preamble = "82";
+            ListBytes.AddRange(StringToByteArray(Preamble));
+
+            output += " Preamble: " + Preamble;
+            //Opcode
+            String Opcode = "21";
+            ListBytes.AddRange(StringToByteArray(Opcode));
+
+            output += " Opcode: " + Opcode;
+            //Messagecounter
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
+
+            output += " MessageCounter: " + MessageCounter;
+            MessageCounter++;
+            //RegisterAddress
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
+            output += " RegisterAddress32bits: " + RegisterAddress32bits;
+
+            //DatatoWrite
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(DataToWrite32bits)));
+
+            output += " DataToWrite32bits: " + DataToWrite32bits;
+            //TimeTag
+            String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
+
+            output += " TimeTag: " + TimeTag;
+
+
+            //Data
+            byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
+            ListBytes.AddRange(DataBytes);
+            output += " DATA: " + ByteArrayToString(DataBytes);
+            
+
+            //Calculate check sum
+            Int32 CheckSum = 0;
+
+            for (int i = 0; i < ListBytes.Count; i=i+4)
+            {
+                List<byte> temp = ListBytes.GetRange(i, 4);
+                byte[] tempArr = temp.ToArray();
+
+                tempArr = tempArr.Reverse().ToArray();
+
+                Int32 Num = BitConverter.ToInt32(tempArr, 0);
+
+                CheckSum += Num;
+            }
+            ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
+
+            output += " CheckSum: " + CheckSum.ToString("X8");
+
+
+            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
+            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
+            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, output, true, false);
+
+
+
+            //Send the data
+
+            textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+
+            button_SendSerialPort_Click(null, null);
+
 
             return ret;
         }
@@ -16840,7 +16237,12 @@ This Process can take 1 minute.";
         String ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
         {
             String ret = "";
-            switch(i_Command)
+
+            String[] tempStr = i_Command.Split(' ');
+            String CommandName = tempStr[0];
+
+
+            switch (CommandName)
             {
                 case "WriteReg":
                     ret = WriteToRegister(i_Command,i_OnlyCheckValidity);
@@ -16875,11 +16277,12 @@ This Process can take 1 minute.";
         private void ParseCLICommand(String i_Command)
         {
             String[] tempStr = i_Command.Split(' ');
+            String CommandName = tempStr[0];
             String ret = "";
             bool IsCommandFound = false;
             foreach (CommandClass cmd in List_AllCommands)
             {
-                if(cmd.Command_name == tempStr[0])
+                if(cmd.Command_name == CommandName)
                 {
                     IsCommandFound = true;
 
@@ -16889,7 +16292,7 @@ This Process can take 1 minute.";
 
                     UpdateCommandCLIHistory(i_Command);
 
-                    ret = ExectuteOrCheckValidityCommand(cmd.Command_name, false);
+                    ret = ExectuteOrCheckValidityCommand(i_Command, false);
 
                     if (ret != "")
                     {
@@ -17141,14 +16544,14 @@ Description:
 Write to Register 
 
 Syntax:
-WriteReg address[2 hex bytes] data[2 hex bytes]
+WriteReg address[4 hex bytes] data[4 hex bytes]
 
 Example:
 
-WriteReg 48BF FFFF ---> Write to Register 0x48BF data 0xFFFF
+WriteReg AAAAAAAA BBBBBBBB ---> Write to Register 0xAAAAAAAA data 0xBBBBBBBB
 ");
 
-            WriteReg.Example = "WriteReg 48BF FFFF";
+            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB ";
 
             List_AllCommands.Add(WriteReg);
 
@@ -17164,14 +16567,14 @@ Description:
 Read From Register 
 
 Syntax:
-ReadReg address[2 hex bytes]
+ReadReg address[4 hex bytes]
 
 Example:
 
-ReadReg 48BF ---> Read from Register 48BF
+ReadReg AAAAAAAA ---> Read from Register 0xAAAAAAAA
 ");
 
-            ReadReg.Example = "ReadReg 48BF";
+            ReadReg.Example = "ReadReg AAAAAAAA";
             List_AllCommands.Add(ReadReg);
 
 

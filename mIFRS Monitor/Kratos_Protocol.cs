@@ -10,17 +10,17 @@ namespace Monitor
     {
         public string Preamble;
         public string Opcode;
-        public string MessageCounter ;
+       // public string MessageCounter ;
         public string LengthOfEntireMessage;
-        public string CommandActivation ;
-        public string MessageTimeTag ;
+     //   public string CommandActivation ;
+   //     public string MessageTimeTag ;
         public string Data;
         public string CheckSum;
 
         public override string ToString()
         {
-            return String.Format("Preamble: [{0}] Opcode: [{1}] MessageCounter: [{2}] CommandActivation: [{3}] MessageTimeTag: [{4}] Data length: [{5}] Data : [{6}]  CheckSum: [{7}]",
-                Preamble, Opcode, MessageCounter, CommandActivation, MessageTimeTag, LengthOfEntireMessage, Regex.Replace(Data, ".{2}", "$0 "), CheckSum);
+            return String.Format("Preamble: [{0}] Opcode: [{1}] Data length: [{2}] Data : [{3}]  CheckSum: [{4}]",
+                Preamble, Opcode, LengthOfEntireMessage, Regex.Replace(Data, ".{2}", "$0 "), CheckSum);
         }
     }
 
