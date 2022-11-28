@@ -403,7 +403,7 @@ namespace Monitor
         private TextBox textBox_CommandActivation;
         private Label label12;
         private Label label14;
-        private CheckBox checkBox_WriteTotalbytes;
+        private CheckBox checkBox_WriteFrameInformation;
         private static readonly string PREAMBLE = "23";
 
 
@@ -458,8 +458,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -815,7 +815,7 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox_WriteTotalbytes = new System.Windows.Forms.CheckBox();
+            this.checkBox_WriteFrameInformation = new System.Windows.Forms.CheckBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1668,7 +1668,7 @@ namespace Monitor
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.checkBox_WriteTotalbytes);
+            this.groupBox5.Controls.Add(this.checkBox_WriteFrameInformation);
             this.groupBox5.Controls.Add(this.groupBox_Timer);
             this.groupBox5.Controls.Add(this.groupBox_Stopwatch);
             this.groupBox5.Controls.Add(this.checkBox_RxHex);
@@ -2937,17 +2937,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea3.AxisX.Title = "Freq";
-            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.AxisY.Title = "Power [dBm]";
-            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend3);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -4879,16 +4879,17 @@ namespace Monitor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
             // 
-            // checkBox_WriteTotalbytes
+            // checkBox_WriteFrameInformation
             // 
-            this.checkBox_WriteTotalbytes.AutoSize = true;
-            this.checkBox_WriteTotalbytes.Location = new System.Drawing.Point(710, 18);
-            this.checkBox_WriteTotalbytes.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox_WriteTotalbytes.Name = "checkBox_WriteTotalbytes";
-            this.checkBox_WriteTotalbytes.Size = new System.Drawing.Size(135, 23);
-            this.checkBox_WriteTotalbytes.TabIndex = 108;
-            this.checkBox_WriteTotalbytes.Text = "Write frame info";
-            this.checkBox_WriteTotalbytes.UseVisualStyleBackColor = true;
+            this.checkBox_WriteFrameInformation.AutoSize = true;
+            this.checkBox_WriteFrameInformation.Location = new System.Drawing.Point(710, 18);
+            this.checkBox_WriteFrameInformation.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox_WriteFrameInformation.Name = "checkBox_WriteFrameInformation";
+            this.checkBox_WriteFrameInformation.Size = new System.Drawing.Size(135, 23);
+            this.checkBox_WriteFrameInformation.TabIndex = 108;
+            this.checkBox_WriteFrameInformation.Text = "Write frame info";
+            this.checkBox_WriteFrameInformation.UseVisualStyleBackColor = true;
+            this.checkBox_WriteFrameInformation.CheckedChanged += new System.EventHandler(this.checkBox_WriteTotalbytes_CheckedChanged);
             // 
             // MainForm
             // 
@@ -8309,7 +8310,7 @@ namespace Monitor
                 ParseSerialPortString(IncomingString);
             }
 
-            if (checkBox_WriteTotalbytes.Checked == true)
+            if (checkBox_WriteFrameInformation.Checked == true)
             {
                 WriteBufferInfo(buffer);
             }
@@ -15951,7 +15952,7 @@ This Process can take 1 minute.";
 
             }
 
-            if (checkBox_WriteTotalbytes.Checked == true)
+            if (checkBox_WriteFrameInformation.Checked == true)
             {
                 WriteBufferInfo(buffer);
             }
@@ -16443,6 +16444,11 @@ This Process can take 1 minute.";
             {
                 txtbx.BackColor = Color.Red;
             }
+        }
+
+        private void checkBox_WriteTotalbytes_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void ListBox_Charts_SelectedIndexChanged(object sender, EventArgs e)
