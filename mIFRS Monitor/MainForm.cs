@@ -458,8 +458,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -1015,9 +1015,9 @@ namespace Monitor
             // 
             this.tabControl_Main.Controls.Add(this.tabPage_ServerTCP);
             this.tabControl_Main.Controls.Add(this.tabPage_ClientTCP);
+            this.tabControl_Main.Controls.Add(this.tabPage_GenericFrame);
             this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Controls.Add(this.tabPage_SerialPort);
-            this.tabControl_Main.Controls.Add(this.tabPage_GenericFrame);
             this.tabControl_Main.Controls.Add(this.tabPage_Commands);
             this.tabControl_Main.Location = new System.Drawing.Point(4, 5);
             this.tabControl_Main.Margin = new System.Windows.Forms.Padding(2);
@@ -2523,7 +2523,9 @@ namespace Monitor
             // 
             // textBox_CommandHelp
             // 
+            this.textBox_CommandHelp.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.textBox_CommandHelp.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_CommandHelp.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBox_CommandHelp.Location = new System.Drawing.Point(5, 19);
             this.textBox_CommandHelp.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_CommandHelp.Multiline = true;
@@ -2532,7 +2534,8 @@ namespace Monitor
             this.textBox_CommandHelp.Size = new System.Drawing.Size(359, 437);
             this.textBox_CommandHelp.TabIndex = 114;
             this.textBox_CommandHelp.TabStop = false;
-            this.textBox_CommandHelp.Text = "General Format:\r\nCommand arg1 arg2 arg3...\r\n\r\nFor example:\r\nCommand 12 abc\r\n";
+            this.textBox_CommandHelp.Text = "General Format:\r\nCommand arg1 arg2 arg3...\r\n\r\nFor example:\r\nCommand 12 abc\r\n-----" +
+    "------------------------\r\nUse the arrows Up, Down and Tab for autocomplition.\r\n";
             // 
             // listBox_CLI_ALLCommands
             // 
@@ -2937,17 +2940,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea7.AxisX.Title = "Freq";
+            chartArea7.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea7.AxisY.Title = "Power [dBm]";
+            chartArea7.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea7.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea7);
+            legend7.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend7.IsTextAutoFit = false;
+            legend7.Name = "Legend1";
+            legend7.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend7);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -16149,7 +16152,12 @@ This Process can take 1 minute.";
             ///
             byte[] buffer = StringToByteArray(RegisterAddress32bits);
 
-            if(buffer == null || buffer.Length != 4)
+            if (tempStr.Length != 3)
+            {
+                ret += String.Format("\n Arguments number should be 3, see example");
+            }
+
+            if (buffer == null || buffer.Length != 4)
             {
                 ret +=  String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", RegisterAddress32bits);
             }
@@ -16247,7 +16255,115 @@ This Process can take 1 minute.";
 
         String ReadFromRegister(String i_Command, bool i_OnlyCheckValidity)
         {
-            String ret = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            String ret = "";
+
+
+            String[] tempStr = i_Command.Split(' ');
+
+            //Init all the commands //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            String Command = tempStr[0];
+            String RegisterAddress32bits = tempStr[1];
+
+
+            //Check Validity of the command first and retuen string error if something wrong. //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////
+            ///
+
+            if(tempStr.Length != 2)
+            {
+                ret += String.Format("\n Arguments number should be 2, see example");
+            }
+
+            byte[] buffer = StringToByteArray(RegisterAddress32bits);
+
+            if (buffer == null || buffer.Length != 4)
+            {
+                ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", RegisterAddress32bits);
+            }
+
+            if (i_OnlyCheckValidity == true || ret != "")
+            {
+                return ret;
+            }
+
+
+            // Excute the command //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////
+            List<byte> ListBytes = new List<byte>();
+
+
+
+            //Preamble
+            String Preamble = "82";
+            ListBytes.AddRange(StringToByteArray(Preamble));
+
+
+            //Opcode
+            String Opcode = "22";
+            ListBytes.AddRange(StringToByteArray(Opcode));
+
+
+            //Messagecounter
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
+
+
+            MessageCounter++;
+            //RegisterAddress
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
+
+            //DatatoWrite
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian("00 00 00 00")));
+
+            //TimeTag
+            //String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
+            String TimeTag = "00 00 00 00";
+            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
+
+
+
+
+            //Data
+            byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
+            ListBytes.AddRange(DataBytes);
+
+
+
+            //Calculate check sum
+            Int32 CheckSum = 0;
+
+            for (int i = 0; i < ListBytes.Count; i = i + 4)
+            {
+                List<byte> temp = ListBytes.GetRange(i, 4);
+                byte[] tempArr = temp.ToArray();
+
+                tempArr = tempArr.Reverse().ToArray();
+
+                Int32 Num = BitConverter.ToInt32(tempArr, 0);
+
+                CheckSum += Num;
+            }
+            ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
+
+
+
+
+            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
+            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
+            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, output, true, false);
+
+
+
+            //Send the data 
+
+            textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+
+            button_SendSerialPort_Click(null, null);
+
+
             return ret;
         }
 
@@ -16607,6 +16723,7 @@ ReadReg AAAAAAAA ---> Read from Register 0xAAAAAAAA
             {
 
 
+                tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
