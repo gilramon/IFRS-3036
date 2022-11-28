@@ -457,8 +457,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -502,6 +502,7 @@ namespace Monitor
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage_SerialPort = new System.Windows.Forms.TabPage();
+            this.button_OpenPort = new System.Windows.Forms.Button();
             this.groupBox_SendSerialOrMonitorCommands = new System.Windows.Forms.GroupBox();
             this.textBox_SendSerialPortPeriod = new System.Windows.Forms.TextBox();
             this.checkBox_SendEveryOneSecond = new System.Windows.Forms.CheckBox();
@@ -510,7 +511,6 @@ namespace Monitor
             this.checkBox_DeleteCommand = new System.Windows.Forms.CheckBox();
             this.button_SendSerialPort = new System.Windows.Forms.Button();
             this.gbPortSettings = new System.Windows.Forms.GroupBox();
-            this.button_OpenPort = new System.Windows.Forms.Button();
             this.button_ReScanComPort = new System.Windows.Forms.Button();
             this.cmb_PortName = new System.Windows.Forms.ComboBox();
             this.cmbBaudRate = new System.Windows.Forms.ComboBox();
@@ -1013,10 +1013,10 @@ namespace Monitor
             // 
             this.tabControl_Main.Controls.Add(this.tabPage_ServerTCP);
             this.tabControl_Main.Controls.Add(this.tabPage_ClientTCP);
+            this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Controls.Add(this.tabPage_SerialPort);
             this.tabControl_Main.Controls.Add(this.tabPage_GenericFrame);
             this.tabControl_Main.Controls.Add(this.tabPage_Commands);
-            this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Location = new System.Drawing.Point(4, 5);
             this.tabControl_Main.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl_Main.Name = "tabControl_Main";
@@ -1394,6 +1394,17 @@ namespace Monitor
             this.tabPage_SerialPort.Text = "Serial Port";
             this.tabPage_SerialPort.UseVisualStyleBackColor = true;
             // 
+            // button_OpenPort
+            // 
+            this.button_OpenPort.Location = new System.Drawing.Point(1321, 25);
+            this.button_OpenPort.Margin = new System.Windows.Forms.Padding(2);
+            this.button_OpenPort.Name = "button_OpenPort";
+            this.button_OpenPort.Size = new System.Drawing.Size(83, 71);
+            this.button_OpenPort.TabIndex = 11;
+            this.button_OpenPort.Text = "Open ";
+            this.button_OpenPort.UseVisualStyleBackColor = true;
+            this.button_OpenPort.Click += new System.EventHandler(this.Button_OpenPort_Click);
+            // 
             // groupBox_SendSerialOrMonitorCommands
             // 
             this.groupBox_SendSerialOrMonitorCommands.Controls.Add(this.textBox_SendSerialPortPeriod);
@@ -1505,17 +1516,6 @@ namespace Monitor
             this.gbPortSettings.TabIndex = 10;
             this.gbPortSettings.TabStop = false;
             this.gbPortSettings.Text = "COM Serial Port Settings";
-            // 
-            // button_OpenPort
-            // 
-            this.button_OpenPort.Location = new System.Drawing.Point(1321, 25);
-            this.button_OpenPort.Margin = new System.Windows.Forms.Padding(2);
-            this.button_OpenPort.Name = "button_OpenPort";
-            this.button_OpenPort.Size = new System.Drawing.Size(83, 71);
-            this.button_OpenPort.TabIndex = 11;
-            this.button_OpenPort.Text = "Open ";
-            this.button_OpenPort.UseVisualStyleBackColor = true;
-            this.button_OpenPort.Click += new System.EventHandler(this.Button_OpenPort_Click);
             // 
             // button_ReScanComPort
             // 
@@ -2934,17 +2934,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -17199,7 +17199,7 @@ ReadReg 48BF ---> Read from Register 48BF
 
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
-                //tabControl_Main.TabPages.RemoveAt(0);
+                tabControl_Main.TabPages.RemoveAt(0);
 
 
                 SetAllCLIcommands();
