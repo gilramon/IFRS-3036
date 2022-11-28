@@ -8000,10 +8000,7 @@ namespace Monitor
 
         }
 
-        private void CheckIfSerialPortOpen()
-        {
 
-        }
 
         //bool timer_General_TranssmitionPeriodicallyEnable = false;
         //uint NumbeOfTransmmitions = 0;
@@ -8019,6 +8016,9 @@ namespace Monitor
             else
             {
                 textBox_SystemStatus.Text = "";
+                textBox_SystemStatus.ForeColor = default;
+                textBox_SystemStatus.BackColor = default;
+
                 progressBar_UserStatus.ForeColor = Color.Blue;
                 progressBar_UserStatus.BackColor = default;
 
@@ -16145,23 +16145,22 @@ This Process can take 1 minute.";
             //Check Validity of the command first and retuen string error if something wrong. //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////
+            ///
             byte[] buffer = StringToByteArray(RegisterAddress32bits);
 
             if(buffer == null || buffer.Length != 4)
             {
-                ret = " Argument 1 invalid not hex value or not 32 bits";
-                return ret;
+                ret +=  String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", RegisterAddress32bits);
             }
 
             buffer = StringToByteArray(DataToWrite32bits);
 
             if (buffer == null || buffer.Length != 4)
             {
-                ret = " Argument 2 invalid not hex value or not 32 bits";
-                return ret;
+                ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", DataToWrite32bits);
             }
 
-            if(i_OnlyCheckValidity == true)
+            if(i_OnlyCheckValidity == true || ret != "")
             {
                 return ret;
             }
