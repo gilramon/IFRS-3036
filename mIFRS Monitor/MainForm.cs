@@ -458,8 +458,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -1469,7 +1469,7 @@ namespace Monitor
             this.textBox_SendSerialPort.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_SendSerialPort.Name = "textBox_SendSerialPort";
             this.textBox_SendSerialPort.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_SendSerialPort.Size = new System.Drawing.Size(630, 31);
+            this.textBox_SendSerialPort.Size = new System.Drawing.Size(829, 31);
             this.textBox_SendSerialPort.TabIndex = 0;
             this.textBox_SendSerialPort.TextChanged += new System.EventHandler(this.TextBox_SendSerialPort_TextChanged_1);
             this.textBox_SendSerialPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SendSerialPort_KeyDown);
@@ -2937,17 +2937,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea3.AxisX.Title = "Freq";
+            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea3.AxisY.Title = "Power [dBm]";
+            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend3.IsTextAutoFit = false;
+            legend3.Name = "Legend1";
+            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -4885,9 +4885,9 @@ namespace Monitor
             this.checkBox_WriteTotalbytes.Location = new System.Drawing.Point(710, 18);
             this.checkBox_WriteTotalbytes.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_WriteTotalbytes.Name = "checkBox_WriteTotalbytes";
-            this.checkBox_WriteTotalbytes.Size = new System.Drawing.Size(137, 23);
+            this.checkBox_WriteTotalbytes.Size = new System.Drawing.Size(135, 23);
             this.checkBox_WriteTotalbytes.TabIndex = 108;
-            this.checkBox_WriteTotalbytes.Text = "Write total bytes";
+            this.checkBox_WriteTotalbytes.Text = "Write frame info";
             this.checkBox_WriteTotalbytes.UseVisualStyleBackColor = true;
             // 
             // MainForm
@@ -16133,25 +16133,43 @@ This Process can take 1 minute.";
 
             String[] tempStr = i_Command.Split(' ');
 
-            /////////////////////////////////////////////////
-            /////////////////////////////////////////////////
-            //Init all the commands
+            //Init all the commands //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
             String Command = tempStr[0];
             String RegisterAddress32bits = tempStr[1];
             String DataToWrite32bits = tempStr[2];
 
 
-            /////////////////////////////////////////////////
-            /////////////////////////////////////////////////
-            //Check Validity of the command first and retuen string error if something wrong.
+
+            //Check Validity of the command first and retuen string error if something wrong. //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////
+            byte[] buffer = StringToByteArray(RegisterAddress32bits);
+
+            if(buffer == null || buffer.Length != 4)
+            {
+                ret = " Argument 1 invalid not hex value or not 32 bits";
+                return ret;
+            }
+
+            buffer = StringToByteArray(DataToWrite32bits);
+
+            if (buffer == null || buffer.Length != 4)
+            {
+                ret = " Argument 2 invalid not hex value or not 32 bits";
+                return ret;
+            }
+
+            if(i_OnlyCheckValidity == true)
+            {
+                return ret;
+            }
 
 
-
-
-
-            /////////////////////////////////////////////////
-            /////////////////////////////////////////////////
-            // Excute the command
+            // Excute the command //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////
             List<byte> ListBytes = new List<byte>();
 
             String output = "";
@@ -16217,7 +16235,7 @@ This Process can take 1 minute.";
 
 
 
-            //Send the data
+            //Send the data 
 
             textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
 
@@ -16312,22 +16330,6 @@ This Process can take 1 minute.";
         private void button_CLISend_Click(object sender, EventArgs e)
         {
             ParseCLICommand(textBox_CLISendCommands.Text);
-
-            //if (IsCommandFound == true)
-            //{
-            //    UpdateCommandCLIHistory(textBox_CLISendCommands.Text);
-
-
-
-
-            //    SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-            //    SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-            //    SystemLogger.LogMessage(Color.Purple, Color.Yellow, textBox_CLISendCommands.Text, true, false);
-            //}
-            //else
-            //{
-                
-            //}
 
             if (checkBox_CLIDeleteAfterSend.Checked == true)
             {
