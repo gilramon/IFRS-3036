@@ -16366,7 +16366,7 @@ This Process can take 1 minute.";
             if (SystemMode.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 7);
-                SystemMode.Remove(SystemMode.Length - 1);
+                SystemMode =  SystemMode.Remove(SystemMode.Length - 1);
             }
             if (int.TryParse(SystemMode, out Num) && (Num >=0  && Num <= 3))
             {
@@ -16384,7 +16384,7 @@ This Process can take 1 minute.";
             if (ResetAlarmCounter.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 6);
-                ResetAlarmCounter.Remove(ResetAlarmCounter.Length - 1);
+                ResetAlarmCounter = ResetAlarmCounter.Remove(ResetAlarmCounter.Length - 1);
             }
             if (int.TryParse(ResetAlarmCounter, out Num) && (Num >= 0 && Num <= 1))
             {
@@ -16401,7 +16401,7 @@ This Process can take 1 minute.";
             if (TxFrequency.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 4);
-                TxFrequency.Remove(TxFrequency.Length - 1);
+                TxFrequency = TxFrequency.Remove(TxFrequency.Length - 1);
             }
             if (int.TryParse(TxFrequency, out Num) && (Num >= 0 && Num <= 80))
             {
@@ -16417,7 +16417,7 @@ This Process can take 1 minute.";
             if (TxInputPower.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 3);
-                TxInputPower.Remove(TxInputPower.Length - 1);
+                TxInputPower =  TxInputPower.Remove(TxInputPower.Length - 1);
             }
             if (int.TryParse(TxInputPower, out Num) && (Num >= 0 && Num <= 80))
             {
@@ -16433,7 +16433,7 @@ This Process can take 1 minute.";
             if (TxDutyCycle.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 2);
-                TxDutyCycle.Remove(TxDutyCycle.Length - 1);
+                TxDutyCycle = TxDutyCycle.Remove(TxDutyCycle.Length - 1);
             }
             if (int.TryParse(TxDutyCycle, out Num) && (Num >= 0 && Num <= 35))
             {
@@ -16449,7 +16449,7 @@ This Process can take 1 minute.";
             if (RxFrequency.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 7);
-                RxFrequency.Remove(RxFrequency.Length - 1);
+                RxFrequency = RxFrequency.Remove(RxFrequency.Length - 1);
             }
             if (int.TryParse(RxFrequency, out Num) && (Num >= 0 && Num <= 80))
             {
@@ -16465,7 +16465,7 @@ This Process can take 1 minute.";
             if (RxCh1Att.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 6);
-                RxCh1Att.Remove(RxCh1Att.Length - 1);
+                RxCh1Att = RxCh1Att.Remove(RxCh1Att.Length - 1);
             }
             if (int.TryParse(RxCh1Att, out Num) && (Num >= 0 && Num <= 20))
             {
@@ -16481,7 +16481,7 @@ This Process can take 1 minute.";
             if (RxCh2Att.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 5);
-                RxCh2Att.Remove(RxCh2Att.Length - 1);
+                RxCh2Att = RxCh2Att.Remove(RxCh2Att.Length - 1);
             }
             if (int.TryParse(RxCh2Att, out Num) && (Num >= 0 && Num <= 20))
             {
@@ -16497,7 +16497,7 @@ This Process can take 1 minute.";
             if (RxCh3Att.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 4);
-                RxCh3Att.Remove(RxCh3Att.Length - 1);
+                RxCh3Att = RxCh3Att.Remove(RxCh3Att.Length - 1);
             }
             if (int.TryParse(RxCh3Att, out Num) && (Num >= 0 && Num <= 20))
             {
@@ -16514,7 +16514,7 @@ This Process can take 1 minute.";
             if (RxCh4Att.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 3);
-                RxCh4Att.Remove(RxCh4Att.Length - 1);
+                RxCh4Att = RxCh4Att.Remove(RxCh4Att.Length - 1);
             }
             if (int.TryParse(RxCh4Att, out Num) && (Num >= 0 && Num <= 20))
             {
@@ -16530,7 +16530,7 @@ This Process can take 1 minute.";
             if (RxChGRDAtt.EndsWith("x"))
             {
                 SendFrame[17] |= (1 << 2);
-                RxChGRDAtt.Remove(RxChGRDAtt.Length - 1);
+                RxChGRDAtt = RxChGRDAtt.Remove(RxChGRDAtt.Length - 1);
             }
             if (int.TryParse(RxChGRDAtt, out Num) && (Num >= 0 && Num <= 20))
             {
