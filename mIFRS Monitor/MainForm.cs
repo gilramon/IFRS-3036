@@ -16227,7 +16227,9 @@ This Process can take 1 minute.";
             byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
             ListBytes.AddRange(DataBytes);
             output += " DATA: " + ByteArrayToString(DataBytes);
-            
+
+
+
 
             //Calculate check sum
             Int32 CheckSum = 0;
@@ -16237,12 +16239,16 @@ This Process can take 1 minute.";
                 List<byte> temp = ListBytes.GetRange(i, 4);
                 byte[] tempArr = temp.ToArray();
 
+                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
                 tempArr = tempArr.Reverse().ToArray();
 
                 Int32 Num = BitConverter.ToInt32(tempArr, 0);
 
                 CheckSum += Num;
             }
+            FrameAnalizer += " -------------\n";
+            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+
             ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
 
             output += " CheckSum: " + CheckSum.ToString("X8");
@@ -16678,12 +16684,22 @@ This Process can take 1 minute.";
 
                 tempArr = tempArr.Reverse().ToArray();
 
+                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
                 Int32 Num = BitConverter.ToInt32(tempArr, 0);
 
                 CheckSum += Num;
             }
+
+            FrameAnalizer += " -------------\n";
+            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+
+
             ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
 
+
+
+
+            
 
 
 
@@ -17028,7 +17044,7 @@ Example:
 WriteReg AAAAAAAA BBBBBBBB ---> Write to Register 0xAAAAAAAA data 0xBBBBBBBB
 ");
 
-            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB ";
+            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB";
 
             List_AllCommands.Add(WriteReg);
 
