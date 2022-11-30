@@ -248,27 +248,11 @@ namespace Monitor
         private GroupBox groupBox4;
         private TextBox textBox_SystemStatus;
         private PictureBox pictureBox1;
-        private TabPage tabPage_GenericFrame;
-        private Button button_SendProtocolTCPIP;
-        private TextBox textBox_data;
-        private TextBox textBox_Opcode;
-        private TextBox textBox_Preamble;
-        private Label label11;
-        private Label label6;
-        private Label label4;
         private GroupBox groupBox_ClentTCPStatus;
         private Label Label_TCPClientTx;
         private Label label_ClientTCPConnected;
         private Label Label_TCPClientRx;
         private Button button_ClearServer;
-        private GroupBox groupBox31;
-        private Label label13;
-        private TextBox textBox_RxClientPreamble;
-        private TextBox textBox_RxClientOpcode;
-        private TextBox textBox_RxClientData;
-        private Label label15;
-        private Label label16;
-        private GroupBox groupBox_clientTX;
         private Label label_SerialPortStatus;
         private Label label_TCPClient;
         private TabPage tabPage_Commands;
@@ -278,14 +262,8 @@ namespace Monitor
         private CheckBox checkBox_RecordMiniAda;
         private CheckBox checkBox_PauseMiniAda;
         private Button button_ClearMiniAda;
-        private Label label17;
-        private Label label18;
-        private Button button52;
         private TabControl tabControl_System;
         private TabPage tabPage1;
-        private TextBox textBox_RxClientDataLength;
-        private Label label23;
-        private Label label24;
         private GroupBox groupBox3;
         private CheckBox checkBox_StopLogging;
         private RichTextBox TextBox_Server;
@@ -301,21 +279,6 @@ namespace Monitor
         private Label label37;
         private Button button97;
         private Button button99;
-        private GroupBox groupBox41;
-        private TextBox textBox_SentChecksum;
-        private Label label48;
-        private Label label42;
-        private TextBox textBox_SentDataLength;
-        private Label label43;
-        private Label label44;
-        private Label label45;
-        private TextBox textBox_SentPreamble;
-        private TextBox textBox_SentOpcode;
-        private TextBox textBox_SentData;
-        private Label label46;
-        private Label label47;
-        private TextBox textBox_RxClientCheckSum;
-        private Label label41;
         private CheckedListBox checkedListBox_PhoneBook;
         private Button button_AddContact;
         private Button button_RemoveContact;
@@ -355,7 +318,6 @@ namespace Monitor
         private GroupBox groupBox42;
         private RadioButton radioButton_TCPIP;
         private RadioButton radioButton_SerialPort;
-        private Button button_SendProtocolSerialPort;
         private Button button_WriteCatalinas;
         private RichTextBox textBox_FilesToWriteForTheCatalinas;
         private RichTextBox richTextBox_SyntisazerL1;
@@ -375,10 +337,6 @@ namespace Monitor
         private CheckBox checkBox_SendEveryOneSecond;
         private TextBox textBox_SendSerialPortPeriod;
         private ProgressBar progressBar_UserStatus;
-        private GroupBox groupBox_KratosMonitor;
-        private RichTextBox richTextBox_KratosProtocol;
-        private Button button_ClearKratosProtocol;
-        private CheckBox checkBox_RecordKratosProtocol;
         private ListBox listBox_CLI_ALLCommands;
         private GroupBox groupBox_CLISendCommand;
         private TextBox textBox_CLIsendperodically;
@@ -399,9 +357,6 @@ namespace Monitor
         private Button button_RunScript;
         private Label label_Projectname;
         private GroupBox groupBox1;
-        private TextBox textBox_CommandActivation;
-        private Label label12;
-        private Label label14;
         private CheckBox checkBox_WriteFrameInformation;
         private RichTextBox textBox_CommandHelp;
         private static readonly string PREAMBLE = "23";
@@ -458,8 +413,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -502,51 +457,6 @@ namespace Monitor
             this.textBox_ClientIP = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.tabPage_GenericFrame = new System.Windows.Forms.TabPage();
-            this.groupBox_KratosMonitor = new System.Windows.Forms.GroupBox();
-            this.checkBox_RecordKratosProtocol = new System.Windows.Forms.CheckBox();
-            this.button_ClearKratosProtocol = new System.Windows.Forms.Button();
-            this.richTextBox_KratosProtocol = new System.Windows.Forms.RichTextBox();
-            this.groupBox31 = new System.Windows.Forms.GroupBox();
-            this.textBox_RxClientCheckSum = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.textBox_RxClientDataLength = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox_RxClientPreamble = new System.Windows.Forms.TextBox();
-            this.textBox_RxClientOpcode = new System.Windows.Forms.TextBox();
-            this.textBox_RxClientData = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.groupBox_clientTX = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox_CommandActivation = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button_SendProtocolSerialPort = new System.Windows.Forms.Button();
-            this.button52 = new System.Windows.Forms.Button();
-            this.groupBox41 = new System.Windows.Forms.GroupBox();
-            this.textBox_SentChecksum = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.textBox_SentDataLength = new System.Windows.Forms.TextBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.textBox_SentPreamble = new System.Windows.Forms.TextBox();
-            this.textBox_SentOpcode = new System.Windows.Forms.TextBox();
-            this.textBox_SentData = new System.Windows.Forms.TextBox();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox_Preamble = new System.Windows.Forms.TextBox();
-            this.button_SendProtocolTCPIP = new System.Windows.Forms.Button();
-            this.textBox_Opcode = new System.Windows.Forms.TextBox();
-            this.textBox_data = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabPage_charts = new System.Windows.Forms.TabPage();
             this.button99 = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
@@ -822,11 +732,6 @@ namespace Monitor
             this.tabPage_ServerTCP.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage_ClientTCP.SuspendLayout();
-            this.tabPage_GenericFrame.SuspendLayout();
-            this.groupBox_KratosMonitor.SuspendLayout();
-            this.groupBox31.SuspendLayout();
-            this.groupBox_clientTX.SuspendLayout();
-            this.groupBox41.SuspendLayout();
             this.tabPage_charts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage_SerialPort.SuspendLayout();
@@ -1015,7 +920,6 @@ namespace Monitor
             // 
             this.tabControl_Main.Controls.Add(this.tabPage_ServerTCP);
             this.tabControl_Main.Controls.Add(this.tabPage_ClientTCP);
-            this.tabControl_Main.Controls.Add(this.tabPage_GenericFrame);
             this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Controls.Add(this.tabPage_SerialPort);
             this.tabControl_Main.Controls.Add(this.tabPage_Commands);
@@ -1025,8 +929,6 @@ namespace Monitor
             this.tabControl_Main.SelectedIndex = 0;
             this.tabControl_Main.Size = new System.Drawing.Size(1422, 690);
             this.tabControl_Main.TabIndex = 8;
-            this.tabControl_Main.TabStop = false;
-            this.tabControl_Main.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl_Main_KeyDown);
             this.tabControl_Main.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tabControl_Main_PreviewKeyDown);
             // 
             // tabPage_ServerTCP
@@ -1381,551 +1283,6 @@ namespace Monitor
             this.label7.TabIndex = 0;
             this.label7.Text = "Host or IP";
             // 
-            // tabPage_GenericFrame
-            // 
-            this.tabPage_GenericFrame.Controls.Add(this.groupBox_KratosMonitor);
-            this.tabPage_GenericFrame.Controls.Add(this.groupBox31);
-            this.tabPage_GenericFrame.Controls.Add(this.groupBox_clientTX);
-            this.tabPage_GenericFrame.Location = new System.Drawing.Point(4, 27);
-            this.tabPage_GenericFrame.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage_GenericFrame.Name = "tabPage_GenericFrame";
-            this.tabPage_GenericFrame.Size = new System.Drawing.Size(1414, 659);
-            this.tabPage_GenericFrame.TabIndex = 10;
-            this.tabPage_GenericFrame.Text = "Generic Kratos frame";
-            this.tabPage_GenericFrame.UseVisualStyleBackColor = true;
-            this.tabPage_GenericFrame.Enter += new System.EventHandler(this.tabPage_GenericFrame_Enter);
-            this.tabPage_GenericFrame.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tabPage_GenericFrame_PreviewKeyDown);
-            // 
-            // groupBox_KratosMonitor
-            // 
-            this.groupBox_KratosMonitor.Controls.Add(this.checkBox_RecordKratosProtocol);
-            this.groupBox_KratosMonitor.Controls.Add(this.button_ClearKratosProtocol);
-            this.groupBox_KratosMonitor.Controls.Add(this.richTextBox_KratosProtocol);
-            this.groupBox_KratosMonitor.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_KratosMonitor.Location = new System.Drawing.Point(577, 16);
-            this.groupBox_KratosMonitor.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox_KratosMonitor.Name = "groupBox_KratosMonitor";
-            this.groupBox_KratosMonitor.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox_KratosMonitor.Size = new System.Drawing.Size(835, 647);
-            this.groupBox_KratosMonitor.TabIndex = 16;
-            this.groupBox_KratosMonitor.TabStop = false;
-            this.groupBox_KratosMonitor.Text = "Kratos Protocol Monitor";
-            // 
-            // checkBox_RecordKratosProtocol
-            // 
-            this.checkBox_RecordKratosProtocol.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox_RecordKratosProtocol.AutoSize = true;
-            this.checkBox_RecordKratosProtocol.Location = new System.Drawing.Point(96, 600);
-            this.checkBox_RecordKratosProtocol.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox_RecordKratosProtocol.Name = "checkBox_RecordKratosProtocol";
-            this.checkBox_RecordKratosProtocol.Size = new System.Drawing.Size(110, 29);
-            this.checkBox_RecordKratosProtocol.TabIndex = 18;
-            this.checkBox_RecordKratosProtocol.Text = "Record To File";
-            this.checkBox_RecordKratosProtocol.UseVisualStyleBackColor = true;
-            // 
-            // button_ClearKratosProtocol
-            // 
-            this.button_ClearKratosProtocol.Location = new System.Drawing.Point(5, 603);
-            this.button_ClearKratosProtocol.Name = "button_ClearKratosProtocol";
-            this.button_ClearKratosProtocol.Size = new System.Drawing.Size(75, 23);
-            this.button_ClearKratosProtocol.TabIndex = 8;
-            this.button_ClearKratosProtocol.Text = "Clear";
-            this.button_ClearKratosProtocol.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox_KratosProtocol
-            // 
-            this.richTextBox_KratosProtocol.BackColor = System.Drawing.Color.LightGray;
-            this.richTextBox_KratosProtocol.EnableAutoDragDrop = true;
-            this.richTextBox_KratosProtocol.Location = new System.Drawing.Point(4, 16);
-            this.richTextBox_KratosProtocol.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBox_KratosProtocol.Name = "richTextBox_KratosProtocol";
-            this.richTextBox_KratosProtocol.Size = new System.Drawing.Size(831, 574);
-            this.richTextBox_KratosProtocol.TabIndex = 0;
-            this.richTextBox_KratosProtocol.Text = "";
-            // 
-            // groupBox31
-            // 
-            this.groupBox31.Controls.Add(this.textBox_RxClientCheckSum);
-            this.groupBox31.Controls.Add(this.label24);
-            this.groupBox31.Controls.Add(this.label41);
-            this.groupBox31.Controls.Add(this.textBox_RxClientDataLength);
-            this.groupBox31.Controls.Add(this.label23);
-            this.groupBox31.Controls.Add(this.label18);
-            this.groupBox31.Controls.Add(this.label13);
-            this.groupBox31.Controls.Add(this.textBox_RxClientPreamble);
-            this.groupBox31.Controls.Add(this.textBox_RxClientOpcode);
-            this.groupBox31.Controls.Add(this.textBox_RxClientData);
-            this.groupBox31.Controls.Add(this.label15);
-            this.groupBox31.Controls.Add(this.label16);
-            this.groupBox31.Location = new System.Drawing.Point(13, 398);
-            this.groupBox31.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox31.Size = new System.Drawing.Size(564, 197);
-            this.groupBox31.TabIndex = 14;
-            this.groupBox31.TabStop = false;
-            this.groupBox31.Text = "Data received";
-            // 
-            // textBox_RxClientCheckSum
-            // 
-            this.textBox_RxClientCheckSum.Location = new System.Drawing.Point(89, 155);
-            this.textBox_RxClientCheckSum.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_RxClientCheckSum.MaxLength = 4;
-            this.textBox_RxClientCheckSum.Name = "textBox_RxClientCheckSum";
-            this.textBox_RxClientCheckSum.ReadOnly = true;
-            this.textBox_RxClientCheckSum.Size = new System.Drawing.Size(92, 26);
-            this.textBox_RxClientCheckSum.TabIndex = 15;
-            this.textBox_RxClientCheckSum.TabStop = false;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label24.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.Maroon;
-            this.label24.Location = new System.Drawing.Point(186, 122);
-            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(65, 21);
-            this.label24.TabIndex = 11;
-            this.label24.Text = "Decimal";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(9, 159);
-            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(75, 18);
-            this.label41.TabIndex = 14;
-            this.label41.Text = "Check Sum";
-            // 
-            // textBox_RxClientDataLength
-            // 
-            this.textBox_RxClientDataLength.Location = new System.Drawing.Point(89, 121);
-            this.textBox_RxClientDataLength.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_RxClientDataLength.MaxLength = 4;
-            this.textBox_RxClientDataLength.Name = "textBox_RxClientDataLength";
-            this.textBox_RxClientDataLength.ReadOnly = true;
-            this.textBox_RxClientDataLength.Size = new System.Drawing.Size(92, 26);
-            this.textBox_RxClientDataLength.TabIndex = 10;
-            this.textBox_RxClientDataLength.TabStop = false;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(9, 125);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(81, 18);
-            this.label23.TabIndex = 9;
-            this.label23.Text = "Data Length";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label18.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Maroon;
-            this.label18.Location = new System.Drawing.Point(186, 17);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(97, 21);
-            this.label18.TabIndex = 8;
-            this.label18.Text = "Hexadecimal";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 20);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 18);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "Preamble";
-            // 
-            // textBox_RxClientPreamble
-            // 
-            this.textBox_RxClientPreamble.Location = new System.Drawing.Point(89, 18);
-            this.textBox_RxClientPreamble.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_RxClientPreamble.MaxLength = 4;
-            this.textBox_RxClientPreamble.Name = "textBox_RxClientPreamble";
-            this.textBox_RxClientPreamble.ReadOnly = true;
-            this.textBox_RxClientPreamble.Size = new System.Drawing.Size(92, 26);
-            this.textBox_RxClientPreamble.TabIndex = 0;
-            this.textBox_RxClientPreamble.TabStop = false;
-            this.textBox_RxClientPreamble.TextChanged += new System.EventHandler(this.textBox_RxClientPreamble_TextChanged);
-            // 
-            // textBox_RxClientOpcode
-            // 
-            this.textBox_RxClientOpcode.Location = new System.Drawing.Point(89, 52);
-            this.textBox_RxClientOpcode.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_RxClientOpcode.MaxLength = 4;
-            this.textBox_RxClientOpcode.Name = "textBox_RxClientOpcode";
-            this.textBox_RxClientOpcode.ReadOnly = true;
-            this.textBox_RxClientOpcode.Size = new System.Drawing.Size(92, 26);
-            this.textBox_RxClientOpcode.TabIndex = 1;
-            this.textBox_RxClientOpcode.TabStop = false;
-            // 
-            // textBox_RxClientData
-            // 
-            this.textBox_RxClientData.Location = new System.Drawing.Point(89, 86);
-            this.textBox_RxClientData.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_RxClientData.Name = "textBox_RxClientData";
-            this.textBox_RxClientData.ReadOnly = true;
-            this.textBox_RxClientData.Size = new System.Drawing.Size(455, 26);
-            this.textBox_RxClientData.TabIndex = 2;
-            this.textBox_RxClientData.TabStop = false;
-            this.textBox_RxClientData.TextChanged += new System.EventHandler(this.textBox_RxClientData_TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 58);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 18);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "Opcode";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(9, 88);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(36, 18);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "Data";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
-            // 
-            // groupBox_clientTX
-            // 
-            this.groupBox_clientTX.Controls.Add(this.label14);
-            this.groupBox_clientTX.Controls.Add(this.textBox_CommandActivation);
-            this.groupBox_clientTX.Controls.Add(this.label12);
-            this.groupBox_clientTX.Controls.Add(this.button_SendProtocolSerialPort);
-            this.groupBox_clientTX.Controls.Add(this.button52);
-            this.groupBox_clientTX.Controls.Add(this.groupBox41);
-            this.groupBox_clientTX.Controls.Add(this.label17);
-            this.groupBox_clientTX.Controls.Add(this.label4);
-            this.groupBox_clientTX.Controls.Add(this.textBox_Preamble);
-            this.groupBox_clientTX.Controls.Add(this.button_SendProtocolTCPIP);
-            this.groupBox_clientTX.Controls.Add(this.textBox_Opcode);
-            this.groupBox_clientTX.Controls.Add(this.textBox_data);
-            this.groupBox_clientTX.Controls.Add(this.label6);
-            this.groupBox_clientTX.Controls.Add(this.label11);
-            this.groupBox_clientTX.Location = new System.Drawing.Point(13, 12);
-            this.groupBox_clientTX.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox_clientTX.Name = "groupBox_clientTX";
-            this.groupBox_clientTX.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox_clientTX.Size = new System.Drawing.Size(560, 382);
-            this.groupBox_clientTX.TabIndex = 13;
-            this.groupBox_clientTX.TabStop = false;
-            this.groupBox_clientTX.Text = "Send Data";
-            this.groupBox_clientTX.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.groupBox_clientTX_PreviewKeyDown);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Maroon;
-            this.label14.Location = new System.Drawing.Point(257, 85);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 21);
-            this.label14.TabIndex = 19;
-            this.label14.Text = "01, 02, 04";
-            // 
-            // textBox_CommandActivation
-            // 
-            this.textBox_CommandActivation.Location = new System.Drawing.Point(156, 83);
-            this.textBox_CommandActivation.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_CommandActivation.MaxLength = 5;
-            this.textBox_CommandActivation.Name = "textBox_CommandActivation";
-            this.textBox_CommandActivation.Size = new System.Drawing.Size(92, 26);
-            this.textBox_CommandActivation.TabIndex = 17;
-            this.textBox_CommandActivation.Text = "01";
-            this.textBox_CommandActivation.TextChanged += new System.EventHandler(this.textBox_CommandActivation_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 87);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(133, 18);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Command activation";
-            // 
-            // button_SendProtocolSerialPort
-            // 
-            this.button_SendProtocolSerialPort.Location = new System.Drawing.Point(120, 151);
-            this.button_SendProtocolSerialPort.Margin = new System.Windows.Forms.Padding(2);
-            this.button_SendProtocolSerialPort.Name = "button_SendProtocolSerialPort";
-            this.button_SendProtocolSerialPort.Size = new System.Drawing.Size(128, 22);
-            this.button_SendProtocolSerialPort.TabIndex = 16;
-            this.button_SendProtocolSerialPort.TabStop = false;
-            this.button_SendProtocolSerialPort.Text = "Send SerialPort";
-            this.button_SendProtocolSerialPort.UseVisualStyleBackColor = true;
-            this.button_SendProtocolSerialPort.Click += new System.EventHandler(this.button_SendProtocolSerialPort_Click);
-            // 
-            // button52
-            // 
-            this.button52.Location = new System.Drawing.Point(481, 153);
-            this.button52.Margin = new System.Windows.Forms.Padding(2);
-            this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(69, 22);
-            this.button52.TabIndex = 15;
-            this.button52.Text = "Clear";
-            this.button52.UseVisualStyleBackColor = true;
-            this.button52.Click += new System.EventHandler(this.button52_Click);
-            // 
-            // groupBox41
-            // 
-            this.groupBox41.Controls.Add(this.textBox_SentChecksum);
-            this.groupBox41.Controls.Add(this.label48);
-            this.groupBox41.Controls.Add(this.label42);
-            this.groupBox41.Controls.Add(this.textBox_SentDataLength);
-            this.groupBox41.Controls.Add(this.label43);
-            this.groupBox41.Controls.Add(this.label44);
-            this.groupBox41.Controls.Add(this.label45);
-            this.groupBox41.Controls.Add(this.textBox_SentPreamble);
-            this.groupBox41.Controls.Add(this.textBox_SentOpcode);
-            this.groupBox41.Controls.Add(this.textBox_SentData);
-            this.groupBox41.Controls.Add(this.label46);
-            this.groupBox41.Controls.Add(this.label47);
-            this.groupBox41.Location = new System.Drawing.Point(6, 174);
-            this.groupBox41.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox41.Name = "groupBox41";
-            this.groupBox41.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox41.Size = new System.Drawing.Size(544, 199);
-            this.groupBox41.TabIndex = 15;
-            this.groupBox41.TabStop = false;
-            this.groupBox41.Text = "Data Sent";
-            // 
-            // textBox_SentChecksum
-            // 
-            this.textBox_SentChecksum.Location = new System.Drawing.Point(89, 157);
-            this.textBox_SentChecksum.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_SentChecksum.MaxLength = 4;
-            this.textBox_SentChecksum.Name = "textBox_SentChecksum";
-            this.textBox_SentChecksum.ReadOnly = true;
-            this.textBox_SentChecksum.Size = new System.Drawing.Size(92, 26);
-            this.textBox_SentChecksum.TabIndex = 13;
-            this.textBox_SentChecksum.TabStop = false;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(9, 161);
-            this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(75, 18);
-            this.label48.TabIndex = 12;
-            this.label48.Text = "Check Sum";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label42.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.Maroon;
-            this.label42.Location = new System.Drawing.Point(186, 122);
-            this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(65, 21);
-            this.label42.TabIndex = 11;
-            this.label42.Text = "Decimal";
-            // 
-            // textBox_SentDataLength
-            // 
-            this.textBox_SentDataLength.Location = new System.Drawing.Point(89, 121);
-            this.textBox_SentDataLength.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_SentDataLength.MaxLength = 4;
-            this.textBox_SentDataLength.Name = "textBox_SentDataLength";
-            this.textBox_SentDataLength.ReadOnly = true;
-            this.textBox_SentDataLength.Size = new System.Drawing.Size(92, 26);
-            this.textBox_SentDataLength.TabIndex = 10;
-            this.textBox_SentDataLength.TabStop = false;
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(9, 125);
-            this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(81, 18);
-            this.label43.TabIndex = 9;
-            this.label43.Text = "Data Length";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label44.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.Maroon;
-            this.label44.Location = new System.Drawing.Point(192, 22);
-            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(97, 21);
-            this.label44.TabIndex = 8;
-            this.label44.Text = "Hexadecimal";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(9, 20);
-            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(68, 18);
-            this.label45.TabIndex = 4;
-            this.label45.Text = "Preamble";
-            // 
-            // textBox_SentPreamble
-            // 
-            this.textBox_SentPreamble.Location = new System.Drawing.Point(89, 18);
-            this.textBox_SentPreamble.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_SentPreamble.MaxLength = 4;
-            this.textBox_SentPreamble.Name = "textBox_SentPreamble";
-            this.textBox_SentPreamble.ReadOnly = true;
-            this.textBox_SentPreamble.Size = new System.Drawing.Size(92, 26);
-            this.textBox_SentPreamble.TabIndex = 0;
-            this.textBox_SentPreamble.TabStop = false;
-            // 
-            // textBox_SentOpcode
-            // 
-            this.textBox_SentOpcode.Location = new System.Drawing.Point(89, 52);
-            this.textBox_SentOpcode.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_SentOpcode.MaxLength = 4;
-            this.textBox_SentOpcode.Name = "textBox_SentOpcode";
-            this.textBox_SentOpcode.ReadOnly = true;
-            this.textBox_SentOpcode.Size = new System.Drawing.Size(92, 26);
-            this.textBox_SentOpcode.TabIndex = 1;
-            this.textBox_SentOpcode.TabStop = false;
-            // 
-            // textBox_SentData
-            // 
-            this.textBox_SentData.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_SentData.Location = new System.Drawing.Point(89, 86);
-            this.textBox_SentData.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_SentData.Name = "textBox_SentData";
-            this.textBox_SentData.ReadOnly = true;
-            this.textBox_SentData.Size = new System.Drawing.Size(449, 26);
-            this.textBox_SentData.TabIndex = 2;
-            this.textBox_SentData.TabStop = false;
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(9, 58);
-            this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(56, 18);
-            this.label46.TabIndex = 5;
-            this.label46.Text = "Opcode";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(9, 88);
-            this.label47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(36, 18);
-            this.label47.TabIndex = 6;
-            this.label47.Text = "Data";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Maroon;
-            this.label17.Location = new System.Drawing.Point(369, 20);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(97, 21);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "Hexadecimal";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 20);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 18);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Preamble";
-            // 
-            // textBox_Preamble
-            // 
-            this.textBox_Preamble.Location = new System.Drawing.Point(156, 14);
-            this.textBox_Preamble.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Preamble.MaxLength = 5;
-            this.textBox_Preamble.Name = "textBox_Preamble";
-            this.textBox_Preamble.Size = new System.Drawing.Size(92, 26);
-            this.textBox_Preamble.TabIndex = 0;
-            this.textBox_Preamble.Text = "82";
-            this.textBox_Preamble.TextChanged += new System.EventHandler(this.textBox_Preamble_TextChanged);
-            this.textBox_Preamble.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Preamble_KeyDown);
-            // 
-            // button_SendProtocolTCPIP
-            // 
-            this.button_SendProtocolTCPIP.Location = new System.Drawing.Point(6, 151);
-            this.button_SendProtocolTCPIP.Margin = new System.Windows.Forms.Padding(2);
-            this.button_SendProtocolTCPIP.Name = "button_SendProtocolTCPIP";
-            this.button_SendProtocolTCPIP.Size = new System.Drawing.Size(109, 22);
-            this.button_SendProtocolTCPIP.TabIndex = 3;
-            this.button_SendProtocolTCPIP.TabStop = false;
-            this.button_SendProtocolTCPIP.Text = "Send TCP/IP";
-            this.button_SendProtocolTCPIP.UseVisualStyleBackColor = true;
-            this.button_SendProtocolTCPIP.Click += new System.EventHandler(this.button_Send_Click);
-            // 
-            // textBox_Opcode
-            // 
-            this.textBox_Opcode.Location = new System.Drawing.Point(156, 47);
-            this.textBox_Opcode.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Opcode.MaxLength = 5;
-            this.textBox_Opcode.Name = "textBox_Opcode";
-            this.textBox_Opcode.Size = new System.Drawing.Size(92, 26);
-            this.textBox_Opcode.TabIndex = 1;
-            this.textBox_Opcode.Text = "70";
-            this.textBox_Opcode.TextChanged += new System.EventHandler(this.textBox_Opcode_TextChanged);
-            this.textBox_Opcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Opcode_KeyDown);
-            // 
-            // textBox_data
-            // 
-            this.textBox_data.Location = new System.Drawing.Point(156, 114);
-            this.textBox_data.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_data.Name = "textBox_data";
-            this.textBox_data.Size = new System.Drawing.Size(394, 26);
-            this.textBox_data.TabIndex = 2;
-            this.textBox_data.Text = "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00";
-            this.textBox_data.TextChanged += new System.EventHandler(this.textBox_data_TextChanged);
-            this.textBox_data.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_data_KeyDown);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 55);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 18);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Opcode";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 119);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(36, 18);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Data";
-            // 
             // tabPage_charts
             // 
             this.tabPage_charts.Controls.Add(this.button99);
@@ -2103,17 +1460,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea2.AxisX.Title = "Freq";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.AxisY.Title = "Power [dBm]";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2694,7 +2051,6 @@ namespace Monitor
             this.tabControl_System.SelectedIndex = 0;
             this.tabControl_System.Size = new System.Drawing.Size(875, 615);
             this.tabControl_System.TabIndex = 21;
-            this.tabControl_System.SelectedIndexChanged += new System.EventHandler(this.tabControl_MiniAda_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -4924,15 +4280,6 @@ namespace Monitor
             this.groupBox3.PerformLayout();
             this.tabPage_ClientTCP.ResumeLayout(false);
             this.tabPage_ClientTCP.PerformLayout();
-            this.tabPage_GenericFrame.ResumeLayout(false);
-            this.groupBox_KratosMonitor.ResumeLayout(false);
-            this.groupBox_KratosMonitor.PerformLayout();
-            this.groupBox31.ResumeLayout(false);
-            this.groupBox31.PerformLayout();
-            this.groupBox_clientTX.ResumeLayout(false);
-            this.groupBox_clientTX.PerformLayout();
-            this.groupBox41.ResumeLayout(false);
-            this.groupBox41.PerformLayout();
             this.tabPage_charts.ResumeLayout(false);
             this.tabPage_charts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -5576,7 +4923,6 @@ namespace Monitor
         //{
         //    System.Windows.Forms.Application.Exit();
         //}
-        private TextBox_Logger KratosProtocolLogger;
         private TextBox_Logger SystemLogger;
         private TextBox_Logger ServerLogger;
         private TextBox_Logger SerialPortLogger;
@@ -7834,61 +7180,10 @@ namespace Monitor
                     Result = Kratos_Protocol.DecodeKratusProtocol_Standard(ref i_IncomeBuffer);
                     TCPClientBuffer = new byte[0];
 
-                    textBox_RxClientPreamble.BeginInvoke(new EventHandler(delegate
-                    {
-                        if (Result != null)
-                        {
-                            textBox_RxClientPreamble.BackColor = Color.LightGreen;
-                            textBox_RxClientPreamble.Text = Result.Preamble;
 
-                            textBox_RxClientOpcode.BackColor = Color.LightGreen;
-                            textBox_RxClientOpcode.Text = Result.Opcode;
-
-                            textBox_RxClientData.BackColor = Color.LightGreen;
-                            textBox_RxClientData.Text = Regex.Replace(Result.Data, ".{2}", "$0 ");
-
-                            textBox_RxClientDataLength.BackColor = Color.LightGreen;
-                            textBox_RxClientDataLength.Text = Result.LengthOfEntireMessage + " Bytes";
-
-                            textBox_RxClientCheckSum.BackColor = Color.LightGreen;
-                            textBox_RxClientCheckSum.Text = Result.CheckSum;
+ 
 
 
-                            ParseSystemFrame(Result);
-
-                            //SendMessageToSystemLogger(Result.ToString());
-
-                            //SystemLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
-                            //SystemLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
-                            //SystemLogger.LogMessage(Color.Blue, Color.LightGray, Result.ToString(), true, false);
-
-                            KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
-                            KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
-                            KratosProtocolLogger.LogMessage(Color.Blue, Color.Azure, Result.ToString(), true, false);
-
-
-
-                            GlobalSystemResultReceived += Result.ToString();
-
-
-
-
-
-
-
-
-                            richTextBox_ClientRx.Invoke(new EventHandler(delegate
-                            {
-                                byte[] Onlythe40FirstBytes = i_IncomeBuffer.Skip(0).Take(200).ToArray();
-                                richTextBox_ClientRxPrintText("[" + DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + "] " + ByteArrayToString(Onlythe40FirstBytes) + "\n \n");
-                                //richTextBox_ClientRx.AppendText("[" + dt.TimeOfDay.ToString().Substring(0, 11) + "] " + Encoding.ASCII.GetString(buffer) + " \n");
-
-                            }));
-
-                        }
-
-
-                    }));
                 }
             }
             catch (Exception ex)
@@ -11035,52 +10330,12 @@ namespace Monitor
 
         private void ClearRxTextBox()
         {
-            textBox_RxClientPreamble.BackColor = default;
-            textBox_RxClientPreamble.Text = "";
-
-            textBox_RxClientOpcode.BackColor = default;
-            textBox_RxClientOpcode.Text = "";
-
-            textBox_RxClientData.BackColor = default;
-            textBox_RxClientData.Text = "";
 
         }
 
         private void ClearallTextBoxsTCPClient()
         {
-            textBox_RxClientPreamble.BackColor = default;
-            textBox_RxClientPreamble.Text = "";
 
-            textBox_RxClientOpcode.BackColor = default;
-            textBox_RxClientOpcode.Text = "";
-
-            textBox_RxClientData.BackColor = default;
-            textBox_RxClientData.Text = "";
-
-            textBox_Preamble.BackColor = default;
-            textBox_Preamble.Text = "";
-
-            textBox_Opcode.BackColor = default;
-            textBox_Opcode.Text = "";
-
-            textBox_data.BackColor = default;
-            textBox_data.Text = "";
-
-            textBox_data.BackColor = default;
-            textBox_data.Text = "";
-
-            textBox_RxClientDataLength.BackColor = default;
-            textBox_RxClientDataLength.Text = "";
-
-            textBox_RxClientCheckSum.BackColor = default;
-            textBox_RxClientCheckSum.Text = "";
-
-            textBox_SentPreamble.Text = "";
-            textBox_SentOpcode.Text = "";
-            textBox_SentData.Text = "";
-            textBox_SentDataLength.Text = "";
-            textBox_SentChecksum.Text = "";
-            textBox_SentPreamble.Text = "";
 
         }
 
@@ -11097,15 +10352,6 @@ namespace Monitor
                 textBox_Opcode_TextChanged(null, null);
                 textBox_data_TextChanged(null, null);
 
-                if (!(textBox_Preamble.BackColor == Color.LightGreen && textBox_Opcode.BackColor == Color.LightGreen && textBox_data.BackColor == Color.LightGreen))
-                {
-                    button_SendProtocolTCPIP.BackColor = Color.Red;
-                    return;
-                }
-                else
-                {
-                    button_SendProtocolTCPIP.BackColor = Color.LightGreen;
-                }
 
                 List<byte> ListBytes = new List<byte>();
                 // Kratos_Protocol KratusP = new Kratos_Protocol();
@@ -11114,24 +10360,14 @@ namespace Monitor
 
                 if (stm != null)
                 {
-                    KratosProtocolFrame KratosFrame = new KratosProtocolFrame
-                    {
-                        Preamble = Regex.Replace(textBox_Preamble.Text, @"\s+", ""),
-                        Opcode = Regex.Replace(textBox_Opcode.Text, @"\s+", ""),
-                        Data = Regex.Replace(textBox_data.Text, @"\s+", "")
-                    };
-                    byte[] Result = Kratos_Protocol.EncodeKratusProtocol_Standard(KratosFrame);
 
-                    KratosProtocolFrame SentFrame = Kratos_Protocol.DecodeKratusProtocol_Standard(ref Result);
+
+                    //KratosProtocolFrame SentFrame = Kratos_Protocol.DecodeKratusProtocol_Standard(ref Result);
                     //textBox_AllDataSent.Text = String.Format("Preamble: [{0}] Opcode: [{1}] Data : [{2}] Data length: [{3}] CheckSum: [{4}]",Ret.Preamble,Ret.Opcode,Ret.Data,Ret.DataLength,Ret.CheckSum);
-                    textBox_SentPreamble.Text = SentFrame.Preamble;
-                    textBox_SentOpcode.Text = SentFrame.Opcode;
-                    textBox_SentData.Text = Regex.Replace(SentFrame.Data, ".{2}", "$0 ");
-                    textBox_SentDataLength.Text = SentFrame.LengthOfEntireMessage;
-                    textBox_SentChecksum.Text = SentFrame.CheckSum;
 
-                    byte[] WriteData = Kratos_Protocol.EncodeKratusProtocol_Standard(SentFrame);
-                    stm.Write(WriteData, 0, WriteData.Length);
+
+                //    byte[] WriteData = Kratos_Protocol.EncodeKratusProtocol_Standard(SentFrame);
+//                      stm.Write(WriteData, 0, WriteData.Length);
                 }
 
 
@@ -11269,52 +10505,16 @@ namespace Monitor
             }
             else
             {
-                button_SendProtocolSerialPort_Click(null, null);
+                //button_SendProtocolSerialPort_Click(null, null);
                 //button_SendProtocolSerialPort.PerformClick();
 
-                if (button_SendProtocolSerialPort.BackColor == Color.LightGreen)
-                {
-                    //SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                    //SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                    //SystemLogger.LogMessage(Color.Purple, Color.LightGray, SentFrameGlobal.ToString(), true, false);
 
-                    KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                    KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                    KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, SentFrameGlobal.ToString(), true, false);
-
-
-                }
-                else
-                {
-                    //SystemLogger.LogMessage(Color.Red, Color.White, "Connection Problem or bad data", true, true);
-                    KratosProtocolLogger.LogMessage(Color.Red, Color.White, "Connection Problem or bad data", true, true);
-
-                }
             }
         }
 
         private void SendThrouthTCPIP()
         {
-            button_Send_Click(null, null);
 
-            if (button_SendProtocolTCPIP.BackColor == Color.LightGreen)
-            {
-                //SystemLogger.LogMessage(Color.Purple, Color.LightYellow, "", New_Line = false, Show_Time = true);
-                //SystemLogger.LogMessage(Color.Purple, Color.LightYellow, "Tx:>", false, false);
-                //string str = string.Format("Preamble [{0}],Opcode [{1}],Data [{2}] ", textBox_Preamble.Text, textBox_Opcode.Text, textBox_data.Text);
-                //SystemLogger.LogMessage(Color.Purple, Color.LightYellow, str, true, false);
-
-                KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                string str = string.Format("Preamble [{0}],Opcode [{1}],Data [{2}] ", textBox_Preamble.Text, textBox_Opcode.Text, textBox_data.Text);
-                KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, str, true, false);
-            }
-            else
-            {
-                //SystemLogger.LogMessage(Color.Orange, Color.White, "Connection Problem or bad data", true, true);
-                KratosProtocolLogger.LogMessage(Color.Orange, Color.White, "Connection Problem or bad data", true, true);
-
-            }
         }
 
         private void SendDataToSystem()
@@ -11335,29 +10535,17 @@ namespace Monitor
 
         private void button_GetSoftwareVersion_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "81";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
         }
 
         private void button45_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "82";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
         }
 
         private void button46_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "83";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
         }
 
 
@@ -11366,74 +10554,27 @@ namespace Monitor
 
         private void button48_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "07 00";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
         }
 
         private void button49_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "08 00";
-            textBox_data.Text = "";
+
 
             SendDataToSystem();
         }
 
         private void button50_Click(object sender, EventArgs e)
         {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "10 00";
-            textBox_data.Text = "";
+
 
             SendDataToSystem();
         }
 
 
 
-        private void button52_Click(object sender, EventArgs e)
-        {
-            ClearallTextBoxsTCPClient();
 
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "12 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void MainForm_FormClosed_1(object sender, FormClosedEventArgs e)
-        {
-            CloseClentConnection();
-            m_Exit = true;
-            System.GC.Collect();
-        }
-
-
-        private void button56_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "14 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-
-        private void button58_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "16 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
+        
 
 
 
@@ -11509,14 +10650,7 @@ byte – band type: 0x00 - L1, 0x01 - L2
             }
         }
 
-        private void button63_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "37";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
-        }
 
         private void textBox_SetSyestemState_TextChanged(object sender, EventArgs e)
         {
@@ -11538,105 +10672,17 @@ byte – band type: 0x00 - L1, 0x01 - L2
 
 
 
-        private void button64_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"Description:   Set the system state: 
- Command: 0x28
- TX data: 1 byte – System state: 0x1 – CAL; 0x2 - Normal
- TX frame: 	0x004D 0x0028 0x00000001 + TX Data + checksum
- RX data: 	N.A
- RX frame: 0x004D 0x0028 0x00000000 0x75
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
 
 
 
-        private void button67_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "11";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button66_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set system output power in dBm by Band type
-Command: 	0x2A
-TX data: 	5 bytes
-		1 byte – Band type: 0x0 – Both, 0x1 – L1; 0x2 – L2
-		4 byte – System output power in dBm -117.0 ÷ -49.0, Float type
-TX frame: 	0x004D 0x002A 0x00000005 + TX Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x002A 0x00000000 0x77
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
 
 
 
 
 
-        private void textBox_SetTCXOTrim_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            string WithoutSpaces = Regex.Replace(txtbox.Text, @"\s+", "");
-            byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            if (buffer != null)
-            {
-                txtbox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "26";
-            // textBox_data.Text = textBox_SetPSUOutput.Text;
-
-            SendDataToSystem();
-        }
-
-        private void tabControl_MiniAda_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void button71_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "70 00";
-            //textBox_data.Text = textBox_ReadFPGARegister.Text;
-
-            //SendDataToSystem();
-        }
 
         private void richTextBox_ClientRxPrintText(string i_string)
         {
@@ -11794,85 +10840,13 @@ RX frame: 	0x004D 0x005C 0x00000001 + RX Data + checksum
 
 
 
-        private void button87_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "33";
-            // textBox_data.Text = textBox_SetDCAWithBusMode.Text;
 
-            SendDataToSystem();
-        }
 
-        private void textBox_ReadQSPIFlashData_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            string WithoutSpaces = Regex.Replace(txtbox.Text, @"\s+", "");
-            byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            if (buffer != null)
-            {
-                txtbox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
 
-        private void textBox_Erase4KsectorQSPI_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            string WithoutSpaces = Regex.Replace(txtbox.Text, @"\s+", "");
-            byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            if (buffer != null)
-            {
-                txtbox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
 
-        private void textBox_SetInternalLOFreq_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_SetInternalLOFreq.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            //if (buffer != null && buffer.Length == 9)
-            //{
-            //    textBox_SetInternalLOFreq.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_SetInternalLOFreq.BackColor = Color.Red;
-            //}
-        }
-
-        private void button91_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "5A 00";
-            //textBox_data.Text = textBox_SetInternalLOFreq.Text;
-
-            //SendDataToSystem();
-        }
-
-        private void textBox_GetInternalLOFreq_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_GetInternalLOFreq.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            //if (buffer != null && buffer.Length == 1)
-            //{
-            //    textBox_GetInternalLOFreq.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_GetInternalLOFreq.BackColor = Color.Red;
-            //}
-        }
 
         private void button90_Click(object sender, EventArgs e)
         {
@@ -12870,14 +11844,7 @@ Raw4 - Catalina 4
             //SendDataToSystem();
         }
 
-        private void button96_Click_1(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "32 00";
-            // textBox_data.Text = textBox_EraseDataFromFlash.Text;
 
-            SendDataToSystem();
-        }
 
         private readonly string CATALINA_1_ADDRESS = "00500000";
         private readonly string CATALINA_2_ADDRESS = "00600000";
@@ -13296,14 +12263,6 @@ RX frame: 	0x004D 0x008A 0x00000001 + RX Data + checksum
             }
         }
 
-        private void button73_Click_2(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "90 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
 
         private void textBox_GetMonitoredData_TextChanged(object sender, EventArgs e)
         {
@@ -13368,120 +12327,14 @@ Note: eStatus enum 
             }
         }
 
-        private void button95_Click_1(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "92 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button96_Click_3(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "93 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
-
-        private void button96_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Get a block of next monitored data having alarm 
-Command: 	0x93
-TX data: 	N.A
-TX frame: 	0x004D 0x0093 0x00000001 + TX Data + checksum
-RX data: 	64 byte
-		2 byte - The ID of this object Discrete 
-1 byte - Current value
-1 byte - Discrete is Alarm. Boolean level (1/0) for generating an Alarm
-4 byte - Minimum value allowed
-4 byte - Maximum value allowed
-4 byte - Analog Current value
-40 byte - The Name of this object, String type.
-4byte - Alarm type, eStatus enum
-4byte - Alarm rules (Min-Only, Max-Only, Min-Max, No), eStatus enum
-RX frame: 	0x004D 0x0093 0x00000040 + RX Data + checksum
-Note: eStatus enum 
-	0x0 - NO - Alarm is not generated/Current reading is in range. Ok!
-0x1 - HIGH - Alarm when value to high / Current reading is too high.
-0x2 - LOW - Alarm when value to low / Current reading is too low.
-0x3 - MIN_MAX- Alarm when value to high or to low / not applicable for reading
 
 
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
 
-        private void textBox_SetAlarmSimulatorBlock_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_SetAlarmSimulatorBlock.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            //if (buffer != null )
-            //{
-            //    textBox_SetAlarmSimulatorBlock.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_SetAlarmSimulatorBlock.BackColor = Color.Red;
-            //}
-        }
 
-        private void button100_Click_3(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "94 00";
-            //textBox_data.Text = textBox_SetAlarmSimulatorBlock.Text;
 
-            //SendDataToSystem();
-        }
 
-        private void textBox_MonitorTask_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_MonitorTask.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
 
-            //if (buffer != null && buffer.Length == 1)
-            //{
-            //    textBox_MonitorTask.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_MonitorTask.BackColor = Color.Red;
-            //}
-        }
-
-        private void button101_Click_1(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "95 00";
-            //textBox_data.Text = textBox_MonitorTask.Text;
-
-            //SendDataToSystem();
-        }
-
-        private void textBox_SetLOFreq_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_SetLOFreq.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            //if (buffer != null && buffer.Length == 5)
-            //{
-            //    textBox_SetLOFreq.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_SetLOFreq.BackColor = Color.Red;
-            //}
-        }
 
         private void button102_Click(object sender, EventArgs e)
         {
@@ -13518,39 +12371,8 @@ Note: eStatus enum 
 
         }
 
-        private void button104_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "9B 00";
-            //textBox_data.Text = textBox_GetLOStateFreqMode.Text;
+  
 
-            //SendDataToSystem();
-
-        }
-
-        private void textBox_GetLOStateFreqMode_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_GetLOStateFreqMode.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            //if (buffer != null && buffer.Length == 1)
-            //{
-            //    textBox_GetLOStateFreqMode.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_GetLOStateFreqMode.BackColor = Color.Red;
-            //}
-        }
-
-        private void button105_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9C 00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
 
         private void textBox_SelectLOSource_TextChanged(object sender, EventArgs e)
         {
@@ -13576,88 +12398,10 @@ Note: eStatus enum 
             //SendDataToSystem();
         }
 
-        private void button106_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "9E 00";
-            textBox_data.Text = "";
 
-            SendDataToSystem();
-        }
-
-        private void button48_Click_1(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "00";
-            textBox_data.Text = "";
-
-            SendDataToSystem();
-        }
 
         private KratosProtocolFrame SentFrameGlobal = null;
-        private void button_SendProtocolSerialPort_Click(object sender, EventArgs e)
-        {
-            SentFrameGlobal = null;
-            try
-            {
-                if (serialPort.IsOpen == false)
-                {
-                    return;
-                }
-                ClearRxTextBox();
-                textBox_Preamble_TextChanged(null, null);
-                textBox_Opcode_TextChanged(null, null);
-                textBox_data_TextChanged(null, null);
-
-                if (!(textBox_Preamble.BackColor == Color.LightGreen && textBox_Opcode.BackColor == Color.LightGreen && textBox_data.BackColor == Color.LightGreen))
-                {
-                    button_SendProtocolSerialPort.BackColor = Color.Red;
-                    return;
-                }
-                else
-                {
-                    button_SendProtocolSerialPort.BackColor = Color.LightGreen;
-                }
-
-                List<byte> ListBytes = new List<byte>();
-                // Kratos_Protocol KratusP = new Kratos_Protocol();
-
-
-                KratosProtocolFrame KratosFrame = new KratosProtocolFrame
-                {
-                    Preamble = Regex.Replace(textBox_Preamble.Text, @"\s+", ""),
-                    Opcode = Regex.Replace(textBox_Opcode.Text, @"\s+", ""),
-                    Data = Regex.Replace(textBox_data.Text, @"\s+", "")
-                };
-                byte[] Result = Kratos_Protocol.EncodeKratusProtocol_Standard(KratosFrame);
-
-                KratosProtocolFrame SentFrame = Kratos_Protocol.DecodeKratusProtocol_Standard(ref Result);
-
-                SentFrameGlobal = SentFrame;
-                //textBox_AllDataSent.Text = String.Format("Preamble: [{0}] Opcode: [{1}] Data : [{2}] Data length: [{3}] CheckSum: [{4}]",Ret.Preamble,Ret.Opcode,Ret.Data,Ret.DataLength,Ret.CheckSum);
-                textBox_SentPreamble.Text = SentFrame.Preamble;
-                textBox_SentOpcode.Text = SentFrame.Opcode;
-                textBox_SentData.Text = textBox_SentData.Text = Regex.Replace(SentFrame.Data, ".{2}", "$0 ");
-                textBox_SentDataLength.Text = SentFrame.LengthOfEntireMessage;
-                textBox_SentChecksum.Text = SentFrame.CheckSum;
-
-                textBox_SendSerialPort.Text = ConvertByteArraytToString(Kratos_Protocol.EncodeKratusProtocol_Standard(SentFrame));
-
-                button_SendSerialPort_Click(null, null);
-                // button_SendSerialPort.PerformClick();
-                //stm.Write(Result, 0, Result.Length);
-
-
-
-            }
-            catch(Exception ex)
-            {
-
-                KratosProtocolLogger.LogMessage(Color.Orange, Color.White, ex.Message, New_Line = false, Show_Time = true);
-                //MessageBox.Show (se.Message );
-
-            }
-        }
+        
 
 
 
@@ -13672,14 +12416,6 @@ Note: eStatus enum 
 
 
 
-        private void button53_Click_1(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "94";
-            //    textBox_data.Text = textBox5.Text;
-
-            SendDataToSystem();
-        }
 
         void Not_Implemented()
         {
@@ -13715,101 +12451,12 @@ Note: eStatus enum 
             }
         }
 
-        private void textBox84_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    Write_Register_To_Simulator(" 00 05", hexValue);
 
 
-
-                }
-
-            }
-        }
-
-        private void textBox83_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    //Write_Register(" 00 03", "00 07");
-                    //await Task.Delay(300);
-
-                    Write_Register_To_Simulator(" 00 06", hexValue);
-                    //await Task.Delay(500);
-
-                    //Write_Register_To_UUT(" 00 01", "04 00");
+      
+     
 
 
-                }
-
-            }
-        }
-
-        private void textBox82_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void textBox85_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void textBox29_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            if (int.TryParse(txtbox.Text, out int Num) == true)
-            {
-                if (Num >= 0 && Num <= 255)
-                {
-                    txtbox.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    txtbox.BackColor = Color.Red;
-                }
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
-
-        private void groupBox46_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private bool CheckPeriodAndWidth(float i_Period, float i_Width, float i_Delay)
-        {
-            if (i_Period >= i_Width && i_Period >= i_Delay)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private void textBox_RFPeriod_TextChanged(object sender, EventArgs e)
-        {
-            testRFTextboxs();
-        }
 
         void testRFTextboxs()
         {
@@ -13987,69 +12634,11 @@ Note: eStatus enum 
 
 
 
-        private void textBox_CALSAR_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    Write_Register_To_Simulator(" 00 08", hexValue);
 
 
 
-                }
 
-            }
-        }
 
-        private void textBox_CALSAR_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox_DebugMode_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox Checkbx = (CheckBox)sender;
-            if (Checkbx.Checked == true)
-            {
-                //    textBox_SetSystemMode.Text = "01";
-
-                Checkbx.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                //textBox_SetSystemMode.Text = "00";
-                Checkbx.BackColor = default;
-            }
-
-            button_SetSystemMode_Click(null, null);
-        }
-
-        private void textBox84_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            if (int.TryParse(txtbox.Text, out int Num) == true)
-            {
-                if (Num >= 0 && Num <= 7)
-                {
-                    txtbox.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    txtbox.BackColor = Color.Red;
-                }
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
 
         private void SetTextBoxTextChangedColor(TextBox i_textbox)
         {
@@ -14231,89 +12820,13 @@ Note: eStatus enum 
             SetTextBoxTextChangedColor((TextBox)sender);
         }
 
-        private async void button_GetStatus_Click(object sender, EventArgs e)
-        {
-
-            int Delay = 500;
-            if (serialPort.IsOpen == false)
-            {
-                WriteToSystemStatus("Port is closed!", 4, Color.Orange);
-                return;
-
-            }
-
-
-
-
-
-            Write_Register_To_UUT("00 01", "01 00");
-            await Task.Delay(Delay);
-
-            Read_Register_From_UUT("00 0C", "00 20");
-            await Task.Delay(Delay);
-
-            Read_Register_From_UUT("00 AD", "00 14");
-            await Task.Delay(Delay);
-
-            Write_Register_To_UUT("00 01", "02 00");
-            await Task.Delay(100);
-
-            Read_Register_From_UUT("00 03");
-            await Task.Delay(Delay);
-
-            Read_Register_From_UUT("00 B7", "00 14");
-            await Task.Delay(Delay);
-
-            Read_Register_From_UUT("00 A7", "00 0C");
-            await Task.Delay(Delay);
-
-            Read_Register_From_UUT("00 88");
-            await Task.Delay(Delay);
-
-            //Read_Register_From_UUT("00 B9");
-            //await Task.Delay(500);
-
-            //Read_Register_From_UUT("00 BA");
-            //await Task.Delay(500);
-
-            //Read_Register_From_UUT("00 BB");
-            //await Task.Delay(500);
-
-            //Read_Register_From_UUT("00 BF");
-            //await Task.Delay(500);
-
-            //Read_Register_From_UUT("00 A0");
-            //await Task.Delay(500);
-
-            //Read_Register_From_UUT("00 96");
-            //await Task.Delay(500);
-
-            Read_Register_From_UUT("00 F8", "00 0E");
-            await Task.Delay(Delay);
-
-            Read_Register_From_Simulator("00 F8", "00 0E");
-            await Task.Delay(Delay);
-
-
-
-
-
-
-        }
+        
 
         private void textBox95_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxTextChangedColor((TextBox)sender);
         }
 
-        private void button_SetSystemMode_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "35";
-            //   textBox_data.Text = textBox_SetSystemMode.Text;
-
-            SendDataToSystem();
-        }
 
         private void textBox_SystemMode_TextChanged(object sender, EventArgs e)
         {
@@ -14512,52 +13025,15 @@ Note: eStatus enum 
             }
         }
 
-        void Read_Register_From_UUT(String i_Address, String i_Length = "00 02")
-        {
-            //   textBox_ReadRegister.Text = String.Format("02 {0} {1}", i_Address, i_Length);
-
-            button_ReadFromRegister_Click(null, null);
-
-        }
-
-        void Write_Register_To_UUT(String i_Address, String i_Data)
-        {
-            //textBox_WriteRegisterToUUT.Text = String.Format("01 {0} {1}", i_Address, i_Data);
-
-            button_WriteRegisterToUUT_Click(null, null);
-
-        }
-
-        void Write_Register_To_Simulator(String i_Address, String i_Data)
-        {
-            // textBox_WriteToSimulator.Text = String.Format("01 {0} {1}", i_Address, i_Data);
-
-            button_WriteRegisterToSimulator_Click(null, null);
-
-        }
 
 
-        void Read_Register_From_Simulator(String i_Address, String i_Length = "00 02")
-        {
-            //   textBox_ReadToSimulator.Text = String.Format("02 {0} {1}", i_Address, i_Length);
 
-            button_ReadRegisterToSimulator_Click(null, null);
-
-        }
 
         private void tabPage3_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button_ReadFromRegister_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "52";
-            //  textBox_data.Text = textBox_ReadRegister.Text;
-
-            SendDataToSystem();
-        }
 
         private void textBox36_TextChanged(object sender, EventArgs e)
         {
@@ -14614,37 +13090,19 @@ Note: eStatus enum 
             }
         }
 
-        void Write_Flash(String i_Page, String i_PageInternalAddress, String i_Data)
-        {
-            //textBox_WriteFlash.Text = String.Format("01 {0} {1} {2}", i_Page, i_PageInternalAddress, i_Data);
 
-            button_WriteFlash_Click(null, null);
-        }
 
-        void Read_Flash(String i_Page, String i_PageInternalAddress = "00 00")
-        {
-            //  textBox_ReadFlash.Text = String.Format("02 {0} {1}", i_Page, i_PageInternalAddress);
 
-            button_ReadFlash_Click(null, null);
-        }
 
         void Erase_Flash(String i_Settings = "11 00 00")
         {
             //textBox_EraseFlash.Text = i_Settings;
 
-            button_EraseFlash_Click(null, null);
+
         }
 
 
 
-        private void button_EraseFlash_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "74";
-            //   textBox_data.Text = textBox_EraseFlash.Text;
-
-            SendDataToSystem();
-        }
 
         private void textBox_EraseFlash_TextChanged(object sender, EventArgs e)
         {
@@ -14694,176 +13152,21 @@ Note: eStatus enum 
             }
         }
 
-        private void button_WriteFlash_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "72";
-            //  textBox_data.Text = textBox_WriteFlash.Text;
-
-            SendDataToSystem();
-        }
-
-        private void button_ReadFlash_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "70";
-            //  textBox_data.Text = textBox_ReadFlash.Text;
-
-            SendDataToSystem();
-        }
-
-        private void textBox11_TextChanged_1(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            if (int.TryParse(txtbox.Text, out int Num) == true)
-            {
-                if (Num >= 0 && Num <= 4095)
-                {
-                    txtbox.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    txtbox.BackColor = Color.Red;
-                }
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
 
 
-        private async void textBox9_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    // SetU19Values();
 
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
 
-                    Write_Register_To_UUT(" 00 12", "FF FF");
-                    await Task.Delay(500);
 
-                    Write_Register_To_UUT(" 00 01", "40 00");
-                    await Task.Delay(500);
 
-                    Write_Register_To_UUT(" 00 12", int.Parse(m_TextBox.Text).ToString("X4"));
-                    await Task.Delay(500);
 
-                    Write_Register_To_UUT(" 00 01", "08 00");
 
-                }
 
-            }
-        }
 
-        private async void textBox_MPA_Ton_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
+    
 
-                    //Write_Register(" 00 30", "00 04");
-                    //await Task.Delay(300);
 
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
 
-                    Write_Register_To_UUT(" 00 0C", hexValue);
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "04 00");
-
-                }
-
-            }
-        }
-
-        private async void textBox_MPA_Toff_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    //Write_Register(" 00 30", "00 04");
-                    //await Task.Delay(300);
-
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 0D", hexValue);
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "04 00");
-
-                }
-
-            }
-        }
-
-        private async void textBox_SPA_Ton_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    //Write_Register(" 00 30", "00 04");
-                    //await Task.Delay(300);
-
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 0E", hexValue);
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "04 00");
-
-                }
-
-            }
-        }
-
-        private async void textBox_SPA_Toff_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    //Write_Register(" 00 30", "00 04");
-                    //await Task.Delay(300);
-
-                    Write_Register_To_UUT(" 00 30", "00 04");
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 0F", hexValue);
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "04 00");
-
-                }
-
-            }
-        }
+  
 
         private void textBox_SPA_Ton_TextChanged(object sender, EventArgs e)
         {
@@ -15069,73 +13372,6 @@ Note: eStatus enum 
 
 
 
-        private void button_WriteRegisterToSimulator_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "B0";
-            // textBox_data.Text = textBox_WriteToSimulator.Text;
-
-            SendDataToSystem();
-        }
-
-        private void button_ReadRegisterToSimulator_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "B2";
-            //  textBox_data.Text = textBox_ReadToSimulator.Text;
-
-            SendDataToSystem();
-        }
-
-        void WriteRFWidthToSimulator()
-        {
-
-        }
-
-
-
-        void WritePulseGenToSimulator2()
-        {
-
-        }
-
-
-        private void button_WriteRegisterToUUT_Click(object sender, EventArgs e)
-        {
-            textBox_Preamble.Text = PREAMBLE;
-            textBox_Opcode.Text = "50";
-            //    textBox_data.Text = textBox_WriteRegisterToUUT.Text;
-
-            SendDataToSystem();
-        }
-
-        private void textBox_RFPeriod_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    WriteRFWidthToSimulator();
-
-                }
-            }
-        }
-
-        private void textBox_RFDelay_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    WriteRFWidthToSimulator();
-
-                }
-            }
-        }
 
 
 
@@ -15149,24 +13385,13 @@ Note: eStatus enum 
 
 
 
-        private void tabControl_Main_KeyDown(object sender, KeyEventArgs e)
-        {
 
-        }
 
-        private void textBox_EraseFlash_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
 
-                    button_EraseFlash_Click(null, null);
 
-                }
-            }
-        }
+
+
+
 
         private void button_EraseFlash_MouseDown(object sender, MouseEventArgs e)
         {
@@ -15229,49 +13454,9 @@ FF CheckSum
 
 
 
-        private void textBox_SystemMode_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string message = @"
-Bit 0 - Enable SSPA Debug Mode
-Bit 1 - Disable External Strobe
-Bit 2 - Enable Peripherals Debug All Peripherals enables by Force Command ONLY
 
 
-";
-                string title = "Help";
-                MessageBox.Show(message, title);
 
-
-            }
-        }
-
-        private async void textBox_28V_KeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox m_TextBox = (TextBox)sender;
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (m_TextBox.BackColor == Color.LightGreen)
-                {
-
-                    int.TryParse(m_TextBox.Text, out int Data);
-                    string hexValue = Data.ToString("X4");
-
-                    //Write_Register(" 00 03", "00 07");
-                    //await Task.Delay(300);
-
-                    Write_Register_To_UUT(" 00 1A", hexValue);
-                    await Task.Delay(500);
-
-                    Write_Register_To_UUT(" 00 01", "04 00");
-
-
-                }
-
-            }
-        }
 
        
 
@@ -15336,7 +13521,6 @@ Bit 2 - Enable Peripherals Debug All Peripherals enables by Force Command ONLY
 
 
 
-                    Read_Flash(BlockAddress, InternalFlashAddress.ToString("X4"));
                     InternalFlashAddress += 0x0100;
                     TotalBytesToRead -= 0x0100;
                 }
@@ -15408,7 +13592,6 @@ Bit 2 - Enable Peripherals Debug All Peripherals enables by Force Command ONLY
 
 
 
-                    Write_Flash(BlockAddress, InternalFlashAddress.ToString("X4"), DataToWrite);
                     InternalFlashAddress += 256;
                     TotalBytesToSend -= 256;
                 }
@@ -15782,40 +13965,16 @@ This Process can take 1 minute.";
 
 
 
-        private void button59_Click_2(object sender, EventArgs e)
-        {
-            Read_Flash("10 00");
-        }
 
-      
 
 
 
        
 
-        private async void button2_Click_3(object sender, EventArgs e)
-        {
-            int Delay = 800;
-
-            foreach (DataGridView datagrid in List_AllDataGrids)
-            {
-                ReadDataGridToFlash(datagrid);
-                await Task.Delay(Delay);
-            }
-            // tabControl_SSPA_WB_GUI.Enabled = true;
-        }
 
 
 
-        private void button135_Click(object sender, EventArgs e)
-        {
-
-            foreach (DataGridView datagrid in List_AllDataGrids)
-            {
-                ClearallColumnsinGrid(datagrid, false);
-            }
-
-        }
+ 
 
         private void button136_Click(object sender, EventArgs e)
         {
@@ -15825,44 +13984,7 @@ This Process can take 1 minute.";
             }
         }
 
-        private void checkBox_TriggerClock_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox Checkbx = (CheckBox)sender;
-            if (Checkbx.Checked == true)
-            {
-                Write_Register_To_Simulator(" 00 02", "00 10");
 
-                Checkbx.BackColor = Color.LightGreen;
-            }
-            else
-            {
-
-                Write_Register_To_Simulator(" 00 02", "00 00");
-                Checkbx.BackColor = default;
-            }
-        }
-
-        private async void comboBox_CALSARUUT_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            ComboBox m_comboBox = (ComboBox)sender;
-            if (int.TryParse(m_comboBox.Text.Substring(0, 2), out int Data) == true)
-            {
-                m_comboBox.BackColor = Color.LightGreen;
-                string hexValue = Data.ToString("X4");
-
-                Write_Register_To_UUT(" 00 08", hexValue);
-                await Task.Delay(200);
-                Write_Register_To_UUT(" 00 02", "00 10");
-            }
-            else
-            {
-                m_comboBox.BackColor = Color.Red;
-            }
-
-
-
-        }
 
         private void button_SendSerialPort_Click(object sender, EventArgs e)
         {
@@ -16246,9 +14368,6 @@ This Process can take 1 minute.";
             output += " CheckSum: " + CheckSum.ToString("X8");
 
 
-            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-            KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, output, true, false);
 
 
 
@@ -17120,7 +15239,6 @@ SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
-                tabControl_Main.TabPages.RemoveAt(0);
 
 
                 SetAllCLIcommands();
@@ -17131,7 +15249,7 @@ SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
 
 
 
-                KratosProtocolLogger = new TextBox_Logger("Kratos_Protocol", richTextBox_KratosProtocol, button_ClearKratosProtocol, null, checkBox_RecordKratosProtocol, null, null, null, null);
+               // KratosProtocolLogger = new TextBox_Logger("Kratos_Protocol", richTextBox_KratosProtocol, button_ClearKratosProtocol, null, checkBox_RecordKratosProtocol, null, null, null, null);
                 ServerLogger = new TextBox_Logger("Server", TextBox_Server, button_ClearServer, checkBox_ServerPause, checkBox_ServerRecord, null, null, null, checkBox_StopLogging);
                 SerialPortLogger = new TextBox_Logger("Serial_Port", SerialPortLogger_TextBox, button_ClearSerialPort, checkBox_SerialPortPause, checkBox_SerialPortRecordLog, textBox_SerialPortRecognizePattern, textBox_SerialPortRecognizePattern2, textBox_SerialPortRecognizePattern3, null);
                 SystemLogger = new TextBox_Logger("SystemLogger", richTextBox_SSPA, button_ClearMiniAda, checkBox_PauseMiniAda, checkBox_RecordMiniAda, textBox_CLIrecognize1, textBox_CLIrecognize2, textBox_CLIrecognize3, checkBox_StopLogging);
