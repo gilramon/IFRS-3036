@@ -8219,7 +8219,9 @@ namespace Monitor
         //List<byte> temp_serialBuff = new List<byte>();
         void WriteBufferInfo(byte[] i_buffer)
         {
-            SerialPortLogger.LogMessage(Color.Green, Color.White, String.Format("Data: [{0}] ,Total bytes: [{1}]",ConvertByteArraytToString(i_buffer) ,i_buffer.Length.ToString()), New_Line = true, Show_Time = false);
+            SerialPortLogger.LogMessage(Color.Green, Color.White, String.Format("Total bytes: [{0}]" ,i_buffer.Length.ToString()), New_Line = true, Show_Time = false);
+            SerialPortLogger.LogMessage(Color.Green, Color.White, "Check sum calculation", New_Line = true, Show_Time = false);
+            SerialPortLogger.LogMessage(Color.Green, Color.White, FrameAnalizer, New_Line = true, Show_Time = false);
         }
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -15873,8 +15875,9 @@ This Process can take 1 minute.";
         private void button_SendSerialPort_Click(object sender, EventArgs e)
         {
             bool IsSent = false;
+           // 
 
-            if(serialPort.IsOpen == false)
+            if (serialPort.IsOpen == false)
             {
                 WriteToSystemStatus("Serial Port is not open", 3, Color.Orange);
                 return;
@@ -16261,7 +16264,7 @@ This Process can take 1 minute.";
             return ret;
         }
 
-        
+
 
         String SetFullParams(String i_Command, bool i_OnlyCheckValidity)
         {
@@ -16286,130 +16289,304 @@ This Process can take 1 minute.";
 
             //            SetFullParams 0 1 80 2 35 80 20 20 20 20 20
             //            SetFullParams 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
+
+            byte[] SendFrame = new byte[40];
             String ret = "";
-
-
+            int Num = 0;
             String[] tempStr = i_Command.Split(' ');
 
-            //Check Validity of the command first and retuen string error if something wrong. //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////
-            ///
-
-            if (tempStr.Length != 12)
+            int Num_Of_Arguments = 13;
+            if (tempStr.Length != Num_Of_Arguments)
             {
-                ret += String.Format("\n Arguments number should be 12, see example");
+                ret += String.Format("\n Arguments number should be {0}, see example", Num_Of_Arguments);
                 return ret;
             }
 
-            //byte[] buffer = StringToByteArray(RegisterAddress32bits);
-
-            //if (buffer == null || buffer.Length != 4)
-            //{
-            //    ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", RegisterAddress32bits);
-            //}
-
-            //if (i_OnlyCheckValidity == true || ret != "")
-            //{
-            //    return ret;
-            //}
-
-            //Init all the commands //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
+            int i =0;
             String Command = tempStr[0];
-            String SystemMode = tempStr[1];
-            String ResetAlarmCounter = tempStr[2];
-            String TxFrequency = tempStr[3];
-            String TxInputPower = tempStr[4];
-            String TxDutyCycle = tempStr[5];
-            String RxFrequency = tempStr[6];
-            String RxCh1Att = tempStr[7];
-            String RxCh2Att = tempStr[8];
-            String RxCh3Att = tempStr[9];
-            String RxCh4Att = tempStr[10];
-            String RxChGRDAtt = tempStr[11];
+            String CMD_Activation = tempStr[1];
+            String SystemMode = tempStr[2];
+            String ResetAlarmCounter = tempStr[3];
+            String TxFrequency = tempStr[4];
+            String TxInputPower = tempStr[5];
+            String TxDutyCycle = tempStr[6];
+            String RxFrequency = tempStr[7];
+            String RxCh1Att = tempStr[8];
+            String RxCh2Att = tempStr[9];
+            String RxCh3Att = tempStr[10];
+            String RxCh4Att = tempStr[11];
+            String RxChGRDAtt = tempStr[12];
 
-
-
-
-
-            // Excute the command //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////
             List<byte> ListBytes = new List<byte>();
 
 
 
             //Preamble
-            String Preamble = "82";
-            ListBytes.AddRange(StringToByteArray(Preamble));
+            SendFrame[0] = 0x82;
 
 
             //Opcode
-            String Opcode = "22";
-            ListBytes.AddRange(StringToByteArray(Opcode));
+            SendFrame[1] = 0x51;
 
 
             //Messagecounter
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
-
-
+            byte[] temp = (StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
+            temp.CopyTo(SendFrame, 2);
             MessageCounter++;
-            //RegisterAddress
-            //ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
 
-            //DatatoWrite
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian("00 00 00 00")));
+            //Length
+            temp = StringToByteArray("28 00 00 00");
+            temp.CopyTo(SendFrame, 2);
+
+            //Activation
+            if (int.TryParse(CMD_Activation, out Num) && (Num == 1 || Num == 2 || Num == 4))
+            {
+                temp = StringToByteArray(Num.ToString("X2"));
+                temp.CopyTo(SendFrame, 8);
+            }
+            else
+            {
+                ret += String.Format("\n Argument 1 [{0}] invalid ",CMD_Activation);
+            }
+
+            //Spare
+            temp = (StringToByteArray("00 00 00"));
+            temp.CopyTo(SendFrame, 9);
 
             //TimeTag
             //String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
             String TimeTag = "00 00 00 00";
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
+            temp = StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag));
+            temp.CopyTo(SendFrame, 12);
+
+            //Tx Data
 
 
 
+            if (SystemMode.EndsWith("x"))
+            {
+                SendFrame[16] |= (1 << 7);
+                SystemMode.Remove(SystemMode.Length - 1);
+            }
+            if (int.TryParse(SystemMode, out Num) && (Num >=0  && Num <= 3))
+            {
+                SendFrame[19] = (byte)Num;
 
-            //Data
-            byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
-            ListBytes.AddRange(DataBytes);
+            }
+            else
+            {
+                ret += String.Format("\n Argument 2 [{0}] invalid ", SystemMode);
+            }
+            i++;
+
+
+
+            if (ResetAlarmCounter.EndsWith("x"))
+            {
+                SendFrame[16] |= (1 << 6);
+                ResetAlarmCounter.Remove(ResetAlarmCounter.Length - 1);
+            }
+            if (int.TryParse(ResetAlarmCounter, out Num) && (Num >= 0 && Num <= 1))
+            {
+                SendFrame[20] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 3 [{0}] invalid", ResetAlarmCounter);
+            }
+            i++;
+
+
+            if (TxFrequency.EndsWith("x"))
+            {
+                SendFrame[16] |= (1 << 4);
+                TxFrequency.Remove(TxFrequency.Length - 1);
+            }
+            if (int.TryParse(TxFrequency, out Num) && (Num >= 0 && Num <= 80))
+            {
+                SendFrame[22] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 4 [{0}] invalid ", TxFrequency);
+            }
+            i++;
+
+            if (TxInputPower.EndsWith("x"))
+            {
+                SendFrame[16] |= (1 << 3);
+                TxInputPower.Remove(TxInputPower.Length - 1);
+            }
+            if (int.TryParse(TxInputPower, out Num) && (Num >= 0 && Num <= 80))
+            {
+                SendFrame[23] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 5 [{0}] invalid ", TxInputPower);
+            }
+            i++;
+
+            if (TxDutyCycle.EndsWith("x"))
+            {
+                SendFrame[16] |= (1 << 2);
+                TxDutyCycle.Remove(TxDutyCycle.Length - 1);
+            }
+            if (int.TryParse(TxDutyCycle, out Num) && (Num >= 0 && Num <= 35))
+            {
+                SendFrame[24] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 6 [{0}] invalid ", TxDutyCycle);
+            }
+            i++;
+
+            if (RxFrequency.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 7);
+                RxFrequency.Remove(RxFrequency.Length - 1);
+            }
+            if (int.TryParse(RxFrequency, out Num) && (Num >= 0 && Num <= 80))
+            {
+                SendFrame[27] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 7 [{0}] invalid ", RxFrequency);
+            }
+            i++;
+
+            if (RxCh1Att.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 6);
+                RxCh1Att.Remove(RxCh1Att.Length - 1);
+            }
+            if (int.TryParse(RxCh1Att, out Num) && (Num >= 0 && Num <= 20))
+            {
+                SendFrame[28] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 8 [{0}] invalid ", RxCh1Att);
+            }
+            i++;
+
+            if (RxCh2Att.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 5);
+                RxCh2Att.Remove(RxCh2Att.Length - 1);
+            }
+            if (int.TryParse(RxCh2Att, out Num) && (Num >= 0 && Num <= 20))
+            {
+                SendFrame[29] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 9 [{0}] invalid ", RxCh2Att);
+            }
+            i++;
+
+            if (RxCh3Att.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 4);
+                RxCh3Att.Remove(RxCh3Att.Length - 1);
+            }
+            if (int.TryParse(RxCh3Att, out Num) && (Num >= 0 && Num <= 20))
+            {
+                SendFrame[30] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 10 [{0}] invalid ", RxCh3Att);
+            }
+            i++;
+
+
+            if (RxCh4Att.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 3);
+                RxCh4Att.Remove(RxCh4Att.Length - 1);
+            }
+            if (int.TryParse(RxCh4Att, out Num) && (Num >= 0 && Num <= 20))
+            {
+                SendFrame[31] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 11 [{0}] invalid ", RxCh4Att);
+            }
+            i++;
+
+            if (RxChGRDAtt.EndsWith("x"))
+            {
+                SendFrame[17] |= (1 << 2);
+                RxChGRDAtt.Remove(RxChGRDAtt.Length - 1);
+            }
+            if (int.TryParse(RxChGRDAtt, out Num) && (Num >= 0 && Num <= 20))
+            {
+                SendFrame[32] = (byte)Num;
+
+            }
+            else
+            {
+                ret += String.Format("\n Argument 12 [{0}] invalid ",  RxChGRDAtt);
+            }
+            i++;
 
 
 
             //Calculate check sum
             Int32 CheckSum = 0;
 
-            for (int i = 0; i < ListBytes.Count; i = i + 4)
+            for (i = 0; i < SendFrame.Length; i = i + 4)
             {
-                List<byte> temp = ListBytes.GetRange(i, 4);
-                byte[] tempArr = temp.ToArray();
+                var tempArr = SendFrame.Skip(i).Take(4).ToArray();
+                //byte[] temp = SendFrame.(i, 4);
+                //byte[] tempArr = temp.ToArray();
 
                 tempArr = tempArr.Reverse().ToArray();
 
-                Int32 Num = BitConverter.ToInt32(tempArr, 0);
+                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
 
-                CheckSum += Num;
+                Int32 Value = BitConverter.ToInt32(tempArr, 0);
+
+                CheckSum += Value;
             }
-            ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
+
+            FrameAnalizer += " -------------\n";
+            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+
+            temp = StringToByteArray(CheckSum.ToString("X8"));
+            temp.CopyTo(SendFrame, 36);
 
 
-
-
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, output, true, false);
-
+            if(i_OnlyCheckValidity == true)
+            {
+                return ret;
+            }
 
 
             //Send the data 
 
-            textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+            textBox_SendSerialPort.Text = ConvertByteArraytToString(SendFrame);
 
             button_SendSerialPort_Click(null, null);
 
 
             return ret;
         }
+
+        String FrameAnalizer = "";
 
         String ReadFromRegister(String i_Command, bool i_OnlyCheckValidity)
         {
@@ -16527,10 +16704,16 @@ This Process can take 1 minute.";
         }
 
         
+        /// <summary>
+        /// Gil: Each command implemintation return string if the arguments doesn't valit or empty string if every thing OK.
+        /// </summary>
+        /// <param name="i_Command"></param>
+        /// <param name="i_OnlyCheckValidity"></param>
+        /// <returns></returns>
         String ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
         {
             String ret = "";
-
+            FrameAnalizer = "";
             String[] tempStr = i_Command.Split(' ');
             String CommandName = tempStr[0];
 
@@ -16573,6 +16756,7 @@ This Process can take 1 minute.";
 
         private void ParseCLICommand(String i_Command)
         {
+            
             String[] tempStr = i_Command.Split(' ');
             String CommandName = tempStr[0];
             String ret = "";
@@ -16643,7 +16827,12 @@ This Process can take 1 minute.";
 
         private void listBox_CLI_ALLCommands_Click(object sender, EventArgs e)
         {
-            textBox_CLISendCommands.Text=List_AllCommands[listBox_CLI_ALLCommands.SelectedIndex].Example;
+            try 
+            {
+                textBox_CLISendCommands.Text = List_AllCommands[listBox_CLI_ALLCommands.SelectedIndex].Example;
+            }
+            catch { }
+            
         }
 
         private void textBox_CLISendCommands_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -16830,7 +17019,9 @@ Description:
 Write to Register 
 
 Syntax:
-WriteReg address[4 hex bytes] data[4 hex bytes]
+WriteReg 
+address [4 hex bytes] 
+data [4 hex bytes]
 
 Example:
 
@@ -16853,7 +17044,7 @@ Description:
 Read From Register 
 
 Syntax:
-ReadReg address[4 hex bytes]
+ReadReg address [4 hex bytes]
 
 Example:
 
@@ -16872,9 +17063,11 @@ Description:
 Set all mIFRS main parameters.
 
 Syntax:
-SetFullParams [system mode]
-[reset alarm counter] 
-[Tx frequency]
+SetFullParams 
+[cmd activation] {1,2,4}
+[system mode] {0-3}
+[reset alarm counter] {0-1} 
+[Tx frequency] 
 [Tx input power]
 [Tx Duty Cycle]
 [Rx Frequency]
@@ -16888,12 +17081,12 @@ In order to mask the field put x int he end of the parameter.
 
 Examples:
 
-SetFullParams 0 1 80 2 35 80 20 20 20 20 20
-SetFullParams 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
+SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20
+SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
 
 ");
 
-            SetFullParams.Example = "SetFullParams 0 1 80 2 35 80 20 20 20 20 20 ";
+            SetFullParams.Example = "SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20";
             List_AllCommands.Add(SetFullParams);
 
 
