@@ -387,7 +387,6 @@ namespace Monitor
         private CheckBox checkBox_CLIDeleteAfterSend;
         private Button button_CLISend;
         private GroupBox groupBox_AllCommands;
-        private TextBox textBox_CommandHelp;
         private TextBox txtDataTx;
         private Button button_DeleteCommandsHistory;
         private GroupBox groupBox_Help;
@@ -404,6 +403,7 @@ namespace Monitor
         private Label label12;
         private Label label14;
         private CheckBox checkBox_WriteFrameInformation;
+        private RichTextBox textBox_CommandHelp;
         private static readonly string PREAMBLE = "23";
 
 
@@ -609,7 +609,6 @@ namespace Monitor
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox_AllCommands = new System.Windows.Forms.GroupBox();
             this.groupBox_Help = new System.Windows.Forms.GroupBox();
-            this.textBox_CommandHelp = new System.Windows.Forms.TextBox();
             this.listBox_CLI_ALLCommands = new System.Windows.Forms.ListBox();
             this.groupBox_CLISendCommand = new System.Windows.Forms.GroupBox();
             this.button_DeleteCommandsHistory = new System.Windows.Forms.Button();
@@ -816,6 +815,7 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_CommandHelp = new System.Windows.Forms.RichTextBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -2716,7 +2716,7 @@ namespace Monitor
             this.groupBox_AllCommands.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_AllCommands.Location = new System.Drawing.Point(3, 104);
             this.groupBox_AllCommands.Name = "groupBox_AllCommands";
-            this.groupBox_AllCommands.Size = new System.Drawing.Size(842, 475);
+            this.groupBox_AllCommands.Size = new System.Drawing.Size(859, 475);
             this.groupBox_AllCommands.TabIndex = 72;
             this.groupBox_AllCommands.TabStop = false;
             this.groupBox_AllCommands.Text = "Commands list";
@@ -2726,26 +2726,10 @@ namespace Monitor
             this.groupBox_Help.Controls.Add(this.textBox_CommandHelp);
             this.groupBox_Help.Location = new System.Drawing.Point(378, 11);
             this.groupBox_Help.Name = "groupBox_Help";
-            this.groupBox_Help.Size = new System.Drawing.Size(458, 464);
+            this.groupBox_Help.Size = new System.Drawing.Size(475, 464);
             this.groupBox_Help.TabIndex = 115;
             this.groupBox_Help.TabStop = false;
             this.groupBox_Help.Text = "Help";
-            // 
-            // textBox_CommandHelp
-            // 
-            this.textBox_CommandHelp.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox_CommandHelp.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_CommandHelp.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox_CommandHelp.Location = new System.Drawing.Point(5, 19);
-            this.textBox_CommandHelp.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_CommandHelp.Multiline = true;
-            this.textBox_CommandHelp.Name = "textBox_CommandHelp";
-            this.textBox_CommandHelp.ReadOnly = true;
-            this.textBox_CommandHelp.Size = new System.Drawing.Size(448, 437);
-            this.textBox_CommandHelp.TabIndex = 114;
-            this.textBox_CommandHelp.TabStop = false;
-            this.textBox_CommandHelp.Text = "General Format:\r\nCommand arg1 arg2 arg3...\r\n\r\nFor example:\r\nCommand 12 abc\r\n-----" +
-    "------------------------\r\nUse the arrows Up, Down and Tab for autocomplition.\r\n";
             // 
             // listBox_CLI_ALLCommands
             // 
@@ -4894,6 +4878,15 @@ namespace Monitor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
             // 
+            // textBox_CommandHelp
+            // 
+            this.textBox_CommandHelp.Location = new System.Drawing.Point(9, 21);
+            this.textBox_CommandHelp.Name = "textBox_CommandHelp";
+            this.textBox_CommandHelp.Size = new System.Drawing.Size(460, 437);
+            this.textBox_CommandHelp.TabIndex = 115;
+            this.textBox_CommandHelp.Text = "General Format:\nCommand arg1 arg2 arg3...\n\nFor example:\nCommand 12 abc\n----------" +
+    "-------------------\nUse the arrows Up, Down and Tab for autocomplition.\n\n";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -4960,7 +4953,6 @@ namespace Monitor
             this.tabPage1.ResumeLayout(false);
             this.groupBox_AllCommands.ResumeLayout(false);
             this.groupBox_Help.ResumeLayout(false);
-            this.groupBox_Help.PerformLayout();
             this.groupBox_CLISendCommand.ResumeLayout(false);
             this.groupBox_CLISendCommand.PerformLayout();
             this.tabPage2_Script.ResumeLayout(false);
@@ -17083,15 +17075,15 @@ SetFullParams
 [cmd activation] {1,2,4}
 [system mode] {0-3}
 [reset alarm counter] {0-1} 
-[Tx frequency] 
-[Tx input power]
-[Tx Duty Cycle]
-[Rx Frequency]
-[Rx CH#1 IF Attenuator]
-[Rx CH#2 IF Attenuator] 
-[Rx CH#3 IF Attenuator]
-[Rx CH#4 IF Attenuator]
-[Rx GRD CH IF Attenuator]
+[Tx frequency] {0-80}
+[Tx input power] {0-3}
+[Tx Duty Cycle] {0-35}
+[Rx Frequency] {0-80}
+[Rx CH#1 IF Attenuator] {0-20}
+[Rx CH#2 IF Attenuator] {0-20}
+[Rx CH#3 IF Attenuator] {0-20}
+[Rx CH#4 IF Attenuator] {0-20}
+[Rx GRD CH IF Attenuator] {0-20}
 
 In order to mask the field put x int he end of the parameter.
 
