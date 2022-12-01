@@ -360,6 +360,10 @@ namespace Monitor
         private CheckBox checkBox_WriteFrameInformation;
         private RichTextBox textBox_CommandHelp;
         private Button button_ClearScript;
+        private Label label4;
+        private TextBox textBox_TimeBetweenComands;
+        private Button button_SaveScript;
+        private Button button_CheckScriptValidity;
         private static readonly string PREAMBLE = "23";
 
 
@@ -414,8 +418,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -728,6 +732,10 @@ namespace Monitor
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_ClearScript = new System.Windows.Forms.Button();
+            this.textBox_TimeBetweenComands = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button_SaveScript = new System.Windows.Forms.Button();
+            this.button_CheckScriptValidity = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1462,17 +1470,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2196,6 +2204,10 @@ namespace Monitor
             // 
             // tabPage2_Script
             // 
+            this.tabPage2_Script.Controls.Add(this.button_CheckScriptValidity);
+            this.tabPage2_Script.Controls.Add(this.button_SaveScript);
+            this.tabPage2_Script.Controls.Add(this.label4);
+            this.tabPage2_Script.Controls.Add(this.textBox_TimeBetweenComands);
             this.tabPage2_Script.Controls.Add(this.button_ClearScript);
             this.tabPage2_Script.Controls.Add(this.button_RunScript);
             this.tabPage2_Script.Controls.Add(this.richTextBox_Scripts);
@@ -2209,12 +2221,14 @@ namespace Monitor
             // 
             // button_RunScript
             // 
-            this.button_RunScript.Location = new System.Drawing.Point(558, 9);
+            this.button_RunScript.BackColor = System.Drawing.Color.SkyBlue;
+            this.button_RunScript.Location = new System.Drawing.Point(463, 168);
             this.button_RunScript.Name = "button_RunScript";
             this.button_RunScript.Size = new System.Drawing.Size(89, 45);
             this.button_RunScript.TabIndex = 75;
             this.button_RunScript.Text = "Run";
-            this.button_RunScript.UseVisualStyleBackColor = true;
+            this.button_RunScript.UseVisualStyleBackColor = false;
+            this.button_RunScript.Click += new System.EventHandler(this.button_RunScript_Click);
             // 
             // richTextBox_Scripts
             // 
@@ -2223,6 +2237,7 @@ namespace Monitor
             this.richTextBox_Scripts.Size = new System.Drawing.Size(448, 564);
             this.richTextBox_Scripts.TabIndex = 74;
             this.richTextBox_Scripts.Text = "";
+            this.richTextBox_Scripts.TextChanged += new System.EventHandler(this.richTextBox_Scripts_TextChanged);
             // 
             // button_LoadScriptCLI
             // 
@@ -4257,6 +4272,42 @@ namespace Monitor
             this.button_ClearScript.UseVisualStyleBackColor = true;
             this.button_ClearScript.Click += new System.EventHandler(this.button_ClearScript_Click);
             // 
+            // textBox_TimeBetweenComands
+            // 
+            this.textBox_TimeBetweenComands.Location = new System.Drawing.Point(558, 185);
+            this.textBox_TimeBetweenComands.Name = "textBox_TimeBetweenComands";
+            this.textBox_TimeBetweenComands.Size = new System.Drawing.Size(100, 26);
+            this.textBox_TimeBetweenComands.TabIndex = 77;
+            this.textBox_TimeBetweenComands.Text = "300";
+            this.textBox_TimeBetweenComands.TextChanged += new System.EventHandler(this.textBox_TimeBetweenComands_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(558, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(199, 18);
+            this.label4.TabIndex = 78;
+            this.label4.Text = "Time between commands (ms)";
+            // 
+            // button_SaveScript
+            // 
+            this.button_SaveScript.Location = new System.Drawing.Point(558, 9);
+            this.button_SaveScript.Name = "button_SaveScript";
+            this.button_SaveScript.Size = new System.Drawing.Size(89, 45);
+            this.button_SaveScript.TabIndex = 79;
+            this.button_SaveScript.Text = "Save";
+            this.button_SaveScript.UseVisualStyleBackColor = true;
+            // 
+            // button_CheckScriptValidity
+            // 
+            this.button_CheckScriptValidity.Location = new System.Drawing.Point(463, 116);
+            this.button_CheckScriptValidity.Name = "button_CheckScriptValidity";
+            this.button_CheckScriptValidity.Size = new System.Drawing.Size(89, 45);
+            this.button_CheckScriptValidity.TabIndex = 80;
+            this.button_CheckScriptValidity.Text = "check commands";
+            this.button_CheckScriptValidity.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -4317,6 +4368,7 @@ namespace Monitor
             this.groupBox_CLISendCommand.ResumeLayout(false);
             this.groupBox_CLISendCommand.PerformLayout();
             this.tabPage2_Script.ResumeLayout(false);
+            this.tabPage2_Script.PerformLayout();
             this.groupBox32.ResumeLayout(false);
             this.groupBox32.PerformLayout();
             this.groupBox42.ResumeLayout(false);
@@ -15077,6 +15129,42 @@ This Process can take 1 minute.";
             box.SelectionColor = box.ForeColor;
 
             box.ScrollToCaret();
+        }
+
+        private void textBox_TimeBetweenComands_TextChanged(object sender, EventArgs e)
+        {
+            TextBox Txtbx = (TextBox)sender;
+            if (int.TryParse(Txtbx.Text, out int result) == true)
+            {
+                Txtbx.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                Txtbx.BackColor = Color.Red;
+            }
+        }
+
+        private async void button_RunScript_Click(object sender, EventArgs e)
+        {
+            int.TryParse(textBox_TimeBetweenComands.Text, out int Delay);
+            foreach (String line in richTextBox_Scripts.Lines)
+            {
+                textBox_CLISendCommands.Text = line;
+                button_CLISend_Click(null, null);
+                await Task.Delay(Delay);
+            }
+        }
+
+        private void richTextBox_Scripts_TextChanged(object sender, EventArgs e)
+        {
+            //int i = 0;
+            //foreach (String line in richTextBox_Scripts.Lines)
+            //{
+            //    String ret = ExectuteOrCheckValidityCommand(line, true);
+
+            //    richTextBox_Scripts.Lines[i]
+            //    i++;
+            //}
         }
 
         private void ListBox_Charts_SelectedIndexChanged(object sender, EventArgs e)
