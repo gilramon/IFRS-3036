@@ -14305,67 +14305,50 @@ This Process can take 1 minute.";
             /////////////////////////////////////////////////////////////////
             List<byte> ListBytes = new List<byte>();
 
-            String output = "";
 
             //Preamble
             String Preamble = "82";
             ListBytes.AddRange(StringToByteArray(Preamble));
 
-            output += " Preamble: " + Preamble;
+
             //Opcode
             String Opcode = "21";
             ListBytes.AddRange(StringToByteArray(Opcode));
 
-            output += " Opcode: " + Opcode;
+
             //Messagecounter
             ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
 
-            output += " MessageCounter: " + MessageCounter;
+
             MessageCounter++;
             //RegisterAddress
             ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
-            output += " RegisterAddress32bits: " + RegisterAddress32bits;
+
 
             //DatatoWrite
             ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(DataToWrite32bits)));
 
-            output += " DataToWrite32bits: " + DataToWrite32bits;
+
             //TimeTag
             String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
             ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
 
-            output += " TimeTag: " + TimeTag;
 
 
             //Data
             byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
             ListBytes.AddRange(DataBytes);
-            output += " DATA: " + ByteArrayToString(DataBytes);
+
 
 
 
 
             //Calculate check sum
-            Int32 CheckSum = 0;
-
-            for (int i = 0; i < ListBytes.Count; i=i+4)
-            {
-                List<byte> temp = ListBytes.GetRange(i, 4);
-                byte[] tempArr = temp.ToArray();
-
-                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
-                tempArr = tempArr.Reverse().ToArray();
-
-                Int32 Num = BitConverter.ToInt32(tempArr, 0);
-
-                CheckSum += Num;
-            }
-            FrameAnalizer += " -------------\n";
-            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+            Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
 
             ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
 
-            output += " CheckSum: " + CheckSum.ToString("X8");
+
 
 
 
@@ -14663,25 +14646,7 @@ This Process can take 1 minute.";
 
 
             //Calculate check sum
-            Int32 CheckSum = 0;
-
-            for (i = 0; i < SendFrame.Length; i = i + 4)
-            {
-                var tempArr = SendFrame.Skip(i).Take(4).ToArray();
-                //byte[] temp = SendFrame.(i, 4);
-                //byte[] tempArr = temp.ToArray();
-
-                tempArr = tempArr.Reverse().ToArray();
-
-                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
-
-                Int32 Value = BitConverter.ToInt32(tempArr, 0);
-
-                CheckSum += Value;
-            }
-
-            FrameAnalizer += " -------------\n";
-            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+            Int32 CheckSum = CalculateChecksum(SendFrame);
 
             temp = StringToByteArray(CheckSum.ToString("X8"));
             temp.CopyTo(SendFrame, 36);
@@ -14701,6 +14666,30 @@ This Process can take 1 minute.";
 
 
             return ret;
+        }
+
+        Int32 CalculateChecksum(byte[] i_Bufffer)
+        {
+            Int32 CheckSum = 0;
+            for (int i = 0; i < i_Bufffer.Length; i = i + 4)
+            {
+                var tempArr = i_Bufffer.Skip(i).Take(4).ToArray();
+                //byte[] temp = SendFrame.(i, 4);
+                //byte[] tempArr = temp.ToArray();
+
+                tempArr = tempArr.Reverse().ToArray();
+
+                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
+
+                Int32 Value = BitConverter.ToInt32(tempArr, 0);
+
+                CheckSum += Value;
+            }
+
+            FrameAnalizer += " -------------\n";
+            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+
+            return CheckSum;
         }
 
         String FrameAnalizer = "";
@@ -14786,23 +14775,7 @@ This Process can take 1 minute.";
 
 
             //Calculate check sum
-            Int32 CheckSum = 0;
-
-            for (int i = 0; i < ListBytes.Count; i = i + 4)
-            {
-                List<byte> temp = ListBytes.GetRange(i, 4);
-                byte[] tempArr = temp.ToArray();
-
-                tempArr = tempArr.Reverse().ToArray();
-
-                FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
-                Int32 Num = BitConverter.ToInt32(tempArr, 0);
-
-                CheckSum += Num;
-            }
-
-            FrameAnalizer += " -------------\n";
-            FrameAnalizer += CheckSum.ToString("X8") + " \n";
+            Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
 
 
             ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
