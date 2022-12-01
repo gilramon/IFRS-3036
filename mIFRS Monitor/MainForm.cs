@@ -359,6 +359,7 @@ namespace Monitor
         private GroupBox groupBox1;
         private CheckBox checkBox_WriteFrameInformation;
         private RichTextBox textBox_CommandHelp;
+        private Button button_ClearScript;
         private static readonly string PREAMBLE = "23";
 
 
@@ -413,8 +414,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -726,6 +727,7 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_ClearScript = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1460,17 +1462,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea2.AxisX.Title = "Freq";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.AxisY.Title = "Power [dBm]";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2194,6 +2196,7 @@ namespace Monitor
             // 
             // tabPage2_Script
             // 
+            this.tabPage2_Script.Controls.Add(this.button_ClearScript);
             this.tabPage2_Script.Controls.Add(this.button_RunScript);
             this.tabPage2_Script.Controls.Add(this.richTextBox_Scripts);
             this.tabPage2_Script.Controls.Add(this.button_LoadScriptCLI);
@@ -2206,7 +2209,7 @@ namespace Monitor
             // 
             // button_RunScript
             // 
-            this.button_RunScript.Location = new System.Drawing.Point(463, 61);
+            this.button_RunScript.Location = new System.Drawing.Point(558, 9);
             this.button_RunScript.Name = "button_RunScript";
             this.button_RunScript.Size = new System.Drawing.Size(89, 45);
             this.button_RunScript.TabIndex = 75;
@@ -4243,6 +4246,16 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
+            // 
+            // button_ClearScript
+            // 
+            this.button_ClearScript.Location = new System.Drawing.Point(463, 61);
+            this.button_ClearScript.Name = "button_ClearScript";
+            this.button_ClearScript.Size = new System.Drawing.Size(89, 45);
+            this.button_ClearScript.TabIndex = 76;
+            this.button_ClearScript.Text = "clear";
+            this.button_ClearScript.UseVisualStyleBackColor = true;
+            this.button_ClearScript.Click += new System.EventHandler(this.button_ClearScript_Click);
             // 
             // MainForm
             // 
@@ -14998,8 +15011,19 @@ This Process can take 1 minute.";
                         String[] filelines = File.ReadAllLines(filePath);
                         foreach(String line in filelines)
                         {
-                            richTextBox_Scripts.AppendText(line + "\r\n");
-                            richTextBox_Scripts.ScrollToCaret();
+                            String ret = ExectuteOrCheckValidityCommand(line, true);
+
+                            if(ret != "")
+                            {
+                                MyAppendText(richTextBox_Scripts, line + " [" + ret + "]\r\n", Color.Black,Color.OrangeRed);
+                                
+                            }
+                            else
+                            {
+                                MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
+                            }
+
+
                         }
                         
 
@@ -15034,6 +15058,25 @@ This Process can take 1 minute.";
         {
             //SerialPortLogger.LogMessage(Color.White, Color.Red, "SerialPort PinChanged received: ", New_Line = true, Show_Time = true);
             //SerialPortLogger.LogMessage(Color.White, Color.Red, e.EventType.ToString(), New_Line = true, Show_Time = true);
+        }
+
+        private void button_ClearScript_Click(object sender, EventArgs e)
+        {
+            richTextBox_Scripts.Text = "";
+        }
+
+        public void MyAppendText(RichTextBox box, string text, Color Forecolor, Color Backcolor)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = Forecolor;
+            box.SelectionBackColor = Backcolor;
+
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
+
+            box.ScrollToCaret();
         }
 
         private void ListBox_Charts_SelectedIndexChanged(object sender, EventArgs e)
