@@ -413,8 +413,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -519,6 +519,7 @@ namespace Monitor
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox_AllCommands = new System.Windows.Forms.GroupBox();
             this.groupBox_Help = new System.Windows.Forms.GroupBox();
+            this.textBox_CommandHelp = new System.Windows.Forms.RichTextBox();
             this.listBox_CLI_ALLCommands = new System.Windows.Forms.ListBox();
             this.groupBox_CLISendCommand = new System.Windows.Forms.GroupBox();
             this.button_DeleteCommandsHistory = new System.Windows.Forms.Button();
@@ -725,7 +726,6 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_CommandHelp = new System.Windows.Forms.RichTextBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1460,17 +1460,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2086,6 +2086,15 @@ namespace Monitor
             this.groupBox_Help.TabIndex = 115;
             this.groupBox_Help.TabStop = false;
             this.groupBox_Help.Text = "Help";
+            // 
+            // textBox_CommandHelp
+            // 
+            this.textBox_CommandHelp.Location = new System.Drawing.Point(9, 21);
+            this.textBox_CommandHelp.Name = "textBox_CommandHelp";
+            this.textBox_CommandHelp.Size = new System.Drawing.Size(460, 437);
+            this.textBox_CommandHelp.TabIndex = 115;
+            this.textBox_CommandHelp.Text = "General Format:\nCommand arg1 arg2 arg3...\n\nFor example:\nCommand 12 abc\n----------" +
+    "-------------------\nUse the arrows Up, Down and Tab for autocomplition.\n\n";
             // 
             // listBox_CLI_ALLCommands
             // 
@@ -3562,6 +3571,7 @@ namespace Monitor
             // serialPort
             // 
             this.serialPort.ErrorReceived += new System.IO.Ports.SerialErrorReceivedEventHandler(this.serialPort_ErrorReceived);
+            this.serialPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.serialPort_PinChanged);
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPort_DataReceived);
             // 
             // groupBox36
@@ -4234,22 +4244,13 @@ namespace Monitor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
             // 
-            // textBox_CommandHelp
-            // 
-            this.textBox_CommandHelp.Location = new System.Drawing.Point(9, 21);
-            this.textBox_CommandHelp.Name = "textBox_CommandHelp";
-            this.textBox_CommandHelp.Size = new System.Drawing.Size(460, 437);
-            this.textBox_CommandHelp.TabIndex = 115;
-            this.textBox_CommandHelp.Text = "General Format:\nCommand arg1 arg2 arg3...\n\nFor example:\nCommand 12 abc\n----------" +
-    "-------------------\nUse the arrows Up, Down and Tab for autocomplition.\n\n";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1526, 694);
+            this.ClientSize = new System.Drawing.Size(1543, 711);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_ClentTCPStatus);
             this.Controls.Add(this.pictureBox1);
@@ -7166,6 +7167,26 @@ namespace Monitor
             GlobalSystemResultReceived += i_msg;
         }
 
+        public void DecodeIFRSProtocol(ref byte[] i_IncomingBytes)
+        {
+            var newArray = i_IncomingBytes.Skip(76).Take(4).ToArray();
+            Int32 RecievedCheckSum = BitConverter.ToInt32(newArray, 0);
+
+            Int32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Skip(0).Take(76).ToArray());
+
+            if (RecievedCheckSum == CalculatedCheckSum)
+            {
+
+
+            }
+            else
+            {
+                SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, "Frame check sum error", New_Line = true, Show_Time = true);
+            }
+
+
+        }
+
         private void ParseKratosIncomeFrame(byte[] i_IncomeBuffer)
         {
             try
@@ -7176,13 +7197,10 @@ namespace Monitor
                 }
                 while (i_IncomeBuffer.Length != 0)
                 {
-                    KratosProtocolFrame Result = new KratosProtocolFrame();
-                    Result = Kratos_Protocol.DecodeKratusProtocol_Standard(ref i_IncomeBuffer);
+                    DecodeIFRSProtocol(ref i_IncomeBuffer);
+
+
                     TCPClientBuffer = new byte[0];
-
-
- 
-
 
                 }
             }
@@ -7553,11 +7571,6 @@ namespace Monitor
             // This method will be called when there is data waiting in the port's buffer
             Thread.Sleep(300);
 
-            if (!serialPort.IsOpen)
-            {
-                return;
-            }
-
             RxLabelTimerBlink = 5;
 
             // Obtain the number of bytes waiting in the port's buffer
@@ -7598,8 +7611,6 @@ namespace Monitor
                     SerialPortLogger.LogMessage(Color.Blue, Color.Azure, line, New_Line = true, Show_Time = false);
                 }
 
-
-                ParseSerialPortString(IncomingString);
             }
 
             if (checkBox_WriteFrameInformation.Checked == true)
@@ -7841,10 +7852,10 @@ namespace Monitor
             {
                 ParseUnitVersion(IncomingString.Replace(System.Environment.NewLine, " "));
                 IncomingString = IncomingString.Replace(System.Environment.NewLine, "");
-                ParseConfigCommand(IncomingString);
+                //ParseConfigCommand(IncomingString);
                 //ret = ParseSMSCommand(IncomingString);
 
-                ParseStatuPos(IncomingString);
+               // ParseStatuPos(IncomingString);
 
                 // ParseUnitVersion(IncomingString);
 
@@ -12400,7 +12411,7 @@ Note: eStatus enum 
 
 
 
-        private KratosProtocolFrame SentFrameGlobal = null;
+     //   private KratosProtocolFrame SentFrameGlobal = null;
         
 
 
@@ -15017,6 +15028,12 @@ This Process can take 1 minute.";
         private void checkBox_WriteTotalbytes_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            //SerialPortLogger.LogMessage(Color.White, Color.Red, "SerialPort PinChanged received: ", New_Line = true, Show_Time = true);
+            //SerialPortLogger.LogMessage(Color.White, Color.Red, e.EventType.ToString(), New_Line = true, Show_Time = true);
         }
 
         private void ListBox_Charts_SelectedIndexChanged(object sender, EventArgs e)
