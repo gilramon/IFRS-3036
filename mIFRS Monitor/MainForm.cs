@@ -2227,6 +2227,7 @@ namespace Monitor
             this.button_CheckScriptValidity.TabIndex = 80;
             this.button_CheckScriptValidity.Text = "check commands";
             this.button_CheckScriptValidity.UseVisualStyleBackColor = true;
+            this.button_CheckScriptValidity.Click += new System.EventHandler(this.button_CheckScriptValidity_Click);
             // 
             // button_SaveScript
             // 
@@ -2253,7 +2254,7 @@ namespace Monitor
             this.textBox_TimeBetweenComands.Name = "textBox_TimeBetweenComands";
             this.textBox_TimeBetweenComands.Size = new System.Drawing.Size(100, 26);
             this.textBox_TimeBetweenComands.TabIndex = 77;
-            this.textBox_TimeBetweenComands.Text = "300";
+            this.textBox_TimeBetweenComands.Text = "500";
             this.textBox_TimeBetweenComands.TextChanged += new System.EventHandler(this.textBox_TimeBetweenComands_TextChanged);
             // 
             // button_ClearScript
@@ -15068,8 +15069,8 @@ This Process can take 1 minute.";
 
                             if(ret != "")
                             {
-                                MyAppendText(richTextBox_Scripts, line + " [" + ret + "]\r\n", Color.Black,Color.OrangeRed);
-                                
+                                MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.OrangeRed);
+
                             }
                             else
                             {
@@ -15138,6 +15139,10 @@ This Process can take 1 minute.";
             if (int.TryParse(Txtbx.Text, out int result) == true)
             {
                 Txtbx.BackColor = Color.LightGreen;
+
+                Monitor.Properties.Settings.Default.TimeBetweenCLICommands = result.ToString();
+
+                Monitor.Properties.Settings.Default.Save();
             }
             else
             {
@@ -15151,9 +15156,18 @@ This Process can take 1 minute.";
             {
                 foreach (String line in richTextBox_Scripts.Lines)
                 {
-                    textBox_CLISendCommands.Text = line;
-                    button_CLISend_Click(null, null);
-                    await Task.Delay(Delay);
+                    if (line != null && line != String.Empty)
+                    {
+                        textBox_CLISendCommands.Text = line;
+                        button_CLISend_Click(null, null);
+                        await Task.Delay(Delay);
+
+
+                        if (serialPort.IsOpen == false)
+                        {
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -15208,6 +15222,28 @@ This Process can take 1 minute.";
                     File.WriteAllText(sfd.FileName, richTextBox_Scripts.Text);
                 }
             }
+        }
+
+        private void button_CheckScriptValidity_Click(object sender, EventArgs e)
+        {
+            String[] temp = richTextBox_Scripts.Lines;
+            richTextBox_Scripts.Text = "";
+            foreach (String line in temp)
+            {
+                String ret = ExectuteOrCheckValidityCommand(line, true);
+
+                if (ret != "")
+                {
+                    MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.OrangeRed);
+
+                }
+                else
+                {
+                    MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
+                }
+            }
+
+
         }
 
         private void ResetTimer()
@@ -15380,8 +15416,21 @@ Use the arrows Up, Down and Tab for autocomplition.
 
 
 ";
-        //List_AllDataGrids.Add(dataGridView_Block00);
-        // List<S1_Protocol.S1_Messege_Builder.Command_Description> CommandsDescription;
+
+        void LoadDefaultSettings()
+        {
+
+
+            txtPortNo.Text = Monitor.Properties.Settings.Default.Start_Port;
+            txtDataTx.Text = Monitor.Properties.Settings.Default.Default_Server_Message;
+            cmbBaudRate.Text = Monitor.Properties.Settings.Default.Comport_BaudRate;
+            cmbDataBits.Text = Monitor.Properties.Settings.Default.Comport_DataBits;
+            cmb_StopBits.Text = Monitor.Properties.Settings.Default.Comport_StopBit;
+            cmbParity.Text = Monitor.Properties.Settings.Default.Comport_Parity;
+            cmb_PortName.Text = Monitor.Properties.Settings.Default.Comport_Port;
+            textBox_TimeBetweenComands.Text = Monitor.Properties.Settings.Default.TimeBetweenCLICommands;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             try
@@ -15419,15 +15468,7 @@ Use the arrows Up, Down and Tab for autocomplition.
                 cmbParity.SelectedIndex = (int)Parity.None;
 
 
-                txtPortNo.Text = Monitor.Properties.Settings.Default.Start_Port;
-                txtDataTx.Text = Monitor.Properties.Settings.Default.Default_Server_Message;
-                cmbBaudRate.Text = Monitor.Properties.Settings.Default.Comport_BaudRate;
-                cmbDataBits.Text = Monitor.Properties.Settings.Default.Comport_DataBits;
-                cmb_StopBits.Text = Monitor.Properties.Settings.Default.Comport_StopBit;
-                cmbParity.Text = Monitor.Properties.Settings.Default.Comport_Parity;
-                cmb_PortName.Text = Monitor.Properties.Settings.Default.Comport_Port;
-
-
+                LoadDefaultSettings();
 
 
                 //Gil: Set Versions Names

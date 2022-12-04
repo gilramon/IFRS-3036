@@ -38,5 +38,8 @@
   &lt;string&gt;SetAll Parameters&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="TimeBetweenCLICommands" Type="System.String" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
