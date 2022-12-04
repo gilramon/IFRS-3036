@@ -364,6 +364,8 @@ namespace Monitor
         private TextBox textBox_TimeBetweenComands;
         private Button button_SaveScript;
         private Button button_CheckScriptValidity;
+        private CheckBox checkBox_RepeatCLIScript;
+        private Button button_StopRunScrip;
         private static readonly string PREAMBLE = "23";
 
 
@@ -736,6 +738,8 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_RepeatCLIScript = new System.Windows.Forms.CheckBox();
+            this.button_StopRunScrip = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -2204,6 +2208,8 @@ namespace Monitor
             // 
             // tabPage2_Script
             // 
+            this.tabPage2_Script.Controls.Add(this.button_StopRunScrip);
+            this.tabPage2_Script.Controls.Add(this.checkBox_RepeatCLIScript);
             this.tabPage2_Script.Controls.Add(this.button_CheckScriptValidity);
             this.tabPage2_Script.Controls.Add(this.button_SaveScript);
             this.tabPage2_Script.Controls.Add(this.label4);
@@ -2242,7 +2248,7 @@ namespace Monitor
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(558, 161);
+            this.label4.Location = new System.Drawing.Point(665, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(199, 18);
             this.label4.TabIndex = 78;
@@ -2250,7 +2256,7 @@ namespace Monitor
             // 
             // textBox_TimeBetweenComands
             // 
-            this.textBox_TimeBetweenComands.Location = new System.Drawing.Point(558, 185);
+            this.textBox_TimeBetweenComands.Location = new System.Drawing.Point(665, 188);
             this.textBox_TimeBetweenComands.Name = "textBox_TimeBetweenComands";
             this.textBox_TimeBetweenComands.Size = new System.Drawing.Size(100, 26);
             this.textBox_TimeBetweenComands.TabIndex = 77;
@@ -4309,6 +4315,27 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
+            // 
+            // checkBox_RepeatCLIScript
+            // 
+            this.checkBox_RepeatCLIScript.AutoSize = true;
+            this.checkBox_RepeatCLIScript.Location = new System.Drawing.Point(771, 190);
+            this.checkBox_RepeatCLIScript.Name = "checkBox_RepeatCLIScript";
+            this.checkBox_RepeatCLIScript.Size = new System.Drawing.Size(71, 22);
+            this.checkBox_RepeatCLIScript.TabIndex = 81;
+            this.checkBox_RepeatCLIScript.Text = "Repeat";
+            this.checkBox_RepeatCLIScript.UseVisualStyleBackColor = true;
+            // 
+            // button_StopRunScrip
+            // 
+            this.button_StopRunScrip.BackColor = System.Drawing.Color.Orange;
+            this.button_StopRunScrip.Location = new System.Drawing.Point(558, 169);
+            this.button_StopRunScrip.Name = "button_StopRunScrip";
+            this.button_StopRunScrip.Size = new System.Drawing.Size(89, 45);
+            this.button_StopRunScrip.TabIndex = 82;
+            this.button_StopRunScrip.Text = "Stop";
+            this.button_StopRunScrip.UseVisualStyleBackColor = false;
+            this.button_StopRunScrip.Click += new System.EventHandler(this.button_StopRunScrip_Click);
             // 
             // MainForm
             // 
@@ -15065,21 +15092,13 @@ This Process can take 1 minute.";
                         String[] filelines = File.ReadAllLines(filePath);
                         foreach(String line in filelines)
                         {
-                            String ret = ExectuteOrCheckValidityCommand(line, true);
 
-                            if(ret != "")
-                            {
-                                MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.OrangeRed);
-
-                            }
-                            else
-                            {
-                                MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
-                            }
-
-
+                                MyAppendText(richTextBox_Scripts, line + "\r\n", default, default);
                         }
-                        
+
+                        button_CheckScriptValidity_Click(null, null);
+
+
 
                     }
                 }
@@ -15152,23 +15171,36 @@ This Process can take 1 minute.";
 
         private async void button_RunScript_Click(object sender, EventArgs e)
         {
-            if(int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
+            bool IsFirstTime = false;
+            if (int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
             {
-                foreach (String line in richTextBox_Scripts.Lines)
+                while (checkBox_RepeatCLIScript.Checked == true || IsFirstTime == false)
                 {
-                    if (line != null && line != String.Empty)
+                    IsFirstTime = true;
+
+                    foreach (String line in richTextBox_Scripts.Lines)
                     {
-                        textBox_CLISendCommands.Text = line;
-                        button_CLISend_Click(null, null);
-                        await Task.Delay(Delay);
-
-
-                        if (serialPort.IsOpen == false)
+                        if (line != null && line != String.Empty)
                         {
-                            return;
+                            textBox_CLISendCommands.Text = line;
+                            button_CLISend_Click(null, null);
+                            await Task.Delay(Delay);
+
+
+                            if (serialPort.IsOpen == false)
+                            {
+                                return;
+                            }
+
+                            if(StopRuunScript == true)
+                            {
+                                StopRuunScript = false;
+                                return;
+                            }
                         }
                     }
                 }
+
             }
         }
 
@@ -15252,6 +15284,11 @@ This Process can take 1 minute.";
             textBox_SetTimerTime.Text = "0";
             IsTimerRunning = false;
             button_StartStopTimer.BackColor = default;
+        }
+        bool StopRuunScript = false; 
+        private void button_StopRunScrip_Click(object sender, EventArgs e)
+        {
+            StopRuunScript = true;
         }
 
         private void Button_ResetTimer_Click(object sender, EventArgs e)
