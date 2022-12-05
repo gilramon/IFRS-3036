@@ -15260,6 +15260,7 @@ This Process can take 1 minute.";
         {
             String[] temp = richTextBox_Scripts.Lines;
             richTextBox_Scripts.Text = "";
+            Monitor.Properties.Settings.Default.Script.Clear();
             foreach (String line in temp)
             {
                 String ret = ExectuteOrCheckValidityCommand(line, true);
@@ -15273,7 +15274,12 @@ This Process can take 1 minute.";
                 {
                     MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
                 }
+                Monitor.Properties.Settings.Default.Script.Add(line);
             }
+            
+
+            Monitor.Properties.Settings.Default.Save();
+
 
 
         }
@@ -15466,6 +15472,13 @@ Use the arrows Up, Down and Tab for autocomplition.
             cmbParity.Text = Monitor.Properties.Settings.Default.Comport_Parity;
             cmb_PortName.Text = Monitor.Properties.Settings.Default.Comport_Port;
             textBox_TimeBetweenComands.Text = Monitor.Properties.Settings.Default.TimeBetweenCLICommands;
+
+            foreach(String line in Monitor.Properties.Settings.Default.Script)
+            {
+                MyAppendText(richTextBox_Scripts, line + "\r\n", default, default);
+            }
+
+            //button_CheckScriptValidity_Click(null, null);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
