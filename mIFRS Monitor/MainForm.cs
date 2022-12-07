@@ -10179,6 +10179,11 @@ namespace Monitor
 
                     case Keys.Up:
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
+                        if(CommandsHistoy.Count == 0)
+                        {
+                            return;
+                        }
+                        
                         if (HistoryIndex > CommandsHistoy.Count - 1 || HistoryIndex < 0)
                         {
                             HistoryIndex = CommandsHistoy.Count;
@@ -10198,6 +10203,11 @@ namespace Monitor
                         break;
 
                     case Keys.Down:
+
+                        if (CommandsHistoy.Count == 0)
+                        {
+                            return;
+                        }
 
                         textBox_SendSerialPort.Text = CommandsHistoy[HistoryIndex];
                         if (HistoryIndex < CommandsHistoy.Count - 1)
@@ -11888,6 +11898,10 @@ Raw4 - Catalina 4
         /// <returns></returns>
         private string ReverseHexStringLittleBigEndian(string i_HexString)
         {
+            if(i_HexString == null)
+            {
+                return "";
+            }
             byte[] temp = StringToByteArray(i_HexString);
             temp = temp.Reverse().ToArray();
             return ConvertByteArraytToString(temp);
@@ -14240,7 +14254,12 @@ This Process can take 1 minute.";
                         break;
 
                     case Keys.Up:
-                        
+
+                        if (Monitor.Properties.Settings.Default.CLICommad_History.Count == 0)
+                        {
+                            return;
+                        }
+
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
                         if (CLI_HistoryIndex > Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 || CLI_HistoryIndex < 0)
                         {
@@ -14266,7 +14285,11 @@ This Process can take 1 minute.";
 
                     case Keys.Down:
 
-                        
+                        if (Monitor.Properties.Settings.Default.CLICommad_History.Count == 0)
+                        {
+                            return;
+                        }
+
                         if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex > 0)
                         {
                             textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
