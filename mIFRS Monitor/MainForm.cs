@@ -358,7 +358,6 @@ namespace Monitor
         private Label label_Projectname;
         private GroupBox groupBox1;
         private CheckBox checkBox_WriteFrameInformation;
-        private RichTextBox textBox_CommandHelp;
         private Button button_ClearScript;
         private Label label4;
         private TextBox textBox_TimeBetweenComands;
@@ -366,6 +365,7 @@ namespace Monitor
         private Button button_CheckScriptValidity;
         private CheckBox checkBox_RepeatCLIScript;
         private Button button_StopRunScrip;
+        private RichTextBox textBox_CommandHelp;
         private static readonly string PREAMBLE = "23";
 
 
@@ -420,8 +420,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -1474,17 +1474,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea4.AxisX.Title = "Freq";
+            chartArea4.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea4.AxisY.Title = "Power [dBm]";
+            chartArea4.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend4.IsTextAutoFit = false;
+            legend4.Name = "Legend1";
+            legend4.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2136,7 +2136,7 @@ namespace Monitor
             this.groupBox_CLISendCommand.Size = new System.Drawing.Size(841, 90);
             this.groupBox_CLISendCommand.TabIndex = 70;
             this.groupBox_CLISendCommand.TabStop = false;
-            this.groupBox_CLISendCommand.Text = "CLI send command";
+            this.groupBox_CLISendCommand.Text = "CLI send command ( press F1 for help)";
             // 
             // button_DeleteCommandsHistory
             // 
@@ -14213,14 +14213,14 @@ This Process can take 1 minute.";
                 TextBox m_textBox = (TextBox)sender;
                 switch (e.KeyCode)
                 {
-                    //case Keys.F1:
-                    //    SerialTerminalPrintHelp();
+                    case Keys.F1:
+                        textBox_CommandHelp.Text = CLI_Help;
 
-                    //    break;
-
-                    case Keys.F2:
-                        SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "F2 function reads all commands to history", New_Line = true, Show_Time = true);
                         break;
+
+                    //case Keys.F2:
+                    //    SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "F2 function reads all commands to history", New_Line = true, Show_Time = true);
+                    //    break;
 
                     //case Keys.ControlKey:
                     //    SelfMonitorCommandsMode = !SelfMonitorCommandsMode;
@@ -15475,6 +15475,9 @@ WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000:
 Description: 
 Read From Register 
 
+Num of arguments:
+1
+
 Syntax:
 ReadReg address [4 hex bytes]
 
@@ -15493,6 +15496,9 @@ ReadReg AAAAAAAA ---> Read from Register 0xAAAAAAAA
 @"
 Description: 
 Set all mIFRS main parameters.
+
+Num of arguments:
+12
 
 Syntax:
 SetFullParams 
