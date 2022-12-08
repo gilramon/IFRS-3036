@@ -420,8 +420,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -937,11 +937,11 @@ namespace Monitor
             this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Controls.Add(this.tabPage_SerialPort);
             this.tabControl_Main.Controls.Add(this.tabPage_Commands);
-            this.tabControl_Main.Location = new System.Drawing.Point(4, -6);
+            this.tabControl_Main.Location = new System.Drawing.Point(4, 5);
             this.tabControl_Main.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl_Main.Name = "tabControl_Main";
             this.tabControl_Main.SelectedIndex = 0;
-            this.tabControl_Main.Size = new System.Drawing.Size(1422, 690);
+            this.tabControl_Main.Size = new System.Drawing.Size(1422, 679);
             this.tabControl_Main.TabIndex = 8;
             this.tabControl_Main.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tabControl_Main_PreviewKeyDown);
             // 
@@ -1474,17 +1474,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea2.AxisX.Title = "Freq";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.AxisY.Title = "Power [dBm]";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2038,7 +2038,7 @@ namespace Monitor
             this.tabPage_Commands.Location = new System.Drawing.Point(4, 27);
             this.tabPage_Commands.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_Commands.Name = "tabPage_Commands";
-            this.tabPage_Commands.Size = new System.Drawing.Size(1414, 659);
+            this.tabPage_Commands.Size = new System.Drawing.Size(1414, 648);
             this.tabPage_Commands.TabIndex = 11;
             this.tabPage_Commands.Text = "3036 - mIFRS CLI";
             this.tabPage_Commands.UseVisualStyleBackColor = true;
@@ -14437,8 +14437,8 @@ This Process can take 1 minute.";
             String RegisterAddress32bits = tempStr[1];
             String DataToWrite32bits = tempStr[2];
             String MaskString = tempStr[3];
-
-            if(MaskString != "FFFFFFFF")
+            String NotMaskValue = "FFFFFFFF";
+            if (MaskString != NotMaskValue)
             {
                 GlobalReadRegister = 0;
                 Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
@@ -14459,9 +14459,11 @@ This Process can take 1 minute.";
 
                 }
 
+                await ExectuteOrCheckValidityCommand(String.Format("WriteReg {0} {1} {2}", RegisterAddress32bits, GlobalReadRegister.ToString("X8"), NotMaskValue), false);
 
 
 
+                return "";
 
 
             }
@@ -14524,6 +14526,7 @@ This Process can take 1 minute.";
 
             button_SendSerialPort_Click(null, null);
 
+            PrintToSystemLogerTxMessage(i_Command);
 
             return ret;
         }
@@ -14828,6 +14831,7 @@ This Process can take 1 minute.";
 
             button_SendSerialPort_Click(null, null);
 
+            PrintToSystemLogerTxMessage(i_Command);
 
             return ret;
         }
@@ -14963,6 +14967,7 @@ This Process can take 1 minute.";
 
             button_SendSerialPort_Click(null, null);
 
+            PrintToSystemLogerTxMessage(i_Command);
 
             return ret;
         }
@@ -15005,12 +15010,7 @@ This Process can take 1 minute.";
             }
 
             // Gil Ramon: If the is a syntax problem the command function return the message.
-            if (ret == "")
-            {
-                SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Command, true, false);
-            }
+
 
 
             //SystemLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
@@ -15018,6 +15018,13 @@ This Process can take 1 minute.";
 
 
             return ret;
+        }
+
+        void PrintToSystemLogerTxMessage(String i_Message)
+        {
+            SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
+            SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
+            SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Message, true, false);
         }
 
         async private void ParseCLICommand(String i_Command)
