@@ -14392,14 +14392,14 @@ This Process can take 1 minute.";
             if (tempStr.Length != NumOfArguments)
             {
                 ret += String.Format("\n Arguments number should be {0}, see example", NumOfArguments);
-                return ret;
+               // return ret;
             }
 
             byte[] buffer = StringToByteArray(tempStr[1]);
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[1]);
-                return ret;
+             //   return ret;
             }
 
 
@@ -14409,12 +14409,7 @@ This Process can take 1 minute.";
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[2]);
-                return ret;
-            }
-
-            if (i_OnlyCheckValidity == true )
-            {
-                return ret;
+            //    return ret;
             }
 
             buffer = StringToByteArray(tempStr[3]);
@@ -14422,10 +14417,10 @@ This Process can take 1 minute.";
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[2]);
-                return ret;
+              //  return ret;
             }
 
-            if (i_OnlyCheckValidity == true)
+            if (i_OnlyCheckValidity == true || ret != "")
             {
                 return ret;
             }
@@ -15321,18 +15316,21 @@ This Process can take 1 minute.";
             Monitor.Properties.Settings.Default.Script.Clear();
             foreach (String line in temp)
             {
-                String ret = await ExectuteOrCheckValidityCommand(line, true);
-
-                if (ret != "")
+                if (line != "")
                 {
-                    MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.OrangeRed);
+                    String ret = await ExectuteOrCheckValidityCommand(line, true);
 
+                    if (ret != "")
+                    {
+                        MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.OrangeRed);
+
+                    }
+                    else
+                    {
+                        MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
+                    }
+                    Monitor.Properties.Settings.Default.Script.Add(line);
                 }
-                else
-                {
-                    MyAppendText(richTextBox_Scripts, line + "\r\n", Color.Black, Color.LightGreen);
-                }
-                Monitor.Properties.Settings.Default.Script.Add(line);
             }
             
 
@@ -15446,7 +15444,7 @@ Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA
 
 
 
-
+            
 
             CommandClass ReadReg = new CommandClass("ReadReg",
 @"
