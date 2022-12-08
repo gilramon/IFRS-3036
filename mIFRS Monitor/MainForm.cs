@@ -14375,7 +14375,7 @@ This Process can take 1 minute.";
 
         Int32 GlobalReadRegister = 0;
         int MessageCounter = 0;
-        async Task<String> WriteToRegister(String i_Command, bool i_OnlyCheckValidity)
+        async Task<String> WriteReg(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
 
@@ -14519,14 +14519,15 @@ This Process can take 1 minute.";
 
 
 
+            if (ret == "" && i_OnlyCheckValidity == false)
+            {
+                //Execute the command
+                PrintToSystemLogerTxMessage(i_Command);
+                textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
 
-            //Send the data 
+                button_SendSerialPort_Click(null, null);
 
-            textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
-
-            button_SendSerialPort_Click(null, null);
-
-            PrintToSystemLogerTxMessage(i_Command);
+            }
 
             return ret;
         }
@@ -14819,19 +14820,15 @@ This Process can take 1 minute.";
             temp.CopyTo(SendFrame, 36);
 
 
-            if(i_OnlyCheckValidity == true)
+            if (ret == "" && i_OnlyCheckValidity == false)
             {
-                return ret;
+                //Execute the command
+                PrintToSystemLogerTxMessage(i_Command);
+                textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+
+                button_SendSerialPort_Click(null, null);
+
             }
-
-
-            //Send the data 
-
-            textBox_SendSerialPort.Text = ConvertByteArraytToString(SendFrame);
-
-            button_SendSerialPort_Click(null, null);
-
-            PrintToSystemLogerTxMessage(i_Command);
 
             return ret;
         }
@@ -14862,7 +14859,7 @@ This Process can take 1 minute.";
 
         String FrameAnalizer = "";
 
-        String ReadFromRegister(String i_Command, bool i_OnlyCheckValidity)
+        String ReadReg(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
 
@@ -14951,23 +14948,20 @@ This Process can take 1 minute.";
 
 
 
-            
+            if (ret == "" && i_OnlyCheckValidity == false)
+            {
+                //Execute the command
+                PrintToSystemLogerTxMessage(i_Command);
+                textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+
+                button_SendSerialPort_Click(null, null);
+
+            }
 
 
 
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-            //KratosProtocolLogger.LogMessage(Color.Purple, Color.Yellow, output, true, false);
 
 
-
-            //Send the data 
-
-            textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
-
-            button_SendSerialPort_Click(null, null);
-
-            PrintToSystemLogerTxMessage(i_Command);
 
             return ret;
         }
@@ -14990,11 +14984,11 @@ This Process can take 1 minute.";
             switch (CommandName)
             {
                 case "WriteReg":
-                    ret = await WriteToRegister(i_Command,i_OnlyCheckValidity);
+                    ret = await WriteReg(i_Command,i_OnlyCheckValidity);
                     break;
 
                 case "ReadReg":
-                    ret = ReadFromRegister(i_Command,i_OnlyCheckValidity);
+                    ret = ReadReg(i_Command,i_OnlyCheckValidity);
                     break;
 
                 case "SetFullParams":
@@ -15436,8 +15430,11 @@ mask [4 hex bytes]
 
 Examples:
 
-WriteReg AAAAAAAA BBBBBBBB FFFFFFFF ---> Write to Register 0xAAAAAAAA 0xBBBBBBBB
-WriteReg AAAAAAAA BBBBBBBB FFFF0000 ---> Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA
+WriteReg AAAAAAAA BBBBBBBB FFFFFFFF:
+Write to Register 0xAAAAAAAA 0xBBBBBBBB
+
+WriteReg AAAAAAAA BBBBBBBB FFFF0000:
+Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA
 
 ");
 
