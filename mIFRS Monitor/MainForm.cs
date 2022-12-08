@@ -420,8 +420,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -536,6 +536,8 @@ namespace Monitor
             this.checkBox_CLIDeleteAfterSend = new System.Windows.Forms.CheckBox();
             this.button_CLISend = new System.Windows.Forms.Button();
             this.tabPage2_Script = new System.Windows.Forms.TabPage();
+            this.button_StopRunScrip = new System.Windows.Forms.Button();
+            this.checkBox_RepeatCLIScript = new System.Windows.Forms.CheckBox();
             this.button_CheckScriptValidity = new System.Windows.Forms.Button();
             this.button_SaveScript = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -738,8 +740,6 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox_RepeatCLIScript = new System.Windows.Forms.CheckBox();
-            this.button_StopRunScrip = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -937,7 +937,7 @@ namespace Monitor
             this.tabControl_Main.Controls.Add(this.tabPage_charts);
             this.tabControl_Main.Controls.Add(this.tabPage_SerialPort);
             this.tabControl_Main.Controls.Add(this.tabPage_Commands);
-            this.tabControl_Main.Location = new System.Drawing.Point(4, 5);
+            this.tabControl_Main.Location = new System.Drawing.Point(4, -6);
             this.tabControl_Main.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl_Main.Name = "tabControl_Main";
             this.tabControl_Main.SelectedIndex = 0;
@@ -1474,17 +1474,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2224,6 +2224,27 @@ namespace Monitor
             this.tabPage2_Script.TabIndex = 1;
             this.tabPage2_Script.Text = "Scripts";
             this.tabPage2_Script.UseVisualStyleBackColor = true;
+            // 
+            // button_StopRunScrip
+            // 
+            this.button_StopRunScrip.BackColor = System.Drawing.Color.Orange;
+            this.button_StopRunScrip.Location = new System.Drawing.Point(558, 169);
+            this.button_StopRunScrip.Name = "button_StopRunScrip";
+            this.button_StopRunScrip.Size = new System.Drawing.Size(89, 45);
+            this.button_StopRunScrip.TabIndex = 82;
+            this.button_StopRunScrip.Text = "Stop";
+            this.button_StopRunScrip.UseVisualStyleBackColor = false;
+            this.button_StopRunScrip.Click += new System.EventHandler(this.button_StopRunScrip_Click);
+            // 
+            // checkBox_RepeatCLIScript
+            // 
+            this.checkBox_RepeatCLIScript.AutoSize = true;
+            this.checkBox_RepeatCLIScript.Location = new System.Drawing.Point(771, 190);
+            this.checkBox_RepeatCLIScript.Name = "checkBox_RepeatCLIScript";
+            this.checkBox_RepeatCLIScript.Size = new System.Drawing.Size(71, 22);
+            this.checkBox_RepeatCLIScript.TabIndex = 81;
+            this.checkBox_RepeatCLIScript.Text = "Repeat";
+            this.checkBox_RepeatCLIScript.UseVisualStyleBackColor = true;
             // 
             // button_CheckScriptValidity
             // 
@@ -4315,27 +4336,6 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
-            // 
-            // checkBox_RepeatCLIScript
-            // 
-            this.checkBox_RepeatCLIScript.AutoSize = true;
-            this.checkBox_RepeatCLIScript.Location = new System.Drawing.Point(771, 190);
-            this.checkBox_RepeatCLIScript.Name = "checkBox_RepeatCLIScript";
-            this.checkBox_RepeatCLIScript.Size = new System.Drawing.Size(71, 22);
-            this.checkBox_RepeatCLIScript.TabIndex = 81;
-            this.checkBox_RepeatCLIScript.Text = "Repeat";
-            this.checkBox_RepeatCLIScript.UseVisualStyleBackColor = true;
-            // 
-            // button_StopRunScrip
-            // 
-            this.button_StopRunScrip.BackColor = System.Drawing.Color.Orange;
-            this.button_StopRunScrip.Location = new System.Drawing.Point(558, 169);
-            this.button_StopRunScrip.Name = "button_StopRunScrip";
-            this.button_StopRunScrip.Size = new System.Drawing.Size(89, 45);
-            this.button_StopRunScrip.TabIndex = 82;
-            this.button_StopRunScrip.Text = "Stop";
-            this.button_StopRunScrip.UseVisualStyleBackColor = false;
-            this.button_StopRunScrip.Click += new System.EventHandler(this.button_StopRunScrip_Click);
             // 
             // MainForm
             // 
@@ -14373,9 +14373,9 @@ This Process can take 1 minute.";
             return (int)diff.Ticks;
         }
 
-
+        Int32 GlobalReadRegister = 0;
         int MessageCounter = 0;
-        String WriteToRegister(String i_Command, bool i_OnlyCheckValidity)
+        async Task<String> WriteToRegister(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
 
@@ -14387,14 +14387,15 @@ This Process can take 1 minute.";
             /////////////////////////////////////////////////////////////////
             ///
 
-            byte[] buffer = StringToByteArray(tempStr[1]);
-
-            if (tempStr.Length != 3)
+            
+            int NumOfArguments = 4;
+            if (tempStr.Length != NumOfArguments)
             {
-                ret += String.Format("\n Arguments number should be 3, see example");
+                ret += String.Format("\n Arguments number should be {0}, see example", NumOfArguments);
                 return ret;
             }
 
+            byte[] buffer = StringToByteArray(tempStr[1]);
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[1]);
@@ -14416,21 +14417,55 @@ This Process can take 1 minute.";
                 return ret;
             }
 
+            buffer = StringToByteArray(tempStr[3]);
+
+            if (buffer == null || buffer.Length != 4)
+            {
+                ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[2]);
+                return ret;
+            }
+
+            if (i_OnlyCheckValidity == true)
+            {
+                return ret;
+            }
+
             //Init all the commands //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////
             String Command = tempStr[0];
             String RegisterAddress32bits = tempStr[1];
             String DataToWrite32bits = tempStr[2];
+            String MaskString = tempStr[3];
+
+            if(MaskString != "FFFFFFFF")
+            {
+                GlobalReadRegister = 0;
+                Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
+                Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
+                await ExectuteOrCheckValidityCommand(String.Format("ReadReg {0}", RegisterAddress32bits), false);
+
+                await Task.Delay(1000);
+
+                // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
+
+                for(int i=0; i <32; i++)
+                {
+                    if ( ((MaskInt32 >> i) & 1U) == 0)
+                    {
+                        int BitStatus = (DataToWrite >> i) & 1;
+                        GlobalReadRegister = (GlobalReadRegister &  ~(1 << i) ) | (BitStatus << i);
+                    }
+
+                }
 
 
 
 
 
 
-            // Excute the command //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////
+            }
+
             List<byte> ListBytes = new List<byte>();
 
 
@@ -14458,7 +14493,8 @@ This Process can take 1 minute.";
 
 
             //TimeTag
-            String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
+            // String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
+            String TimeTag = "00 00 00 00";
             ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
 
 
@@ -14938,9 +14974,9 @@ This Process can take 1 minute.";
         /// <param name="i_Command"></param>
         /// <param name="i_OnlyCheckValidity"></param>
         /// <returns></returns>
-        String ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
+        async Task<String> ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
         {
-            String ret = "";
+            String ret;
             FrameAnalizer = "";
             String[] tempStr = i_Command.Split(' ');
             String CommandName = tempStr[0];
@@ -14949,7 +14985,7 @@ This Process can take 1 minute.";
             switch (CommandName)
             {
                 case "WriteReg":
-                    ret = WriteToRegister(i_Command,i_OnlyCheckValidity);
+                    ret = await WriteToRegister(i_Command,i_OnlyCheckValidity);
                     break;
 
                 case "ReadReg":
@@ -14969,20 +15005,22 @@ This Process can take 1 minute.";
             }
 
             // Gil Ramon: If the is a syntax problem the command function return the message.
-            //if(ret != "")
-            //{
-            //    SystemLogger.LogMessage(Color.Black, Color.Orange, ret, true, true);
-            //}
+            if (ret == "")
+            {
+                SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
+                SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
+                SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Command, true, false);
+            }
 
 
             //SystemLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
             //SystemLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
 
 
-             return ret;
+            return ret;
         }
 
-        private void ParseCLICommand(String i_Command)
+        async private void ParseCLICommand(String i_Command)
         {
             
             String[] tempStr = i_Command.Split(' ');
@@ -14995,13 +15033,9 @@ This Process can take 1 minute.";
                 {
                     IsCommandFound = true;
 
-                    SystemLogger.LogMessage(Color.Purple, Color.Yellow, "", New_Line = false, Show_Time = true);
-                    SystemLogger.LogMessage(Color.Purple, Color.Yellow, "Tx:>", false, false);
-                    SystemLogger.LogMessage(Color.Purple, Color.Yellow, textBox_CLISendCommands.Text, true, false);
-
                     UpdateCommandCLIHistory(i_Command);
 
-                    ret = ExectuteOrCheckValidityCommand(i_Command, false);
+                    ret = await ExectuteOrCheckValidityCommand(i_Command, false);
 
                     if (ret != "")
                     {
@@ -15279,14 +15313,14 @@ This Process can take 1 minute.";
             }
         }
 
-        private void button_CheckScriptValidity_Click(object sender, EventArgs e)
+        private async void button_CheckScriptValidity_Click(object sender, EventArgs e)
         {
             String[] temp = richTextBox_Scripts.Lines;
             richTextBox_Scripts.Text = "";
             Monitor.Properties.Settings.Default.Script.Clear();
             foreach (String line in temp)
             {
-                String ret = ExectuteOrCheckValidityCommand(line, true);
+                String ret = await ExectuteOrCheckValidityCommand(line, true);
 
                 if (ret != "")
                 {
@@ -15391,13 +15425,16 @@ Syntax:
 WriteReg 
 address [4 hex bytes] 
 data [4 hex bytes]
+mask [4 hex bytes]
 
-Example:
+Examples:
 
-WriteReg AAAAAAAA BBBBBBBB ---> Write to Register 0xAAAAAAAA data 0xBBBBBBBB
+WriteReg AAAAAAAA BBBBBBBB FFFFFFFF ---> Write to Register 0xAAAAAAAA 0xBBBBBBBB
+WriteReg AAAAAAAA BBBBBBBB FFFF0000 ---> Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA
+
 ");
 
-            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB";
+            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFFFFFF";
 
             List_AllCommands.Add(WriteReg);
 
