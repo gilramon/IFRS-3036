@@ -14378,7 +14378,7 @@ This Process can take 1 minute.";
         async Task<String> WriteReg(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
-
+            int DelayBetweenReadWrite = 0;
 
             String[] tempStr = i_Command.Split(' ');
 
@@ -14388,11 +14388,11 @@ This Process can take 1 minute.";
             ///
 
             
-            int NumOfArguments = 4;
-            if (tempStr.Length != NumOfArguments)
+            int NumOfArguments = tempStr.Length;
+            if ( !(NumOfArguments == 5 || NumOfArguments == 3))
             {
-                ret += String.Format("\n Arguments number should be {0}, see example", NumOfArguments);
-               // return ret;
+                ret += String.Format("\n Arguments number should be 3 or 5, see example", NumOfArguments);
+                return ret;
             }
 
             byte[] buffer = StringToByteArray(tempStr[1]);
@@ -14412,116 +14412,130 @@ This Process can take 1 minute.";
             //    return ret;
             }
 
-            buffer = StringToByteArray(tempStr[3]);
-
-            if (buffer == null || buffer.Length != 4)
+            if (NumOfArguments == 5)
             {
-                ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[2]);
-              //  return ret;
+                buffer = StringToByteArray(tempStr[3]);
+
+                if (buffer == null || buffer.Length != 4)
+                {
+                    ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[3]);
+                    //  return ret;
+                }
+
+
+
+                if (int.TryParse(tempStr[4], out DelayBetweenReadWrite) == false)
+                {
+                    ret += String.Format("\n Argument [{0}] invalid not int", tempStr[4]);
+                    //  return ret;
+                }
             }
 
             if (i_OnlyCheckValidity == true || ret != "")
             {
                 return ret;
             }
-
-            //Init all the commands //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
             String Command = tempStr[0];
             String RegisterAddress32bits = tempStr[1];
             String DataToWrite32bits = tempStr[2];
-            String MaskString = tempStr[3];
-            String NotMaskValue = "FFFFFFFF";
-            if (MaskString != NotMaskValue)
+
+            if (NumOfArguments == 5)
             {
-                GlobalReadRegister = 0;
-                Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
-                Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
-                await ExectuteOrCheckValidityCommand(String.Format("ReadReg {0}", RegisterAddress32bits), false);
 
-                await Task.Delay(1000);
-
-                // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
-
-                for(int i=0; i <32; i++)
+                String MaskString = tempStr[3];
+                String NotMaskValue = "FFFFFFFF";
+                if (MaskString != NotMaskValue)
                 {
-                    if ( ((MaskInt32 >> i) & 1U) == 0)
+                    GlobalReadRegister = 0;
+                    Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
+                    Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
+                    await ExectuteOrCheckValidityCommand(String.Format("ReadReg {0}", RegisterAddress32bits), false);
+
+                    await Task.Delay(DelayBetweenReadWrite);
+
+                    // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
+
+                    for (int i = 0; i < 32; i++)
                     {
-                        int BitStatus = (DataToWrite >> i) & 1;
-                        GlobalReadRegister = (GlobalReadRegister &  ~(1 << i) ) | (BitStatus << i);
+                        if (((MaskInt32 >> i) & 1U) == 0)
+                        {
+                            int BitStatus = (DataToWrite >> i) & 1;
+                            GlobalReadRegister = (GlobalReadRegister & ~(1 << i)) | (BitStatus << i);
+                        }
+
                     }
 
+                    await ExectuteOrCheckValidityCommand(String.Format("WriteReg {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")), false);
+
+
                 }
-
-                await ExectuteOrCheckValidityCommand(String.Format("WriteReg {0} {1} {2}", RegisterAddress32bits, GlobalReadRegister.ToString("X8"), NotMaskValue), false);
-
-
-
-                return "";
-
-
             }
-
-            List<byte> ListBytes = new List<byte>();
-
-
-            //Preamble
-            String Preamble = "82";
-            ListBytes.AddRange(StringToByteArray(Preamble));
-
-
-            //Opcode
-            String Opcode = "21";
-            ListBytes.AddRange(StringToByteArray(Opcode));
-
-
-            //Messagecounter
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
-
-
-            MessageCounter++;
-            //RegisterAddress
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
-
-
-            //DatatoWrite
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(DataToWrite32bits)));
-
-
-            //TimeTag
-            // String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
-            String TimeTag = "00 00 00 00";
-            ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
-
-
-
-            //Data
-            byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
-            ListBytes.AddRange(DataBytes);
-
-
-
-
-
-            //Calculate check sum
-            Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
-
-            ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
-
-
-
-
-
-
-            if (ret == "" && i_OnlyCheckValidity == false)
+            else
             {
-                //Execute the command
-                PrintToSystemLogerTxMessage(i_Command);
-                textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
 
-                button_SendSerialPort_Click(null, null);
 
+
+
+                List<byte> ListBytes = new List<byte>();
+
+
+                //Preamble
+                String Preamble = "82";
+                ListBytes.AddRange(StringToByteArray(Preamble));
+
+
+                //Opcode
+                String Opcode = "21";
+                ListBytes.AddRange(StringToByteArray(Opcode));
+
+
+                //Messagecounter
+                ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(MessageCounter.ToString("X4"))));
+
+
+                MessageCounter++;
+                //RegisterAddress
+                ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(RegisterAddress32bits)));
+
+
+                //DatatoWrite
+                ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(DataToWrite32bits)));
+
+
+                //TimeTag
+                // String TimeTag = ConvertToUnixTimestamp(DateTime.Now).ToString("X4");
+                String TimeTag = "00 00 00 00";
+                ListBytes.AddRange(StringToByteArray(ReverseHexStringLittleBigEndian(TimeTag)));
+
+
+
+                //Data
+                byte[] DataBytes = StringToByteArray(string.Concat(Enumerable.Repeat("00", 20)));
+                ListBytes.AddRange(DataBytes);
+
+
+
+
+
+                //Calculate check sum
+                Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
+
+                ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
+
+
+
+
+
+
+                if (ret == "" && i_OnlyCheckValidity == false)
+                {
+                    //Execute the command
+                    PrintToSystemLogerTxMessage(i_Command);
+                    textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+
+                    button_SendSerialPort_Click(null, null);
+
+                }
             }
 
             return ret;
@@ -15308,7 +15322,13 @@ This Process can take 1 minute.";
                 }
             }
         }
-
+        void Gil_DelaySleep(int i_MiliSeconds)
+        {
+            for(int i =0; i< i_MiliSeconds; i++)
+            {
+                Thread.Sleep(1);
+            }
+        }
         private async void button_CheckScriptValidity_Click(object sender, EventArgs e)
         {
             String[] temp = richTextBox_Scripts.Lines;
@@ -15420,23 +15440,27 @@ This Process can take 1 minute.";
 Description: 
 Write to Register 
 
+Num of arguments:
+2 or 4
+
 Syntax:
 WriteReg 
 address [4 hex bytes] 
 data [4 hex bytes]
-mask [4 hex bytes]
+optional mask [4 hex bytes]
+optional Delay between Read and write (only when using mask) [integer decimal]
 
 Examples:
 
-WriteReg AAAAAAAA BBBBBBBB FFFFFFFF:
-Write to Register 0xAAAAAAAA 0xBBBBBBBB
+WriteReg AAAAAAAA BBBBBBBB
+    Write to Register 0xAAAAAAAA 0xBBBBBBBB 
 
-WriteReg AAAAAAAA BBBBBBBB FFFF0000:
-Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA
+WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000:
+    Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
 
 ");
 
-            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFFFFFF";
+            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFFFFFF 1000";
 
             List_AllCommands.Add(WriteReg);
 
