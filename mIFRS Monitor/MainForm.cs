@@ -14290,7 +14290,7 @@ This Process can take 1 minute.";
                             return;
                         }
 
-                        if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex > 0)
+                        if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
                         {
                             textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
                             CLI_HistoryIndex++;
@@ -14443,9 +14443,9 @@ This Process can take 1 minute.";
             {
 
                 String MaskString = tempStr[3];
-                String NotMaskValue = "FFFFFFFF";
-                if (MaskString != NotMaskValue)
-                {
+                //String NotMaskValue = "FFFFFFFF";
+                //if (MaskString != NotMaskValue)
+                //{
                     GlobalReadRegister = 0;
                     Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
                     Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
@@ -14468,7 +14468,7 @@ This Process can take 1 minute.";
                     await ExectuteOrCheckValidityCommand(String.Format("WriteReg {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")), false);
 
 
-                }
+         //       }
             }
             else
             {
