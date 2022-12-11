@@ -15459,7 +15459,7 @@ Examples:
 WriteReg AAAAAAAA BBBBBBBB
     Write to Register 0xAAAAAAAA 0xBBBBBBBB 
 
-WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000:
+WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000
     Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
 
 ");
