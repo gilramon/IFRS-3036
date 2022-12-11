@@ -15442,12 +15442,17 @@ Write to Register
 Num of arguments:
 2 or 4
 
-Syntax:
+Syntax 2 arguments:
 WriteReg 
 address [4 hex bytes] 
 data [4 hex bytes]
-optional mask [4 hex bytes]
-optional Delay between Read and write (only when using mask) [integer decimal]
+
+Syntax 4 arguments:
+WriteReg 
+address [4 hex bytes] 
+data [4 hex bytes]
+mask [4 hex bytes]
+Delay between Read and write (only when using mask) [integer decimal]
 
 Examples:
 
