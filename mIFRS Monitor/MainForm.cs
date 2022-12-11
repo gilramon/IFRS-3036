@@ -341,7 +341,6 @@ namespace Monitor
         private GroupBox groupBox_CLISendCommand;
         private TextBox textBox_CLIsendperodically;
         private CheckBox checkBox_CLI_SendPeriodically;
-        private TextBox textBox_CLISendCommands;
         private CheckBox checkBox_CLIDeleteAfterSend;
         private Button button_CLISend;
         private GroupBox groupBox_AllCommands;
@@ -366,6 +365,7 @@ namespace Monitor
         private CheckBox checkBox_RepeatCLIScript;
         private Button button_StopRunScrip;
         private RichTextBox textBox_CommandHelp;
+        private RichTextBox textBox_CLISendCommands;
         private static readonly string PREAMBLE = "23";
 
 
@@ -532,7 +532,6 @@ namespace Monitor
             this.button_DeleteCommandsHistory = new System.Windows.Forms.Button();
             this.textBox_CLIsendperodically = new System.Windows.Forms.TextBox();
             this.checkBox_CLI_SendPeriodically = new System.Windows.Forms.CheckBox();
-            this.textBox_CLISendCommands = new System.Windows.Forms.TextBox();
             this.checkBox_CLIDeleteAfterSend = new System.Windows.Forms.CheckBox();
             this.button_CLISend = new System.Windows.Forms.Button();
             this.tabPage2_Script = new System.Windows.Forms.TabPage();
@@ -740,6 +739,7 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_CLISendCommands = new System.Windows.Forms.RichTextBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -957,7 +957,7 @@ namespace Monitor
             this.tabPage_ServerTCP.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_ServerTCP.Name = "tabPage_ServerTCP";
             this.tabPage_ServerTCP.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage_ServerTCP.Size = new System.Drawing.Size(1414, 659);
+            this.tabPage_ServerTCP.Size = new System.Drawing.Size(1414, 648);
             this.tabPage_ServerTCP.TabIndex = 0;
             this.tabPage_ServerTCP.Text = "Server TCP";
             this.tabPage_ServerTCP.UseVisualStyleBackColor = true;
@@ -1135,7 +1135,7 @@ namespace Monitor
             this.tabPage_ClientTCP.Location = new System.Drawing.Point(4, 27);
             this.tabPage_ClientTCP.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_ClientTCP.Name = "tabPage_ClientTCP";
-            this.tabPage_ClientTCP.Size = new System.Drawing.Size(1414, 659);
+            this.tabPage_ClientTCP.Size = new System.Drawing.Size(1414, 648);
             this.tabPage_ClientTCP.TabIndex = 9;
             this.tabPage_ClientTCP.Text = "Client TCP";
             this.tabPage_ClientTCP.UseVisualStyleBackColor = true;
@@ -1316,7 +1316,7 @@ namespace Monitor
             this.tabPage_charts.Location = new System.Drawing.Point(4, 27);
             this.tabPage_charts.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_charts.Name = "tabPage_charts";
-            this.tabPage_charts.Size = new System.Drawing.Size(1414, 659);
+            this.tabPage_charts.Size = new System.Drawing.Size(1414, 648);
             this.tabPage_charts.TabIndex = 7;
             this.tabPage_charts.Text = "Charts";
             this.tabPage_charts.UseVisualStyleBackColor = true;
@@ -1505,7 +1505,7 @@ namespace Monitor
             this.tabPage_SerialPort.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_SerialPort.Name = "tabPage_SerialPort";
             this.tabPage_SerialPort.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage_SerialPort.Size = new System.Drawing.Size(1414, 659);
+            this.tabPage_SerialPort.Size = new System.Drawing.Size(1414, 648);
             this.tabPage_SerialPort.TabIndex = 1;
             this.tabPage_SerialPort.Text = "Serial Port";
             this.tabPage_SerialPort.UseVisualStyleBackColor = true;
@@ -2123,10 +2123,10 @@ namespace Monitor
             // 
             // groupBox_CLISendCommand
             // 
+            this.groupBox_CLISendCommand.Controls.Add(this.textBox_CLISendCommands);
             this.groupBox_CLISendCommand.Controls.Add(this.button_DeleteCommandsHistory);
             this.groupBox_CLISendCommand.Controls.Add(this.textBox_CLIsendperodically);
             this.groupBox_CLISendCommand.Controls.Add(this.checkBox_CLI_SendPeriodically);
-            this.groupBox_CLISendCommand.Controls.Add(this.textBox_CLISendCommands);
             this.groupBox_CLISendCommand.Controls.Add(this.checkBox_CLIDeleteAfterSend);
             this.groupBox_CLISendCommand.Controls.Add(this.button_CLISend);
             this.groupBox_CLISendCommand.Location = new System.Drawing.Point(4, 9);
@@ -2169,20 +2169,6 @@ namespace Monitor
             this.checkBox_CLI_SendPeriodically.TabIndex = 6;
             this.checkBox_CLI_SendPeriodically.Text = "Send Periodically (100 ms)";
             this.checkBox_CLI_SendPeriodically.UseVisualStyleBackColor = true;
-            // 
-            // textBox_CLISendCommands
-            // 
-            this.textBox_CLISendCommands.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.textBox_CLISendCommands.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox_CLISendCommands.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_CLISendCommands.Location = new System.Drawing.Point(8, 20);
-            this.textBox_CLISendCommands.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_CLISendCommands.Name = "textBox_CLISendCommands";
-            this.textBox_CLISendCommands.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_CLISendCommands.Size = new System.Drawing.Size(829, 31);
-            this.textBox_CLISendCommands.TabIndex = 1;
-            this.textBox_CLISendCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_CLISendCommands_KeyDown);
-            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_CLISendCommands_PreviewKeyDown);
             // 
             // checkBox_CLIDeleteAfterSend
             // 
@@ -4336,6 +4322,19 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
+            // 
+            // textBox_CLISendCommands
+            // 
+            this.textBox_CLISendCommands.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox_CLISendCommands.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_CLISendCommands.Location = new System.Drawing.Point(8, 16);
+            this.textBox_CLISendCommands.Multiline = false;
+            this.textBox_CLISendCommands.Name = "textBox_CLISendCommands";
+            this.textBox_CLISendCommands.Size = new System.Drawing.Size(828, 29);
+            this.textBox_CLISendCommands.TabIndex = 110;
+            this.textBox_CLISendCommands.Text = "";
+            this.textBox_CLISendCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_CLISendCommands_KeyDown);
+            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_CLISendCommands_PreviewKeyDown);
             // 
             // MainForm
             // 
@@ -14210,7 +14209,7 @@ This Process can take 1 minute.";
         {
             try
             {
-                TextBox m_textBox = (TextBox)sender;
+                RichTextBox m_textBox = (RichTextBox)sender;
                 switch (e.KeyCode)
                 {
                     case Keys.F1:
