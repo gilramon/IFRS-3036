@@ -4996,7 +4996,7 @@ namespace Monitor
         //    System.Windows.Forms.Application.Exit();
         //}
         private TextBox_Logger SystemLogger;
-        private TextBox_Logger ServerLogger;
+        private TextBox_Logger ServerLogger ;
         private TextBox_Logger SerialPortLogger;
 
         //   Logger LogIWatcher;
@@ -15555,7 +15555,11 @@ Use the arrows Up, Down and Tab for autocomplition.
 
         void LoadDefaultSettings()
         {
+            cmb_StopBits.DataSource = Enum.GetValues(typeof(StopBits));
+            cmb_StopBits.SelectedIndex = (int)StopBits.One;
 
+            cmbParity.DataSource = Enum.GetValues(typeof(Parity));
+            cmbParity.SelectedIndex = (int)Parity.None;
 
             txtPortNo.Text = Monitor.Properties.Settings.Default.Start_Port;
             txtDataTx.Text = Monitor.Properties.Settings.Default.Default_Server_Message;
@@ -15602,13 +15606,6 @@ Use the arrows Up, Down and Tab for autocomplition.
 
 
                 ScanComports();
-
-
-                cmb_StopBits.DataSource = Enum.GetValues(typeof(StopBits));
-                cmb_StopBits.SelectedIndex = (int)StopBits.One;
-
-                cmbParity.DataSource = Enum.GetValues(typeof(Parity));
-                cmbParity.SelectedIndex = (int)Parity.None;
 
 
                 LoadDefaultSettings();
