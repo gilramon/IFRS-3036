@@ -4465,7 +4465,7 @@ namespace Monitor
         private readonly List<string> CommandsHistoy = new List<string>();
         //   private readonly List<string> CLI_CommandsHistoy = new List<string>();
         private int HistoryIndex = -1;
-        private int CLI_HistoryIndex = -1;
+        private int CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
         // bool SelfMonitorCommandsMode = false;
 
 
@@ -14262,22 +14262,21 @@ This Process can take 1 minute.";
                         }
 
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
-                        if (CLI_HistoryIndex > Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 || CLI_HistoryIndex < 0)
+                        if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
                         {
-                            CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count;
+                            textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
+                            if (CLI_HistoryIndex > 0)
+                            {
+                                CLI_HistoryIndex--;
+                            }
                         }
 
-                        //if(textBox_SendSerialPort.Text == string.Empty)
+
+                        //if (CLI_HistoryIndex > 0)
                         //{
-                        //    HistoryIndex = CommandsHistoy.Count;
+                        //    CLI_HistoryIndex--;
                         //}
-
-
-                        if (CLI_HistoryIndex > 0)
-                        {
-                            CLI_HistoryIndex--;
-                        }
-                        textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
+                        //textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
 
                         m_textBox.SelectionStart = m_textBox.Text.Length;
                         m_textBox.SelectionLength = 0;
@@ -14291,10 +14290,13 @@ This Process can take 1 minute.";
                             return;
                         }
 
-                        if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
+                        if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
                         {
                             textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
-                            CLI_HistoryIndex++;
+                            if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1)
+                            {
+                                CLI_HistoryIndex++;
+                            }
                         }
 
                         m_textBox.SelectionStart = m_textBox.Text.Length;
@@ -14318,11 +14320,12 @@ This Process can take 1 minute.";
                             SystemLogger.LogMessage(Color.Black, Color.AliceBlue, "History commands: " + Strlist.Count.ToString() + " ", New_Line = true, Show_Time = true);
                             foreach (string str in Strlist)
                             {
-                                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, New_Line = true, Show_Time = false);
                                 if (CLI_HistoryIndex == Strlist.IndexOf(str))
                                 {
-                                    SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "<------", New_Line = false, Show_Time = false);
+                                    SystemLogger.LogMessage(Color.Black, Color.Chartreuse, CLI_HistoryIndex + " <------", New_Line = false, Show_Time = false);
                                 }
+
+                                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, New_Line = true, Show_Time = false);
                             }
                         }
                         else
@@ -14332,9 +14335,9 @@ This Process can take 1 minute.";
                         }
                         break;
 
-                    default:
-                        CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
-                        break;
+                    //default:
+                    //    CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
+                    //    break;
                 }
 
 
@@ -15559,6 +15562,7 @@ SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
         String CLI_Help = @"
 General Format:
 Command arg1 arg2 arg3...
+Between Command and arguments there is single ASCII space.
 
 For example:
 Command 12 abc
