@@ -21,7 +21,7 @@
       <Value Profile="(Default)">8</Value>
     </Setting>
     <Setting Name="Comport_StopBit" Type="System.String" Scope="User">
-      <Value Profile="(Default)">One</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="LastRunTime" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />

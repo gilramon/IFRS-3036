@@ -97,7 +97,7 @@ namespace Monitor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("One")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string Comport_StopBit {
             get {
                 return ((string)(this["Comport_StopBit"]));

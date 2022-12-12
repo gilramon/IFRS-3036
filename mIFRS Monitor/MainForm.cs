@@ -173,10 +173,7 @@ namespace Monitor
         private TextBox textBox_NumberOfOpenConnections;
         private System.Windows.Forms.Timer timer_General_1Second;
         private GroupBox gbPortSettings;
-        private ComboBox cmb_PortName;
         private ComboBox cmbBaudRate;
-        private ComboBox cmb_StopBits;
-        private ComboBox cmbParity;
         private ComboBox cmbDataBits;
         private Label lblComPort;
         private Label lblStopBits;
@@ -366,6 +363,9 @@ namespace Monitor
         private Button button_StopRunScrip;
         private RichTextBox textBox_CommandHelp;
         private RichTextBox textBox_CLISendCommands;
+        private ComboBox cmb_PortName;
+        private ComboBox cmb_StopBits;
+        private ComboBox cmbParity;
         private static readonly string PREAMBLE = "23";
 
 
@@ -490,10 +490,7 @@ namespace Monitor
             this.button_SendSerialPort = new System.Windows.Forms.Button();
             this.gbPortSettings = new System.Windows.Forms.GroupBox();
             this.button_ReScanComPort = new System.Windows.Forms.Button();
-            this.cmb_PortName = new System.Windows.Forms.ComboBox();
             this.cmbBaudRate = new System.Windows.Forms.ComboBox();
-            this.cmb_StopBits = new System.Windows.Forms.ComboBox();
-            this.cmbParity = new System.Windows.Forms.ComboBox();
             this.cmbDataBits = new System.Windows.Forms.ComboBox();
             this.lblComPort = new System.Windows.Forms.Label();
             this.lblStopBits = new System.Windows.Forms.Label();
@@ -740,6 +737,9 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmb_PortName = new System.Windows.Forms.ComboBox();
+            this.cmbParity = new System.Windows.Forms.ComboBox();
+            this.cmb_StopBits = new System.Windows.Forms.ComboBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1613,11 +1613,11 @@ namespace Monitor
             // 
             // gbPortSettings
             // 
-            this.gbPortSettings.Controls.Add(this.button_ReScanComPort);
-            this.gbPortSettings.Controls.Add(this.cmb_PortName);
-            this.gbPortSettings.Controls.Add(this.cmbBaudRate);
             this.gbPortSettings.Controls.Add(this.cmb_StopBits);
             this.gbPortSettings.Controls.Add(this.cmbParity);
+            this.gbPortSettings.Controls.Add(this.cmb_PortName);
+            this.gbPortSettings.Controls.Add(this.button_ReScanComPort);
+            this.gbPortSettings.Controls.Add(this.cmbBaudRate);
             this.gbPortSettings.Controls.Add(this.cmbDataBits);
             this.gbPortSettings.Controls.Add(this.lblComPort);
             this.gbPortSettings.Controls.Add(this.lblStopBits);
@@ -1646,25 +1646,6 @@ namespace Monitor
             this.button_ReScanComPort.UseVisualStyleBackColor = true;
             this.button_ReScanComPort.Click += new System.EventHandler(this.Button_ReScanComPort_Click);
             // 
-            // cmb_PortName
-            // 
-            this.cmb_PortName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_PortName.FormattingEnabled = true;
-            this.cmb_PortName.Items.AddRange(new object[] {
-            "COM1",
-            "COM2",
-            "COM3",
-            "COM4",
-            "COM5",
-            "COM6"});
-            this.cmb_PortName.Location = new System.Drawing.Point(7, 37);
-            this.cmb_PortName.Margin = new System.Windows.Forms.Padding(2);
-            this.cmb_PortName.Name = "cmb_PortName";
-            this.cmb_PortName.Size = new System.Drawing.Size(62, 26);
-            this.cmb_PortName.TabIndex = 1;
-            this.cmb_PortName.Tag = "1";
-            this.cmb_PortName.SelectedIndexChanged += new System.EventHandler(this.CmbPortName_SelectedIndexChanged);
-            // 
             // cmbBaudRate
             // 
             this.cmbBaudRate.FormattingEnabled = true;
@@ -1677,43 +1658,13 @@ namespace Monitor
             "38400",
             "57600",
             "115200"});
-            this.cmbBaudRate.Location = new System.Drawing.Point(74, 37);
+            this.cmbBaudRate.Location = new System.Drawing.Point(81, 35);
             this.cmbBaudRate.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBaudRate.Name = "cmbBaudRate";
             this.cmbBaudRate.Size = new System.Drawing.Size(82, 26);
             this.cmbBaudRate.TabIndex = 3;
             this.cmbBaudRate.Text = "38400";
             this.cmbBaudRate.SelectedIndexChanged += new System.EventHandler(this.CmbBaudRate_SelectedIndexChanged);
-            // 
-            // cmb_StopBits
-            // 
-            this.cmb_StopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_StopBits.FormattingEnabled = true;
-            this.cmb_StopBits.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.cmb_StopBits.Location = new System.Drawing.Point(282, 36);
-            this.cmb_StopBits.Margin = new System.Windows.Forms.Padding(2);
-            this.cmb_StopBits.Name = "cmb_StopBits";
-            this.cmb_StopBits.Size = new System.Drawing.Size(82, 26);
-            this.cmb_StopBits.TabIndex = 9;
-            // 
-            // cmbParity
-            // 
-            this.cmbParity.DisplayMember = "1";
-            this.cmbParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbParity.FormattingEnabled = true;
-            this.cmbParity.Items.AddRange(new object[] {
-            "None",
-            "Even",
-            "Odd"});
-            this.cmbParity.Location = new System.Drawing.Point(161, 36);
-            this.cmbParity.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbParity.Name = "cmbParity";
-            this.cmbParity.Size = new System.Drawing.Size(56, 26);
-            this.cmbParity.TabIndex = 5;
-            this.cmbParity.Tag = "1";
             // 
             // cmbDataBits
             // 
@@ -1723,7 +1674,7 @@ namespace Monitor
             "6",
             "7",
             "8"});
-            this.cmbDataBits.Location = new System.Drawing.Point(220, 36);
+            this.cmbDataBits.Location = new System.Drawing.Point(232, 37);
             this.cmbDataBits.Margin = new System.Windows.Forms.Padding(2);
             this.cmbDataBits.Name = "cmbDataBits";
             this.cmbDataBits.Size = new System.Drawing.Size(56, 26);
@@ -1733,7 +1684,7 @@ namespace Monitor
             // lblComPort
             // 
             this.lblComPort.AutoSize = true;
-            this.lblComPort.Location = new System.Drawing.Point(6, 22);
+            this.lblComPort.Location = new System.Drawing.Point(8, 18);
             this.lblComPort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblComPort.Name = "lblComPort";
             this.lblComPort.Size = new System.Drawing.Size(71, 18);
@@ -1743,7 +1694,7 @@ namespace Monitor
             // lblStopBits
             // 
             this.lblStopBits.AutoSize = true;
-            this.lblStopBits.Location = new System.Drawing.Point(283, 20);
+            this.lblStopBits.Location = new System.Drawing.Point(302, 18);
             this.lblStopBits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStopBits.Name = "lblStopBits";
             this.lblStopBits.Size = new System.Drawing.Size(66, 18);
@@ -1753,7 +1704,7 @@ namespace Monitor
             // lblBaudRate
             // 
             this.lblBaudRate.AutoSize = true;
-            this.lblBaudRate.Location = new System.Drawing.Point(73, 22);
+            this.lblBaudRate.Location = new System.Drawing.Point(80, 20);
             this.lblBaudRate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBaudRate.Name = "lblBaudRate";
             this.lblBaudRate.Size = new System.Drawing.Size(74, 18);
@@ -1763,7 +1714,7 @@ namespace Monitor
             // lblDataBits
             // 
             this.lblDataBits.AutoSize = true;
-            this.lblDataBits.Location = new System.Drawing.Point(223, 20);
+            this.lblDataBits.Location = new System.Drawing.Point(229, 19);
             this.lblDataBits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDataBits.Name = "lblDataBits";
             this.lblDataBits.Size = new System.Drawing.Size(66, 18);
@@ -1773,7 +1724,7 @@ namespace Monitor
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(162, 20);
+            this.label3.Location = new System.Drawing.Point(175, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 18);
@@ -4337,6 +4288,31 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
+            // 
+            // cmb_PortName
+            // 
+            this.cmb_PortName.FormattingEnabled = true;
+            this.cmb_PortName.Location = new System.Drawing.Point(11, 33);
+            this.cmb_PortName.Name = "cmb_PortName";
+            this.cmb_PortName.Size = new System.Drawing.Size(59, 26);
+            this.cmb_PortName.TabIndex = 11;
+            // 
+            // cmbParity
+            // 
+            this.cmbParity.FormattingEnabled = true;
+            this.cmbParity.Location = new System.Drawing.Point(168, 35);
+            this.cmbParity.Name = "cmbParity";
+            this.cmbParity.Size = new System.Drawing.Size(59, 26);
+            this.cmbParity.TabIndex = 12;
+            // 
+            // cmb_StopBits
+            // 
+            this.cmb_StopBits.FormattingEnabled = true;
+            this.cmb_StopBits.Location = new System.Drawing.Point(305, 35);
+            this.cmb_StopBits.Name = "cmb_StopBits";
+            this.cmb_StopBits.Size = new System.Drawing.Size(68, 26);
+            this.cmb_StopBits.TabIndex = 13;
+            this.cmb_StopBits.Text = "1";
             // 
             // MainForm
             // 
@@ -15387,6 +15363,11 @@ This Process can take 1 minute.";
             StopRuunScript = true;
         }
 
+        private void cmb_StopBits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void Button_ResetTimer_Click(object sender, EventArgs e)
         {
             ResetTimer();
@@ -15653,11 +15634,6 @@ Use the arrows Up, Down and Tab for autocomplition.
 
 
 
-
-                foreach (DataGridView datagrid in List_AllDataGrids)
-                {
-                    datagrid.Columns[0].HeaderCell.Value = "Flash data Hex (0xFFFF)";
-                }
 
 
 
