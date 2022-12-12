@@ -14377,6 +14377,7 @@ This Process can take 1 minute.";
         }
 
         Int32 GlobalReadRegister = 0;
+        bool GlobalReadRegisterWritten = false;
         int MessageCounter = 0;
         async Task<String> WriteReg(String i_Command, bool i_OnlyCheckValidity)
         {
@@ -14450,15 +14451,21 @@ This Process can take 1 minute.";
                 //if (MaskString != NotMaskValue)
                 //{
                     GlobalReadRegister = 0;
+                GlobalReadRegisterWritten = false;
                     Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
                     Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
                     await ExectuteOrCheckValidityCommand(String.Format("ReadReg {0}", RegisterAddress32bits), false);
 
                     await Task.Delay(DelayBetweenReadWrite);
 
-                    // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
+                //while (GlobalReadRegisterWritten == false)
+                //{
+                //    await Task.Delay(100);
+                //}
 
-                    for (int i = 0; i < 32; i++)
+                // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
+
+                for (int i = 0; i < 32; i++)
                     {
                         if (((MaskInt32 >> i) & 1U) == 0)
                         {
