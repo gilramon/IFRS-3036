@@ -420,8 +420,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -529,6 +529,7 @@ namespace Monitor
             this.textBox_CommandHelp = new System.Windows.Forms.RichTextBox();
             this.listBox_CLI_ALLCommands = new System.Windows.Forms.ListBox();
             this.groupBox_CLISendCommand = new System.Windows.Forms.GroupBox();
+            this.textBox_CLISendCommands = new System.Windows.Forms.RichTextBox();
             this.button_DeleteCommandsHistory = new System.Windows.Forms.Button();
             this.textBox_CLIsendperodically = new System.Windows.Forms.TextBox();
             this.checkBox_CLI_SendPeriodically = new System.Windows.Forms.CheckBox();
@@ -739,7 +740,6 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_CLISendCommands = new System.Windows.Forms.RichTextBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1474,17 +1474,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea4.AxisX.Title = "Freq";
-            chartArea4.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea4.AxisY.Title = "Power [dBm]";
-            chartArea4.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend4.IsTextAutoFit = false;
-            legend4.Name = "Legend1";
-            legend4.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend4);
+            chartArea3.AxisX.Title = "Freq";
+            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea3.AxisY.Title = "Power [dBm]";
+            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend3.IsTextAutoFit = false;
+            legend3.Name = "Legend1";
+            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2137,6 +2137,21 @@ namespace Monitor
             this.groupBox_CLISendCommand.TabIndex = 70;
             this.groupBox_CLISendCommand.TabStop = false;
             this.groupBox_CLISendCommand.Text = "CLI send command ( press F1 for help)";
+            // 
+            // textBox_CLISendCommands
+            // 
+            this.textBox_CLISendCommands.AutoWordSelection = true;
+            this.textBox_CLISendCommands.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox_CLISendCommands.DetectUrls = false;
+            this.textBox_CLISendCommands.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_CLISendCommands.Location = new System.Drawing.Point(8, 16);
+            this.textBox_CLISendCommands.Multiline = false;
+            this.textBox_CLISendCommands.Name = "textBox_CLISendCommands";
+            this.textBox_CLISendCommands.Size = new System.Drawing.Size(828, 29);
+            this.textBox_CLISendCommands.TabIndex = 110;
+            this.textBox_CLISendCommands.Text = "";
+            this.textBox_CLISendCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_CLISendCommands_KeyDown);
+            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_CLISendCommands_PreviewKeyDown);
             // 
             // button_DeleteCommandsHistory
             // 
@@ -4322,19 +4337,6 @@ namespace Monitor
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
-            // 
-            // textBox_CLISendCommands
-            // 
-            this.textBox_CLISendCommands.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.textBox_CLISendCommands.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_CLISendCommands.Location = new System.Drawing.Point(8, 16);
-            this.textBox_CLISendCommands.Multiline = false;
-            this.textBox_CLISendCommands.Name = "textBox_CLISendCommands";
-            this.textBox_CLISendCommands.Size = new System.Drawing.Size(828, 29);
-            this.textBox_CLISendCommands.TabIndex = 110;
-            this.textBox_CLISendCommands.Text = "";
-            this.textBox_CLISendCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_CLISendCommands_KeyDown);
-            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_CLISendCommands_PreviewKeyDown);
             // 
             // MainForm
             // 
@@ -14300,6 +14302,8 @@ This Process can take 1 minute.";
                         break;
 
                     case Keys.Tab:
+                        e.Handled = false;
+                        e.SuppressKeyPress = true;
                         List<string> Strlist = new List<string>();
                         foreach (string str in Monitor.Properties.Settings.Default.CLICommad_History)
                         {
@@ -14322,7 +14326,7 @@ This Process can take 1 minute.";
                             }
                         }
                         else
-                            if (Strlist.Count == 1)
+                        if (Strlist.Count == 1)
                         {
                             textBox_CLISendCommands.Text = Strlist[0];
                         }
@@ -15112,6 +15116,7 @@ This Process can take 1 minute.";
             {
                 // MessageBox.Show("Tab");
                 e.IsInputKey = true;
+
             }
             if (e.KeyData == (Keys.Tab | Keys.Shift))
             {
