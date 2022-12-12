@@ -15463,7 +15463,7 @@ Syntax 4 arguments:
 WriteReg 
 address [4 hex bytes] 
 data [4 hex bytes]
-mask [4 hex bytes]
+mask [4 hex bytes] - if mask is set
 Delay between Read and write (only when using mask) [integer decimal]
 
 Examples:
@@ -15472,11 +15472,11 @@ WriteReg AAAAAAAA BBBBBBBB
     Write to Register 0xAAAAAAAA 0xBBBBBBBB 
 
 WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000
-    Read Register 0xAAAAAAAA modify 0xBBBBXXXX and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
+    Read Register 0xAAAAAAAA modify 0xXXXXBBBB and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
 
 ");
 
-            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFFFFFF 1000";
+            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000";
 
             List_AllCommands.Add(WriteReg);
 
