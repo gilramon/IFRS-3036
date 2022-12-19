@@ -27,10 +27,11 @@ namespace Monitor
         /// </summary>
         /// <param name="i_CommandName"></param>
         /// <param name="i_CommandHelp"></param>
-        public CommandClass(String i_CommandName, String i_CommandHelp)
+        public CommandClass(String i_CommandName, String i_CommandHelp, String i_Example)
         {
             Command_name = i_CommandName;
             Help = i_CommandHelp;
+            Example = i_Example;
         }
 
         String CheckCommandValidity(String i_Command)

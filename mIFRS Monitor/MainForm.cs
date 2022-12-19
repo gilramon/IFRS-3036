@@ -14246,6 +14246,10 @@ This Process can take 1 minute.";
                                 CLI_HistoryIndex--;
                             }
                         }
+                        else
+                        {
+                            CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
+                        }
 
 
                         //if (CLI_HistoryIndex > 0)
@@ -14273,6 +14277,10 @@ This Process can take 1 minute.";
                             {
                                 CLI_HistoryIndex++;
                             }
+                        }
+                        else
+                        {
+                            CLI_HistoryIndex = 0;
                         }
 
                         m_textBox.SelectionStart = m_textBox.Text.Length;
@@ -14356,9 +14364,9 @@ This Process can take 1 minute.";
         }
 
         Int32 GlobalReadRegister = 0;
-        bool GlobalReadRegisterWritten = false;
+       // bool GlobalReadRegisterWritten = false;
         int MessageCounter = 0;
-        async Task<String> WriteReg(String i_Command, bool i_OnlyCheckValidity)
+        async Task<String> WriteReg32(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
             int DelayBetweenReadWrite = 0;
@@ -14430,10 +14438,12 @@ This Process can take 1 minute.";
                 //if (MaskString != NotMaskValue)
                 //{
                     GlobalReadRegister = 0;
-                GlobalReadRegisterWritten = false;
+                //GlobalReadRegisterWritten = false;
                     Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
                     Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
-                    await ExectuteOrCheckValidityCommand(String.Format("ReadReg {0}", RegisterAddress32bits), false);
+
+                //ReadReg32(String.Format("ReadReg {0}", RegisterAddress32bits), false);
+                ExecuteCLICommand(String.Format("ReadReg32 {0}", RegisterAddress32bits));
 
                     await Task.Delay(DelayBetweenReadWrite);
 
@@ -14454,10 +14464,11 @@ This Process can take 1 minute.";
 
                     }
 
-                    await ExectuteOrCheckValidityCommand(String.Format("WriteReg {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")), false);
+                //await WriteReg32(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")),false);
+                ExecuteCLICommand(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")));
 
 
-         //       }
+                //       }
             }
             else
             {
@@ -14857,7 +14868,7 @@ This Process can take 1 minute.";
 
         String FrameAnalizer = "";
 
-        String ReadReg(String i_Command, bool i_OnlyCheckValidity)
+        String ReadReg32(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
 
@@ -14971,6 +14982,7 @@ This Process can take 1 minute.";
         /// <param name="i_Command"></param>
         /// <param name="i_OnlyCheckValidity"></param>
         /// <returns></returns>
+        /// 
         async Task<String> ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
         {
             String ret;
@@ -14981,12 +14993,12 @@ This Process can take 1 minute.";
 
             switch (CommandName)
             {
-                case "WriteReg":
-                    ret = await WriteReg(i_Command,i_OnlyCheckValidity);
+                case "WriteReg32":
+                    ret = await WriteReg32(i_Command,i_OnlyCheckValidity);
                     break;
 
-                case "ReadReg":
-                    ret = ReadReg(i_Command,i_OnlyCheckValidity);
+                case "ReadReg32":
+                    ret = ReadReg32(i_Command,i_OnlyCheckValidity);
                     break;
 
                 case "SetFullParams":
@@ -15019,7 +15031,7 @@ This Process can take 1 minute.";
             SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Message, true, false);
         }
 
-        async private void ParseCLICommand(String i_Command)
+        async private void ExecuteCLICommand(String i_Command)
         {
             
             String[] tempStr = i_Command.Split(' ');
@@ -15053,7 +15065,7 @@ This Process can take 1 minute.";
 
         private void button_CLISend_Click(object sender, EventArgs e)
         {
-            ParseCLICommand(textBox_CLISendCommands.Text);
+            ExecuteCLICommand(textBox_CLISendCommands.Text);
 
             if (checkBox_CLIDeleteAfterSend.Checked == true)
             {
@@ -15430,7 +15442,7 @@ This Process can take 1 minute.";
         void SetAllCLIcommands()
         {
 
-            CommandClass WriteReg = new CommandClass("WriteReg",
+            CommandClass WriteReg32 = new CommandClass("WriteReg32",
 @"
 Description: 
 Write to Register 
@@ -15452,17 +15464,18 @@ Delay between Read and write (only when using mask) [integer decimal]
 
 Examples:
 
-WriteReg AAAAAAAA BBBBBBBB
+WriteReg32 AAAAAAAA BBBBBBBB
     Write to Register 0xAAAAAAAA 0xBBBBBBBB 
 
-WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000
+WriteReg32 AAAAAAAA BBBBBBBB FFFF0000 1000
     Read Register 0xAAAAAAAA modify 0xXXXXBBBB and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
 
-");
+", 
+"WriteReg32 AAAAAAAA BBBBBBBB FFFF0000 1000");
 
-            WriteReg.Example = "WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000";
+            //WriteReg32.Example = "WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000";
 
-            List_AllCommands.Add(WriteReg);
+            List_AllCommands.Add(WriteReg32);
 
 
 
@@ -15470,7 +15483,7 @@ WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000
 
             
 
-            CommandClass ReadReg = new CommandClass("ReadReg",
+            CommandClass ReadReg32 = new CommandClass("ReadReg32",
 @"
 Description: 
 Read From Register 
@@ -15483,11 +15496,11 @@ ReadReg address [4 hex bytes]
 
 Example:
 
-ReadReg AAAAAAAA ---> Read from Register 0xAAAAAAAA
-");
+ReadReg32 AAAAAAAA ---> Read from Register 0xAAAAAAAA
+",
+"ReadReg32 AAAAAAAA");
 
-            ReadReg.Example = "ReadReg AAAAAAAA";
-            List_AllCommands.Add(ReadReg);
+            List_AllCommands.Add(ReadReg32);
 
 
 
@@ -15522,9 +15535,9 @@ Examples:
 SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20
 SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
 
-");
+",
+"SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20");
 
-            SetFullParams.Example = "SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20";
             List_AllCommands.Add(SetFullParams);
 
 
