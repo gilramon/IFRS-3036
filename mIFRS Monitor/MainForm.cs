@@ -15275,18 +15275,23 @@ This Process can take 1 minute.";
         private async void button_RunScript_Click(object sender, EventArgs e)
         {
             bool IsFirstTime = false;
+            int i = 0;
             if (int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
             {
                 while (checkBox_RepeatCLIScript.Checked == true || IsFirstTime == false)
                 {
                     IsFirstTime = true;
-
+                    i = 1;
                     foreach (String line in richTextBox_Scripts.Lines)
                     {
                         if (line != null && line != String.Empty)
                         {
-                            textBox_CLISendCommands.Text = line;
-                            button_CLISend_Click(null, null);
+                            //textBox_CLISendCommands.Text = line;
+                            //button_CLISend_Click(null, null);
+                            
+                            SystemLogger.LogMessage(Color.Black, Color.White, i.ToString()+ ":  ", false, false);
+                            await ExecuteCLICommand(line, false);
+                            i++;
                             await Task.Delay(Delay);
 
 
