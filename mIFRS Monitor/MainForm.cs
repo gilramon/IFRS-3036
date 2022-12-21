@@ -14443,7 +14443,7 @@ This Process can take 1 minute.";
                     Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
 
                 //ReadReg32(String.Format("ReadReg {0}", RegisterAddress32bits), false);
-                ExecuteCLICommand(String.Format("ReadReg32 {0}", RegisterAddress32bits));
+                await ExecuteCLICommand(String.Format("ReadReg32 {0}", RegisterAddress32bits),false);
 
                     await Task.Delay(DelayBetweenReadWrite);
 
@@ -14465,7 +14465,7 @@ This Process can take 1 minute.";
                     }
 
                 //await WriteReg32(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")),false);
-                ExecuteCLICommand(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")));
+                await ExecuteCLICommand(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")), false);
 
 
                 //       }
@@ -14868,6 +14868,7 @@ This Process can take 1 minute.";
 
         String FrameAnalizer = "";
 
+
         String ReadReg32(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
@@ -14983,46 +14984,46 @@ This Process can take 1 minute.";
         /// <param name="i_OnlyCheckValidity"></param>
         /// <returns></returns>
         /// 
-        async Task<String> ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
-        {
-            String ret;
-            FrameAnalizer = "";
-            String[] tempStr = i_Command.Split(' ');
-            String CommandName = tempStr[0];
+        //async Task<String> ExectuteOrCheckValidityCommand(String i_Command,bool i_OnlyCheckValidity)
+        //{
+        //    String ret;
+        //    FrameAnalizer = "";
+        //    String[] tempStr = i_Command.Split(' ');
+        //    String CommandName = tempStr[0];
 
 
-            switch (CommandName)
-            {
-                case "WriteReg32":
-                    ret = await WriteReg32(i_Command,i_OnlyCheckValidity);
-                    break;
+        //    switch (CommandName)
+        //    {
+        //        case "WriteReg32":
+        //            ret = await WriteReg32(i_Command,i_OnlyCheckValidity);
+        //            break;
 
-                case "ReadReg32":
-                    ret = ReadReg32(i_Command,i_OnlyCheckValidity);
-                    break;
+        //        case "ReadReg32":
+        //            ret = ReadReg32(i_Command,i_OnlyCheckValidity);
+        //            break;
 
-                case "SetFullParams":
-                    ret = SetFullParams(i_Command, i_OnlyCheckValidity);
-                    break;
+        //        case "SetFullParams":
+        //            ret = SetFullParams(i_Command, i_OnlyCheckValidity);
+        //            break;
 
-                default:
-                    ret = String.Format("[{0}] command not implemented", i_Command);
-                   // SystemLogger.LogMessage(Color.Orange, Color.LightGray, String.Format(ret, i_Command), true, true);
+        //        default:
+        //            ret = String.Format("[{0}] command not implemented", i_Command);
+        //           // SystemLogger.LogMessage(Color.Orange, Color.LightGray, String.Format(ret, i_Command), true, true);
 
-                    break;
+        //            break;
 
-            }
+        //    }
 
-            // Gil Ramon: If the is a syntax problem the command function return the message.
-
-
-
-            //SystemLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
-            //SystemLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
+        //    // Gil Ramon: If the is a syntax problem the command function return the message.
 
 
-            return ret;
-        }
+
+        //    //SystemLogger.LogMessage(Color.Blue, Color.Azure, "", New_Line = false, Show_Time = true);
+        //    //SystemLogger.LogMessage(Color.Blue, Color.Azure, "Rx:>", false, false);
+
+
+        //    return ret;
+        //}
 
         void PrintToSystemLogerTxMessage(String i_Message)
         {
@@ -15031,7 +15032,14 @@ This Process can take 1 minute.";
             SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Message, true, false);
         }
 
-        async private void ExecuteCLICommand(String i_Command)
+        /// <summary>
+        /// Gil: Each command implemintation return string if the arguments doesn't valit or empty string if every thing OK.
+        /// </summary>
+        /// <param name="i_Command"></param>
+        /// <param name="i_OnlyCheckValidity"></param>
+        /// <returns></returns>
+        /// 
+        async private Task<String> ExecuteCLICommand(String i_Command, bool i_OnlyCheckValidity)
         {
             
             String[] tempStr = i_Command.Split(' ');
@@ -15046,7 +15054,29 @@ This Process can take 1 minute.";
 
                     UpdateCommandCLIHistory(i_Command);
 
-                    ret = await ExectuteOrCheckValidityCommand(i_Command, false);
+                    //ret = await ExectuteOrCheckValidityCommand(i_Command, false);
+                    switch (CommandName)
+                    {
+                        case "WriteReg32":
+                            ret = await WriteReg32(i_Command, i_OnlyCheckValidity);
+                            break;
+
+                        case "ReadReg32":
+                            ret = ReadReg32(i_Command, i_OnlyCheckValidity);
+                            break;
+
+                        case "SetFullParams":
+                            ret = SetFullParams(i_Command, i_OnlyCheckValidity);
+                            break;
+
+                        default:
+                            ret = String.Format("[{0}] command not implemented", i_Command);
+                             SystemLogger.LogMessage(Color.Orange, Color.LightGray, ret, true, true);
+
+                            break;
+
+                    }
+
 
                     if (ret != "")
                     {
@@ -15057,15 +15087,19 @@ This Process can take 1 minute.";
 
             if (IsCommandFound == false)
             {
-                SystemLogger.LogMessage(Color.DarkOrange, Color.White, String.Format(" command '{0}' is not found", tempStr[0]), New_Line = true, Show_Time = true);
+                ret = String.Format("[{0}] command not found", i_Command);
+                SystemLogger.LogMessage(Color.Orange, Color.LightGray, ret, true, true);
+                //SystemLogger.LogMessage(Color.DarkOrange, Color.White, String.Format(" command '{0}' is not found", tempStr[0]), New_Line = true, Show_Time = true);
             }
+
+            return ret;
 
 
         }
 
-        private void button_CLISend_Click(object sender, EventArgs e)
+        private async  void button_CLISend_Click(object sender, EventArgs e)
         {
-            ExecuteCLICommand(textBox_CLISendCommands.Text);
+            await ExecuteCLICommand(textBox_CLISendCommands.Text,false);
 
             if (checkBox_CLIDeleteAfterSend.Checked == true)
             {
@@ -15340,7 +15374,7 @@ This Process can take 1 minute.";
             {
                 if (line != "")
                 {
-                    String ret = await ExectuteOrCheckValidityCommand(line, true);
+                    String ret = await ExecuteCLICommand(line, true);
 
                     if (ret != "")
                     {
