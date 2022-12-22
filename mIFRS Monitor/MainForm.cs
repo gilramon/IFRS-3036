@@ -15191,11 +15191,12 @@ This Process can take 1 minute.";
 
             using (OpenFileDialog openFileDialog = openFileDialog_Local)
             {
-        //        openFileDialog.InitialDirectory = "c:\\";
+                string initPath = Path.GetFullPath(".");
+                openFileDialog.InitialDirectory = Path.GetFullPath(initPath);
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 //openFileDialog.FilterIndex = 2;
                 //openFileDialog.RestoreDirectory = true;
-
+                //dlgOpen.InitialDirectory = Path.GetFullPath(initPath);
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
@@ -15366,6 +15367,8 @@ This Process can take 1 minute.";
         {
             using (var sfd = saveFileDialog_Local)
             {
+                string initPath = Path.GetFullPath(".");
+                sfd.InitialDirectory = Path.GetFullPath(initPath);
                 sfd.Filter = "txt files (*.txt)|*.txt";
                 //sfd.FilterIndex = 2;
 
