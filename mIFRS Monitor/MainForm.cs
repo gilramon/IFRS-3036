@@ -366,6 +366,8 @@ namespace Monitor
         private ComboBox cmb_PortName;
         private ComboBox cmb_StopBits;
         private ComboBox cmbParity;
+        private SaveFileDialog saveFileDialog_Local;
+        private OpenFileDialog openFileDialog_Local;
         private static readonly string PREAMBLE = "23";
 
 
@@ -420,8 +422,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -489,6 +491,9 @@ namespace Monitor
             this.checkBox_DeleteCommand = new System.Windows.Forms.CheckBox();
             this.button_SendSerialPort = new System.Windows.Forms.Button();
             this.gbPortSettings = new System.Windows.Forms.GroupBox();
+            this.cmb_StopBits = new System.Windows.Forms.ComboBox();
+            this.cmbParity = new System.Windows.Forms.ComboBox();
+            this.cmb_PortName = new System.Windows.Forms.ComboBox();
             this.button_ReScanComPort = new System.Windows.Forms.Button();
             this.cmbBaudRate = new System.Windows.Forms.ComboBox();
             this.cmbDataBits = new System.Windows.Forms.ComboBox();
@@ -737,9 +742,8 @@ namespace Monitor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label_Projectname = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmb_PortName = new System.Windows.Forms.ComboBox();
-            this.cmbParity = new System.Windows.Forms.ComboBox();
-            this.cmb_StopBits = new System.Windows.Forms.ComboBox();
+            this.saveFileDialog_Local = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog_Local = new System.Windows.Forms.OpenFileDialog();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1474,17 +1478,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea3.AxisX.Title = "Freq";
-            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.AxisY.Title = "Power [dBm]";
-            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend3);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -1632,6 +1636,31 @@ namespace Monitor
             this.gbPortSettings.TabIndex = 10;
             this.gbPortSettings.TabStop = false;
             this.gbPortSettings.Text = "COM Serial Port Settings";
+            // 
+            // cmb_StopBits
+            // 
+            this.cmb_StopBits.FormattingEnabled = true;
+            this.cmb_StopBits.Location = new System.Drawing.Point(305, 35);
+            this.cmb_StopBits.Name = "cmb_StopBits";
+            this.cmb_StopBits.Size = new System.Drawing.Size(68, 26);
+            this.cmb_StopBits.TabIndex = 13;
+            this.cmb_StopBits.Text = "1";
+            // 
+            // cmbParity
+            // 
+            this.cmbParity.FormattingEnabled = true;
+            this.cmbParity.Location = new System.Drawing.Point(168, 35);
+            this.cmbParity.Name = "cmbParity";
+            this.cmbParity.Size = new System.Drawing.Size(59, 26);
+            this.cmbParity.TabIndex = 12;
+            // 
+            // cmb_PortName
+            // 
+            this.cmb_PortName.FormattingEnabled = true;
+            this.cmb_PortName.Location = new System.Drawing.Point(11, 33);
+            this.cmb_PortName.Name = "cmb_PortName";
+            this.cmb_PortName.Size = new System.Drawing.Size(59, 26);
+            this.cmb_PortName.TabIndex = 11;
             // 
             // button_ReScanComPort
             // 
@@ -4289,30 +4318,15 @@ namespace Monitor
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
             // 
-            // cmb_PortName
+            // saveFileDialog_Local
             // 
-            this.cmb_PortName.FormattingEnabled = true;
-            this.cmb_PortName.Location = new System.Drawing.Point(11, 33);
-            this.cmb_PortName.Name = "cmb_PortName";
-            this.cmb_PortName.Size = new System.Drawing.Size(59, 26);
-            this.cmb_PortName.TabIndex = 11;
+            this.saveFileDialog_Local.FileName = "Script.txt";
+            this.saveFileDialog_Local.RestoreDirectory = true;
             // 
-            // cmbParity
+            // openFileDialog_Local
             // 
-            this.cmbParity.FormattingEnabled = true;
-            this.cmbParity.Location = new System.Drawing.Point(168, 35);
-            this.cmbParity.Name = "cmbParity";
-            this.cmbParity.Size = new System.Drawing.Size(59, 26);
-            this.cmbParity.TabIndex = 12;
-            // 
-            // cmb_StopBits
-            // 
-            this.cmb_StopBits.FormattingEnabled = true;
-            this.cmb_StopBits.Location = new System.Drawing.Point(305, 35);
-            this.cmb_StopBits.Name = "cmb_StopBits";
-            this.cmb_StopBits.Size = new System.Drawing.Size(68, 26);
-            this.cmb_StopBits.TabIndex = 13;
-            this.cmb_StopBits.Text = "1";
+            this.openFileDialog_Local.InitialDirectory = ".";
+            this.openFileDialog_Local.RestoreDirectory = true;
             // 
             // MainForm
             // 
@@ -15175,12 +15189,12 @@ This Process can take 1 minute.";
             var fileContent = string.Empty;
             var filePath = string.Empty;
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            using (OpenFileDialog openFileDialog = openFileDialog_Local)
             {
-                openFileDialog.InitialDirectory = "c:\\";
+        //        openFileDialog.InitialDirectory = "c:\\";
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
+                //openFileDialog.FilterIndex = 2;
+                //openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -15350,12 +15364,10 @@ This Process can take 1 minute.";
 
         private void button_SaveScript_Click(object sender, EventArgs e)
         {
-            using (var sfd = new SaveFileDialog())
+            using (var sfd = saveFileDialog_Local)
             {
                 sfd.Filter = "txt files (*.txt)|*.txt";
                 //sfd.FilterIndex = 2;
-
-
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
