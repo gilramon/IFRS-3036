@@ -173,5 +173,29 @@ namespace Monitor.Properties {
                 this["Script"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.100")]
+        public string IP_Client {
+            get {
+                return ((string)(this["IP_Client"]));
+            }
+            set {
+                this["IP_Client"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7000")]
+        public string Port_Client {
+            get {
+                return ((string)(this["Port_Client"]));
+            }
+            set {
+                this["Port_Client"] = value;
+            }
+        }
     }
 }

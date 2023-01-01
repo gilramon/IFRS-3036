@@ -422,8 +422,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -1269,6 +1269,7 @@ namespace Monitor
             this.textBox_ClientPort.Size = new System.Drawing.Size(92, 26);
             this.textBox_ClientPort.TabIndex = 3;
             this.textBox_ClientPort.Text = "7";
+            this.textBox_ClientPort.TextChanged += new System.EventHandler(this.textBox_ClientPort_TextChanged);
             // 
             // textBox_ClientIP
             // 
@@ -1478,17 +1479,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea3.AxisX.Title = "Freq";
-            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.AxisY.Title = "Power [dBm]";
-            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend3);
+            chartArea4.AxisX.Title = "Freq";
+            chartArea4.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea4.AxisY.Title = "Power [dBm]";
+            chartArea4.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend4.IsTextAutoFit = false;
+            legend4.Name = "Legend1";
+            legend4.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2401,11 +2402,11 @@ namespace Monitor
             // 
             this.groupBox42.Controls.Add(this.radioButton_TCPIP);
             this.groupBox42.Controls.Add(this.radioButton_SerialPort);
-            this.groupBox42.Location = new System.Drawing.Point(1427, 383);
+            this.groupBox42.Location = new System.Drawing.Point(1427, 377);
             this.groupBox42.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox42.Name = "groupBox42";
             this.groupBox42.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox42.Size = new System.Drawing.Size(183, 97);
+            this.groupBox42.Size = new System.Drawing.Size(183, 103);
             this.groupBox42.TabIndex = 33;
             this.groupBox42.TabStop = false;
             this.groupBox42.Text = "Communication gatway";
@@ -10047,6 +10048,13 @@ namespace Monitor
                     richTextBox_ClientRxPrintText(string.Format("Failed to connect to [{0}] [{1}]\n", szIPSelected, szPort));
                     return;
                 }
+                else
+                {
+                    Monitor.Properties.Settings.Default.IP_Client = textBox_ClientIP.Text;
+                    Monitor.Properties.Settings.Default.Port_Client= textBox_ClientPort.Text;
+                    Monitor.Properties.Settings.Default.Save();
+
+                }    
                 // we have connected
                 ClientSocket.EndConnect(result);
 
@@ -15397,6 +15405,16 @@ This Process can take 1 minute.";
             toolTip1.Show("Line: " + (lineIndex+1).ToString(), m_richtext,2000);
         }
 
+        private void checkBox_Debug_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_ClientPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void Button_ResetTimer_Click(object sender, EventArgs e)
         {
             ResetTimer();
@@ -15599,8 +15617,10 @@ Use the arrows Up, Down and Tab for autocomplition.
             cmbParity.Text = Monitor.Properties.Settings.Default.Comport_Parity;
             cmb_PortName.Text = Monitor.Properties.Settings.Default.Comport_Port;
             textBox_TimeBetweenComands.Text = Monitor.Properties.Settings.Default.TimeBetweenCLICommands;
+            textBox_ClientIP.Text = Monitor.Properties.Settings.Default.IP_Client;
+             textBox_ClientPort.Text = Monitor.Properties.Settings.Default.Port_Client ;
 
-            foreach(String line in Monitor.Properties.Settings.Default.Script)
+            foreach (String line in Monitor.Properties.Settings.Default.Script)
             {
                 MyAppendText(richTextBox_Scripts, line + "\r\n", default, default);
             }

@@ -47,5 +47,11 @@
   &lt;string /&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="IP_Client" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.100</Value>
+    </Setting>
+    <Setting Name="Port_Client" Type="System.String" Scope="User">
+      <Value Profile="(Default)">7000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
