@@ -368,6 +368,7 @@ namespace Monitor
         private ComboBox cmbParity;
         private SaveFileDialog saveFileDialog_Local;
         private OpenFileDialog openFileDialog_Local;
+        private CheckBox checkBox_Openall;
         private static readonly string PREAMBLE = "23";
 
 
@@ -422,8 +423,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -744,6 +745,7 @@ namespace Monitor
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.saveFileDialog_Local = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Local = new System.Windows.Forms.OpenFileDialog();
+            this.checkBox_Openall = new System.Windows.Forms.CheckBox();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1479,17 +1481,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea4.AxisX.Title = "Freq";
-            chartArea4.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea4.AxisY.Title = "Power [dBm]";
-            chartArea4.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend4.IsTextAutoFit = false;
-            legend4.Name = "Legend1";
-            legend4.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend4);
+            chartArea2.AxisX.Title = "Freq";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.AxisY.Title = "Power [dBm]";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2402,11 +2404,11 @@ namespace Monitor
             // 
             this.groupBox42.Controls.Add(this.radioButton_TCPIP);
             this.groupBox42.Controls.Add(this.radioButton_SerialPort);
-            this.groupBox42.Location = new System.Drawing.Point(1427, 377);
+            this.groupBox42.Location = new System.Drawing.Point(1427, 400);
             this.groupBox42.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox42.Name = "groupBox42";
             this.groupBox42.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox42.Size = new System.Drawing.Size(183, 103);
+            this.groupBox42.Size = new System.Drawing.Size(183, 80);
             this.groupBox42.TabIndex = 33;
             this.groupBox42.TabStop = false;
             this.groupBox42.Text = "Communication gatway";
@@ -4330,6 +4332,17 @@ namespace Monitor
             this.openFileDialog_Local.InitialDirectory = ".";
             this.openFileDialog_Local.RestoreDirectory = true;
             // 
+            // checkBox_Openall
+            // 
+            this.checkBox_Openall.AutoSize = true;
+            this.checkBox_Openall.Location = new System.Drawing.Point(1433, 375);
+            this.checkBox_Openall.Name = "checkBox_Openall";
+            this.checkBox_Openall.Size = new System.Drawing.Size(109, 22);
+            this.checkBox_Openall.TabIndex = 118;
+            this.checkBox_Openall.Text = "Open all Tabs";
+            this.checkBox_Openall.UseVisualStyleBackColor = true;
+            this.checkBox_Openall.CheckedChanged += new System.EventHandler(this.checkBox_Openall_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -4337,6 +4350,7 @@ namespace Monitor
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1543, 711);
+            this.Controls.Add(this.checkBox_Openall);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_ClentTCPStatus);
             this.Controls.Add(this.pictureBox1);
@@ -4451,6 +4465,7 @@ namespace Monitor
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -15415,6 +15430,22 @@ This Process can take 1 minute.";
 
         }
 
+        private void checkBox_Openall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_Openall.Checked == true)
+            {
+                tabControl_Main.TabPages.Add(tabPage_ServerTCP);
+                tabControl_Main.TabPages.Add(tabPage_ClientTCP);
+                tabControl_Main.TabPages.Add(tabPage_charts);
+            }
+            else
+            {
+                tabControl_Main.TabPages.Remove(tabPage_ServerTCP);
+                tabControl_Main.TabPages.Remove(tabPage_ClientTCP);
+                tabControl_Main.TabPages.Remove(tabPage_charts);
+            }
+        }
+
         private void Button_ResetTimer_Click(object sender, EventArgs e)
         {
             ResetTimer();
@@ -15633,10 +15664,10 @@ Use the arrows Up, Down and Tab for autocomplition.
             try
             {
 
-
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
+                
 
 
                 textBox_CommandHelp.Text = CLI_Help;
