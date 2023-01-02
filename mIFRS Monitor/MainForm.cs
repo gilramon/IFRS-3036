@@ -4716,9 +4716,23 @@ namespace Monitor
 
         private void GilServer_DataRecievedNotifyDelegate(object sender, EventArgs e)
         {
+            Gil_Server.Server.DataEventArgs mye = (Gil_Server.Server.DataEventArgs)e;
 
+            var RecievedString = System.Text.Encoding.Default.GetString(mye.BytesData);
 
+            //ServerLogger.LogMessage(Color.Black, Color.White, "", New_Line = false, Show_Time = true);
+            //ServerLogger.LogMessage(Color.Brown, Color.White, "[Internal Server] ", New_Line = false, Show_Time = false);
+            ServerLogger.LogMessage(Color.Black, Color.White, RecievedString, New_Line = true, Show_Time = true);
+            ServerLogger.LogMessage(Color.Black, Color.White, "", New_Line = true, Show_Time = false);
 
+            if (checkBox_EchoResponse.Checked == true)
+            {
+
+                string ACKBack = string.Format("[{0}],ACK", RecievedString);
+                //ServerLogger.LogMessage(Color.DarkSalmon, Color.White, "Send Echo Back:  " + ACKBack, New_Line = true, Show_Time = true);
+                byte[] b2 = System.Text.Encoding.ASCII.GetBytes(ACKBack);
+                SendDataToServer(mye.ConnectionNumber, b2);
+            }
 
 
 
