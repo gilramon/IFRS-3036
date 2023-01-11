@@ -7299,7 +7299,7 @@ namespace Monitor
             {
                 SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, "Frame check sum error", New_Line = true, Show_Time = true);
             }
-
+            i_IncomingBytes = i_IncomingBytes.Skip(80).ToArray();
 
         }
 
@@ -15527,7 +15527,7 @@ This Process can take 1 minute.";
 Description: 
 Write to Register 
 
-Num of arguments:
+Number of arguments:
 2 or 4
 
 Syntax 2 arguments:
@@ -15544,14 +15544,14 @@ Delay between Read and write (only when using mask) [integer decimal]
 
 Examples:
 
-WriteReg32 AAAAAAAA BBBBBBBB
-    Write to Register 0xAAAAAAAA 0xBBBBBBBB 
+WriteReg32 00000000 1234ABCD
+    Write to Register 00000000 1234ABCD
 
-WriteReg32 AAAAAAAA BBBBBBBB FFFF0000 1000
-    Read Register 0xAAAAAAAA modify 0xXXXXBBBB and write back to 0xAAAAAAAA with delay of 1000 ms between read and write
+WriteReg32 00000000 12345678 FFFF0000 1000
+    Read Register 0x00000000 modify 0xXXXX5678 and write back to 0x00000000 with delay of 1000 ms between read and write
 
-", 
-"WriteReg32 AAAAAAAA BBBBBBBB FFFF0000 1000");
+",
+"WriteReg32 00000000 1234ABCD FFFF0000 1000");
 
             //WriteReg32.Example = "WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000";
 
@@ -15578,7 +15578,7 @@ Example:
 
 ReadReg32 AAAAAAAA ---> Read from Register 0xAAAAAAAA
 ",
-"ReadReg32 AAAAAAAA");
+"ReadReg32 00000000");
 
             List_AllCommands.Add(ReadReg32);
 
