@@ -1656,11 +1656,12 @@ namespace Monitor
             this.cmbParity.Name = "cmbParity";
             this.cmbParity.Size = new System.Drawing.Size(59, 26);
             this.cmbParity.TabIndex = 12;
+            this.cmbParity.Text = "Even";
             // 
             // cmb_PortName
             // 
             this.cmb_PortName.FormattingEnabled = true;
-            this.cmb_PortName.Location = new System.Drawing.Point(11, 33);
+            this.cmb_PortName.Location = new System.Drawing.Point(11, 37);
             this.cmb_PortName.Name = "cmb_PortName";
             this.cmb_PortName.Size = new System.Drawing.Size(59, 26);
             this.cmb_PortName.TabIndex = 11;
@@ -1695,7 +1696,7 @@ namespace Monitor
             this.cmbBaudRate.Name = "cmbBaudRate";
             this.cmbBaudRate.Size = new System.Drawing.Size(82, 26);
             this.cmbBaudRate.TabIndex = 3;
-            this.cmbBaudRate.Text = "38400";
+            this.cmbBaudRate.Text = "115200";
             this.cmbBaudRate.SelectedIndexChanged += new System.EventHandler(this.CmbBaudRate_SelectedIndexChanged);
             // 
             // cmbDataBits
@@ -7283,6 +7284,11 @@ namespace Monitor
             GlobalSystemResultReceived += i_msg;
         }
 
+        void ParseOneIFRSFrame(byte[] i_IncomingBytes)
+        {
+
+        }
+
         public void DecodeIFRSProtocol(ref byte[] i_IncomingBytes)
         {
             var newArray = i_IncomingBytes.Skip(76).Take(4).ToArray();
@@ -7293,7 +7299,7 @@ namespace Monitor
             if (RecievedCheckSum == CalculatedCheckSum)
             {
 
-
+                ParseOneIFRSFrame(i_IncomingBytes);
             }
             else
             {
@@ -14853,7 +14859,7 @@ This Process can take 1 minute.";
                 //byte[] temp = SendFrame.(i, 4);
                 //byte[] tempArr = temp.ToArray();
 
-                tempArr = tempArr.Reverse().ToArray();
+               // tempArr = tempArr.Reverse().ToArray();
 
                 FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
 
