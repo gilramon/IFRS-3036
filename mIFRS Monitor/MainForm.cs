@@ -7284,9 +7284,157 @@ namespace Monitor
             GlobalSystemResultReceived += i_msg;
         }
 
+        void DecodeStatus(byte[] i_IncomingBytes)
+        {
+            if(ShowStatus == false)
+            {
+                return;
+            }
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("System mode: [{0}]", i_IncomingBytes[32]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Serial number: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(33).Take(2).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FW version: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(35).Take(2).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("SW version: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(37).Take(2).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_VOLTAGE : [{0}]", i_IncomingBytes[40]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_CURRENT : [{0}]", i_IncomingBytes[41]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("DIGITAL_3V3  : [{0}]", i_IncomingBytes[42]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("RF_3V8: [{0}]", i_IncomingBytes[43]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_CORE_1V : [{0}]", i_IncomingBytes[44]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_1V35  : [{0}]", i_IncomingBytes[45]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_AUX_1V8  [{0}]", i_IncomingBytes[46]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95  : [{0}]", i_IncomingBytes[47]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V2  : [{0}]", i_IncomingBytes[48]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V8  : [{0}]", i_IncomingBytes[49]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_TEMP   : [{0}]", i_IncomingBytes[50]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("ADC_TEMP    : [{0}]", i_IncomingBytes[51]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_VOLTAGE_OV_COUNTER    : [{0}]", i_IncomingBytes[52]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_VOLTAGE_UV_COUNTER    : [{0}]", i_IncomingBytes[53]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_VOLTAGE_OI_COUNTER   : [{0}]", i_IncomingBytes[54]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("INPUT_VOLTAGE_UI_COUNTER  : [{0}]", i_IncomingBytes[55]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("DIGITAL_3V3_OV_COUNTER  : [{0}]", i_IncomingBytes[56]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("DIGITAL_3V3_UV_COUNTER : [{0}]", i_IncomingBytes[57]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("RF_3V8_OV_COUNTER : [{0}]", i_IncomingBytes[58]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("RF_3V8_UV_COUNTER : [{0}]", i_IncomingBytes[59]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_CORE_OV_COUNTER : [{0}]", i_IncomingBytes[60]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_CORE_UV_COUNTER : [{0}]", i_IncomingBytes[61]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_UV_COUNTER : [{0}]", i_IncomingBytes[63]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_AUX_OV_COUNTER : [{0}]", i_IncomingBytes[64]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_AUX_UV_COUNTER : [{0}]", i_IncomingBytes[65]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95_OV_COUNTER : [{0}]", i_IncomingBytes[66]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95_UV_COUNTER : [{0}]", i_IncomingBytes[67]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V2_OV_COUNTER : [{0}]", i_IncomingBytes[68]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V2_UV_COUNTER : [{0}]", i_IncomingBytes[69]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V8_OV_COUNTER : [{0}]", i_IncomingBytes[70]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V8_UV_COUNTER : [{0}]", i_IncomingBytes[71]), true, false);
+          //  SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95_UV_COUNTER : [{0}]", i_IncomingBytes[72]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("SUM_COUNTER_ALARMS : [{0} {1}]", i_IncomingBytes[73], i_IncomingBytes[74]), true, false);
+
+
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("FPGA_DDR_OV_COUNTER : [{0}]", i_IncomingBytes[62]), true, false);
+
+
+            ShowStatus = false;
+
+
+        }
+
+        void DecodeReadCommand(byte[] i_IncomingBytes)
+        {
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Recieved:"), true, true);
+            byte[] Counter = i_IncomingBytes.Skip(2).Take(2).ToArray();
+          // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(),0)) , true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString( i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+
+            DecodeStatus(i_IncomingBytes);
+        }
+
+        void DecodeWriteCommand(byte[] i_IncomingBytes)
+        {
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Write Recieved:"), true, true);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+
+            DecodeStatus(i_IncomingBytes);
+        }
+
+        void DecodeSetFullParamsCommand(byte[] i_IncomingBytes)
+        {
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Set Full Params:"), true, true);
+            // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Length [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(4).Take(4).ToArray(),0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Activation [{0}]", i_IncomingBytes[8]), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Message Time [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(12).Take(4).ToArray(),0)), true, false);
+            DecodeStatus(i_IncomingBytes);
+        }
+        
         void ParseOneIFRSFrame(byte[] i_IncomingBytes)
         {
+            if(i_IncomingBytes[0] != 0x83)
+            {
+                SystemLogger.LogMessage(Color.Orange, Color.LightGray, String.Format("Frame not start with 0x83"), true, true);
+                return;
+            }
 
+            switch(i_IncomingBytes[1])
+            {
+                //Read conmmand
+                case 0x22:
+                    DecodeReadCommand(i_IncomingBytes);
+                    break;
+
+                //Write conmmand
+                case 0x21:
+                    DecodeWriteCommand(i_IncomingBytes);
+                    break;
+                //SetFullParams commmand
+                case 0x51:
+                    DecodeSetFullParamsCommand(i_IncomingBytes);
+                    break;
+
+                case 0xF0:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Header error [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF1:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Command error [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF2:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Checksum error [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF3:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Data error [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF4:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Execution Error  [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF5:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Time-out Error type 1  [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF6:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Time-out Error type 2 [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                case 0xF7:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Time-out Error type 3 [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+
+                default:
+                    SystemLogger.LogMessage(Color.OrangeRed, Color.LightGray, String.Format("Not recognize CMD opcode [{0}]", i_IncomingBytes[1].ToString("X")), true, true);
+                    break;
+            }
         }
 
         public void DecodeIFRSProtocol(ref byte[] i_IncomingBytes)
@@ -7294,7 +7442,7 @@ namespace Monitor
             var newArray = i_IncomingBytes.Skip(76).Take(4).ToArray();
             Int32 RecievedCheckSum = BitConverter.ToInt32(newArray, 0);
 
-            Int32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Skip(0).Take(76).ToArray());
+            UInt32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Take(76).Reverse().ToArray());
 
             if (RecievedCheckSum == CalculatedCheckSum)
             {
@@ -14394,6 +14542,12 @@ This Process can take 1 minute.";
                 return ret;
             }
 
+            if (tempStr[1].Contains("_s") == true)
+            {
+                tempStr[1] = tempStr[1].Replace("_s", "");
+                ShowStatus = true;
+            }
+
             byte[] buffer = StringToByteArray(tempStr[1]);
             if (buffer == null || buffer.Length != 4)
             {
@@ -14526,7 +14680,7 @@ This Process can take 1 minute.";
 
 
                 //Calculate check sum
-                Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
+                UInt32 CheckSum = CalculateChecksum(ListBytes.ToArray());
 
                 ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
 
@@ -14831,7 +14985,7 @@ This Process can take 1 minute.";
 
 
             //Calculate check sum
-            Int32 CheckSum = CalculateChecksum(SendFrame);
+            UInt32 CheckSum = CalculateChecksum(SendFrame);
 
             temp = StringToByteArray(CheckSum.ToString("X8"));
             temp.CopyTo(SendFrame, 36);
@@ -14841,7 +14995,7 @@ This Process can take 1 minute.";
             {
                 //Execute the command
                 PrintToSystemLogerTxMessage(i_Command);
-                textBox_SendSerialPort.Text = ConvertByteArraytToString(ListBytes.ToArray());
+                textBox_SendSerialPort.Text = ConvertByteArraytToString(SendFrame);
 
                 button_SendSerialPort_Click(null, null);
 
@@ -14850,20 +15004,21 @@ This Process can take 1 minute.";
             return ret;
         }
 
-        Int32 CalculateChecksum(byte[] i_Bufffer)
+        UInt32 CalculateChecksum(byte[] i_Bufffer)
         {
-            Int32 CheckSum = 0;
+            FrameAnalizer = "";
+            UInt32 CheckSum = 0;
             for (int i = 0; i < i_Bufffer.Length; i = i + 4)
             {
                 var tempArr = i_Bufffer.Skip(i).Take(4).ToArray();
                 //byte[] temp = SendFrame.(i, 4);
                 //byte[] tempArr = temp.ToArray();
 
-               // tempArr = tempArr.Reverse().ToArray();
+                tempArr = tempArr.Reverse().ToArray();
 
                 FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
 
-                Int32 Value = BitConverter.ToInt32(tempArr, 0);
+                UInt32 Value = BitConverter.ToUInt32(tempArr, 0);
 
                 CheckSum += Value;
             }
@@ -14876,7 +15031,7 @@ This Process can take 1 minute.";
 
         String FrameAnalizer = "";
 
-
+        bool ShowStatus = false;
         String ReadReg32(String i_Command, bool i_OnlyCheckValidity)
         {
             String ret = "";
@@ -14893,6 +15048,12 @@ This Process can take 1 minute.";
             {
                 ret += String.Format("\n Arguments number should be 2, see example");
                 return ret;
+            }
+
+            if(tempStr[1].Contains("_s") == true)
+            {
+                tempStr[1] = tempStr[1].Replace("_s", "");
+                ShowStatus = true;
             }
 
             byte[] buffer = StringToByteArray(tempStr[1]);
@@ -14958,7 +15119,7 @@ This Process can take 1 minute.";
 
 
             //Calculate check sum
-            Int32 CheckSum = CalculateChecksum(ListBytes.ToArray());
+            UInt32 CheckSum = CalculateChecksum(ListBytes.ToArray());
 
 
             ListBytes.AddRange(StringToByteArray(CheckSum.ToString("X8")));
@@ -15556,8 +15717,12 @@ WriteReg32 00000000 1234ABCD
 WriteReg32 00000000 12345678 FFFF0000 1000
     Read Register 0x00000000 modify 0xXXXX5678 and write back to 0x00000000 with delay of 1000 ms between read and write
 
+in order to see full status add _s to the Address For example:
+
+WriteReg32 00000000_s 1234ABCD
+
 ",
-"WriteReg32 00000000 1234ABCD FFFF0000 1000");
+"WriteReg32 00000000 1234ABCD");
 
             //WriteReg32.Example = "WriteReg AAAAAAAA BBBBBBBB FFFF0000 1000";
 
@@ -15583,6 +15748,8 @@ ReadReg address [4 hex bytes]
 Example:
 
 ReadReg32 AAAAAAAA ---> Read from Register 0xAAAAAAAA
+In order to see full status add _s in the end of the address for example:
+ReadReg32 AAAAAAAA_s
 ",
 "ReadReg32 00000000");
 
