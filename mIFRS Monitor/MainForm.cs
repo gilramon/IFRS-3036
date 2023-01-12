@@ -7350,7 +7350,7 @@ namespace Monitor
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(),0)) , true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString( i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
             GlobalReadRegister = BitConverter.ToInt32(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray(),0);
-            SystemLogger.LogMessage(Color.Blue, Color.White, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Black, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
         }
@@ -14417,18 +14417,17 @@ This Process can take 1 minute.";
                         }
 
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
-                        if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
-                        {
-                            textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
-                            if (CLI_HistoryIndex > 0)
-                            {
-                                CLI_HistoryIndex--;
-                            }
+                        if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex > 0)
+                        { 
+
+                            CLI_HistoryIndex--;
                         }
                         else
                         {
                             CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
                         }
+
+                        textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
 
 
                         //if (CLI_HistoryIndex > 0)
@@ -14449,18 +14448,17 @@ This Process can take 1 minute.";
                             return;
                         }
 
-                        if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
+                        if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
                         {
-                            textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
-                            if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1)
-                            {
-                                CLI_HistoryIndex++;
-                            }
+ 
+                            CLI_HistoryIndex++;
                         }
                         else
                         {
                             CLI_HistoryIndex = 0;
                         }
+
+                        textBox_CLISendCommands.Text = Monitor.Properties.Settings.Default.CLICommad_History[CLI_HistoryIndex];
 
                         m_textBox.SelectionStart = m_textBox.Text.Length;
                         m_textBox.SelectionLength = 0;
