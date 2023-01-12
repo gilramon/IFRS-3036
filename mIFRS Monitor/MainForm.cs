@@ -7454,7 +7454,7 @@ namespace Monitor
 
         public void DecodeIFRSProtocol(ref byte[] i_IncomingBytes)
         {
-            var newArray = i_IncomingBytes.Skip(76).Take(4).Reverse().ToArray();
+            byte[] newArray = i_IncomingBytes.Skip(76).Take(4).Reverse().ToArray();
             UInt32 RecievedCheckSum = BitConverter.ToUInt32(newArray, 0);
 
             UInt32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Take(76).ToArray());
@@ -7479,13 +7479,16 @@ namespace Monitor
                 {
                     return;
                 }
-                while (i_IncomeBuffer.Length != 0)
+                else
                 {
-                    DecodeIFRSProtocol(ref i_IncomeBuffer);
+                    while (i_IncomeBuffer.Length != 0)
+                    {
+                        DecodeIFRSProtocol(ref i_IncomeBuffer);
 
 
-                    TCPClientBuffer = new byte[0];
+                        TCPClientBuffer = new byte[0];
 
+                    }
                 }
             }
             catch (Exception ex)
