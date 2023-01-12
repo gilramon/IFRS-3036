@@ -7350,7 +7350,7 @@ namespace Monitor
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(),0)) , true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString( i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
             GlobalReadRegister = BitConverter.ToInt32(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray(),0);
-            SystemLogger.LogMessage(Color.Blue, Color.Lime, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.White, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
         }
