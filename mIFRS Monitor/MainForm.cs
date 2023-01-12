@@ -369,6 +369,7 @@ namespace Monitor
         private SaveFileDialog saveFileDialog_Local;
         private OpenFileDialog openFileDialog_Local;
         private CheckBox checkBox_Openall;
+        private Button button_ScriptRunFromFile;
         private static readonly string PREAMBLE = "23";
 
 
@@ -746,6 +747,7 @@ namespace Monitor
             this.saveFileDialog_Local = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Local = new System.Windows.Forms.OpenFileDialog();
             this.checkBox_Openall = new System.Windows.Forms.CheckBox();
+            this.button_ScriptRunFromFile = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -2193,6 +2195,7 @@ namespace Monitor
             // 
             // tabPage2_Script
             // 
+            this.tabPage2_Script.Controls.Add(this.button_ScriptRunFromFile);
             this.tabPage2_Script.Controls.Add(this.button_StopRunScrip);
             this.tabPage2_Script.Controls.Add(this.checkBox_RepeatCLIScript);
             this.tabPage2_Script.Controls.Add(this.button_CheckScriptValidity);
@@ -4344,13 +4347,24 @@ namespace Monitor
             this.checkBox_Openall.UseVisualStyleBackColor = true;
             this.checkBox_Openall.CheckedChanged += new System.EventHandler(this.checkBox_Openall_CheckedChanged);
             // 
+            // button_ScriptRunFromFile
+            // 
+            this.button_ScriptRunFromFile.BackColor = System.Drawing.Color.SkyBlue;
+            this.button_ScriptRunFromFile.Location = new System.Drawing.Point(463, 219);
+            this.button_ScriptRunFromFile.Name = "button_ScriptRunFromFile";
+            this.button_ScriptRunFromFile.Size = new System.Drawing.Size(89, 45);
+            this.button_ScriptRunFromFile.TabIndex = 83;
+            this.button_ScriptRunFromFile.Text = "Run From File";
+            this.button_ScriptRunFromFile.UseVisualStyleBackColor = false;
+            this.button_ScriptRunFromFile.Click += new System.EventHandler(this.button_ScriptRunFromFile_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1543, 711);
+            this.ClientSize = new System.Drawing.Size(1543, 728);
             this.Controls.Add(this.checkBox_Openall);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_ClentTCPStatus);
@@ -15658,6 +15672,75 @@ This Process can take 1 minute.";
                 tabControl_Main.TabPages.Remove(tabPage_ClientTCP);
                 tabControl_Main.TabPages.Remove(tabPage_charts);
             }
+        }
+
+        private async  void button_ScriptRunFromFile_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = openFileDialog_Local)
+            {
+                string initPath = Path.GetFullPath(".");
+                openFileDialog.InitialDirectory = Path.GetFullPath(initPath);
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                //openFileDialog.FilterIndex = 2;
+                //openFileDialog.RestoreDirectory = true;
+                //dlgOpen.InitialDirectory = Path.GetFullPath(initPath);
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                    //Read the contents of the file into a stream
+                    var fileStream = openFileDialog.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        String[] filelines = File.ReadAllLines(filePath);
+
+                        WriteToSystemStatus(String.Format("Total Commands: [{0}]", filelines.Length), 10, Color.LightBlue);
+                        if (int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
+                        {
+                            i = 1;
+                            foreach (String line in filelines.ToList())
+                            {
+                                if (line != null && line != String.Empty)
+                                {
+                                    //textBox_CLISendCommands.Text = line;
+                                    //button_CLISend_Click(null, null);
+
+                                    SystemLogger.LogMessage(Color.White, Color.Black, i.ToString() + ":  ", false, false);
+                                    await ExecuteCLICommand(line, false);
+                                    i++;
+                                    await Task.Delay(Delay);
+
+
+                                    if (serialPort.IsOpen == false)
+                                    {
+                                        return;
+                                    }
+
+                                    if (StopRuunScript == true)
+                                    {
+                                        StopRuunScript = false;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+            }
+
+
+
+           
         }
 
         private void Button_ResetTimer_Click(object sender, EventArgs e)
