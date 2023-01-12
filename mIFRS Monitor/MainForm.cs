@@ -7356,10 +7356,10 @@ namespace Monitor
 
         void DecodeWriteCommand(byte[] i_IncomingBytes)
         {
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Write Recieved:"), true, true);
+            SystemLogger.LogMessage(Color.Blue, Color.LightGreen, String.Format("Write Recieved: OK"), true, true);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+           // SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
         }
@@ -7439,19 +7439,18 @@ namespace Monitor
 
         public void DecodeIFRSProtocol(ref byte[] i_IncomingBytes)
         {
-            var newArray = i_IncomingBytes.Skip(76).Take(4).ToArray();
-            Int32 RecievedCheckSum = BitConverter.ToInt32(newArray, 0);
+            var newArray = i_IncomingBytes.Skip(76).Take(4).Reverse().ToArray();
+            UInt32 RecievedCheckSum = BitConverter.ToUInt32(newArray, 0);
 
-            UInt32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Take(76).Reverse().ToArray());
+            UInt32 CalculatedCheckSum = CalculateChecksum(i_IncomingBytes.Take(76).ToArray());
 
             if (RecievedCheckSum == CalculatedCheckSum)
             {
-
                 ParseOneIFRSFrame(i_IncomingBytes);
             }
             else
             {
-                SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, "Frame check sum error", New_Line = true, Show_Time = true);
+                SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, String.Format( "Frame check sum error Recieved [{0}] Claculated [{1}]", RecievedCheckSum.ToString("X8"), CalculatedCheckSum.ToString("X8")), New_Line = true, Show_Time = true);
             }
             i_IncomingBytes = i_IncomingBytes.Skip(80).ToArray();
 
@@ -7858,9 +7857,21 @@ namespace Monitor
             if (checkBox_RxHex.Checked == true)
             {
 
-                string IncomingHexMessage = ConvertByteArraytToString(buffer);
+                if (buffer[0] == 0x83)
+                {
+                    int NuberOfHighLight = 25;
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Cyan, ConvertByteArraytToString(buffer.Take(NuberOfHighLight).ToArray()), New_Line = false, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Azure, ConvertByteArraytToString(buffer.Skip(NuberOfHighLight).ToArray()), New_Line = false, Show_Time = false);
+                }
+                else
+                {
+                    string IncomingHexMessage = ConvertByteArraytToString(buffer);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Azure, IncomingHexMessage, New_Line = true, Show_Time = false);
+                }
 
-                SerialPortLogger.LogMessage(Color.Blue, Color.Azure, IncomingHexMessage, New_Line = true, Show_Time = false);
+                
+
+                
 
 
 
@@ -15010,11 +15021,11 @@ This Process can take 1 minute.";
             UInt32 CheckSum = 0;
             for (int i = 0; i < i_Bufffer.Length; i = i + 4)
             {
-                var tempArr = i_Bufffer.Skip(i).Take(4).ToArray();
+                byte[] tempArr = i_Bufffer.Skip(i).Take(4).ToArray();
                 //byte[] temp = SendFrame.(i, 4);
                 //byte[] tempArr = temp.ToArray();
 
-                tempArr = tempArr.Reverse().ToArray();
+                //tempArr = tempArr.Reverse().ToArray();
 
                 FrameAnalizer += ConvertByteArraytToString(tempArr) + " +  \n";
 
@@ -15025,6 +15036,10 @@ This Process can take 1 minute.";
 
             FrameAnalizer += " -------------\n";
             FrameAnalizer += CheckSum.ToString("X8") + " \n";
+
+            byte[] bytes = BitConverter.GetBytes(CheckSum);
+            bytes = bytes.Reverse().ToArray();
+            CheckSum = BitConverter.ToUInt32(bytes, 0);
 
             return CheckSum;
         }
