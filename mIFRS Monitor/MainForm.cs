@@ -7349,7 +7349,8 @@ namespace Monitor
           // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(),0)) , true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString( i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+            GlobalReadRegister = BitConverter.ToInt32(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray(),0);
+            SystemLogger.LogMessage(Color.Blue, Color.Lime, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
         }
@@ -14616,7 +14617,7 @@ This Process can take 1 minute.";
 
             if (NumOfArguments == 5)
             {
-
+                PrintToSystemLogerTxMessage(i_Command);
                 String MaskString = tempStr[3];
                 //String NotMaskValue = "FFFFFFFF";
                 //if (MaskString != NotMaskValue)
@@ -14765,6 +14766,12 @@ This Process can take 1 minute.";
 
             int i =0;
             String Command = tempStr[0];
+            if (tempStr[1].Contains("_s") == true)
+            {
+                tempStr[1] = tempStr[1].Replace("_s", "");
+                ShowStatus = true;
+            }
+
             String CMD_Activation = tempStr[1];
             String SystemMode = tempStr[2];
             String ResetAlarmCounter = tempStr[3];
@@ -15813,7 +15820,7 @@ Examples:
 
 SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20
 SetFullParams 1 0 1x 80x 2x 35 80x 20x 20x 20x 20 20
-
+SetFullParams 1_s 0 1x 80x 2x 35 80x 20x 20x 20x 20 20 (_s - Show full status)
 ",
 "SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20");
 
