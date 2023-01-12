@@ -15479,6 +15479,8 @@ This Process can take 1 minute.";
             int i = 0;
             if (int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
             {
+                button_CheckScriptValidity.PerformClick();
+                //await Task.Delay(1000);
                 while (checkBox_RepeatCLIScript.Checked == true || IsFirstTime == false)
                 {
                     IsFirstTime = true;
@@ -15490,7 +15492,7 @@ This Process can take 1 minute.";
                             //textBox_CLISendCommands.Text = line;
                             //button_CLISend_Click(null, null);
                             
-                            SystemLogger.LogMessage(Color.Black, Color.White, i.ToString()+ ":  ", false, false);
+                            SystemLogger.LogMessage(Color.White, Color.Black, i.ToString()+ ":  ", false, false);
                             await ExecuteCLICommand(line, false);
                             i++;
                             await Task.Delay(Delay);
