@@ -15797,7 +15797,7 @@ Set all mIFRS main parameters.
 Num of arguments:
 12
 
-Syntax:
+Syntax: (all the values decimal!!)
 SetFullParams 
 [cmd activation] {1,2,4}
 [system mode] {0-3}
