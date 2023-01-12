@@ -7840,13 +7840,22 @@ namespace Monitor
             // This method will be called when there is data waiting in the port's buffer
             Thread.Sleep(300);
 
-            RxLabelTimerBlink = 5;
+
+
+            
 
             // Obtain the number of bytes waiting in the port's buffer
             int bytes = serialPort.BytesToRead;
 
             // Create a byte array buffer to hold the incoming data
             byte[] buffer = new byte[bytes];
+
+            if (buffer == null || buffer.Length == 0)
+            {
+                return;
+            }
+
+            RxLabelTimerBlink = 5;
 
             // Read the data from the port and store it in our buffer
             serialPort.Read(buffer, 0, bytes);
@@ -7857,11 +7866,13 @@ namespace Monitor
             if (checkBox_RxHex.Checked == true)
             {
 
+
                 if (buffer[0] == 0x83)
                 {
-                    int NuberOfHighLight = 25;
-                    SerialPortLogger.LogMessage(Color.Blue, Color.Cyan, ConvertByteArraytToString(buffer.Take(NuberOfHighLight).ToArray()), New_Line = false, Show_Time = false);
-                    SerialPortLogger.LogMessage(Color.Blue, Color.Azure, ConvertByteArraytToString(buffer.Skip(NuberOfHighLight).ToArray()), New_Line = false, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Pink, ConvertByteArraytToString(buffer.Take(2).ToArray()), New_Line = false, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Cyan, ConvertByteArraytToString(buffer.Skip(2).Take(23).ToArray()), New_Line = false, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.Azure, ConvertByteArraytToString(buffer.Skip(25).Take(55).ToArray()), New_Line = false, Show_Time = false);
+                    SerialPortLogger.LogMessage(Color.Blue, Color.PeachPuff, ConvertByteArraytToString(buffer.Skip(76).Take(4).ToArray()), New_Line = true, Show_Time = false);
                 }
                 else
                 {
