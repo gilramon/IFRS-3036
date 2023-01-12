@@ -15283,6 +15283,10 @@ This Process can take 1 minute.";
                             ret = SetFullParams(i_Command, i_OnlyCheckValidity);
                             break;
 
+                        case "clear":
+                            button_ClearMiniAda.PerformClick();
+                            break;
+
                         default:
                             ret = String.Format("[{0}] command not implemented", i_Command);
                              SystemLogger.LogMessage(Color.Orange, Color.LightGray, ret, true, true);
@@ -15814,6 +15818,8 @@ This Process can take 1 minute.";
         void SetAllCLIcommands()
         {
 
+
+
             CommandClass WriteReg32 = new CommandClass("WriteReg32",
 @"
 Description: 
@@ -15917,6 +15923,28 @@ SetFullParams 1_s 0 1x 80x 2x 35 80x 20x 20x 20x 20 20 (_s - Show full status)
 "SetFullParams 1 0 1 80 2 35 80 20 20 20 20 20");
 
             List_AllCommands.Add(SetFullParams);
+
+            CommandClass Clear = new CommandClass("clear",
+@"
+Description: 
+clear the log
+
+Number of arguments:
+0
+
+Syntax 2 arguments:
+clear
+
+
+Examples:
+
+clear
+
+",
+"clear");
+
+
+            List_AllCommands.Add(Clear);
 
 
 
