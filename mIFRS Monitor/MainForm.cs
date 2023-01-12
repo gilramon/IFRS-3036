@@ -7475,7 +7475,7 @@ namespace Monitor
         {
             try
             {
-                if (i_IncomeBuffer.Length == 0 || i_IncomeBuffer.Length < 80 || i_IncomeBuffer[0] != 0x83)
+                if ((i_IncomeBuffer.Length == 0) || (i_IncomeBuffer.Length < 80) || (i_IncomeBuffer[0] != 0x83) )
                 {
                     return;
                 }
