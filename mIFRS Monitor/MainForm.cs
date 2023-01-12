@@ -7475,7 +7475,7 @@ namespace Monitor
         {
             try
             {
-                if (i_IncomeBuffer.Length == 0)
+                if (i_IncomeBuffer.Length == 0 || i_IncomeBuffer.Length < 80 || i_IncomeBuffer[0] != 0x83)
                 {
                     return;
                 }
@@ -15495,6 +15495,9 @@ This Process can take 1 minute.";
             {
                 button_CheckScriptValidity.PerformClick();
                 //await Task.Delay(1000);
+
+                WriteToSystemStatus(String.Format("Total Commands: [{0}]", richTextBox_Scripts.Lines.Length), 10, Color.LightBlue);
+
                 while (checkBox_RepeatCLIScript.Checked == true || IsFirstTime == false)
                 {
                     IsFirstTime = true;
@@ -15677,7 +15680,7 @@ This Process can take 1 minute.";
         private async  void button_ScriptRunFromFile_Click(object sender, EventArgs e)
         {
             int i = 0;
-
+            bool IsFirstTime = false;
             var fileContent = string.Empty;
             var filePath = string.Empty;
 
@@ -15702,31 +15705,37 @@ This Process can take 1 minute.";
                         String[] filelines = File.ReadAllLines(filePath);
 
                         WriteToSystemStatus(String.Format("Total Commands: [{0}]", filelines.Length), 10, Color.LightBlue);
+
+
                         if (int.TryParse(textBox_TimeBetweenComands.Text, out int Delay) == true)
                         {
-                            i = 1;
-                            foreach (String line in filelines.ToList())
+                            while (checkBox_RepeatCLIScript.Checked == true || IsFirstTime == false)
                             {
-                                if (line != null && line != String.Empty)
+                                IsFirstTime = true;
+                                i = 1;
+                                foreach (String line in filelines.ToList())
                                 {
-                                    //textBox_CLISendCommands.Text = line;
-                                    //button_CLISend_Click(null, null);
-
-                                    SystemLogger.LogMessage(Color.White, Color.Black, i.ToString() + ":  ", false, false);
-                                    await ExecuteCLICommand(line, false);
-                                    i++;
-                                    await Task.Delay(Delay);
-
-
-                                    if (serialPort.IsOpen == false)
+                                    if (line != null && line != String.Empty)
                                     {
-                                        return;
-                                    }
+                                        //textBox_CLISendCommands.Text = line;
+                                        //button_CLISend_Click(null, null);
 
-                                    if (StopRuunScript == true)
-                                    {
-                                        StopRuunScript = false;
-                                        return;
+                                        SystemLogger.LogMessage(Color.White, Color.Black, i.ToString() + ":  ", false, false);
+                                        await ExecuteCLICommand(line, false);
+                                        i++;
+                                        await Task.Delay(Delay);
+
+
+                                        if (serialPort.IsOpen == false)
+                                        {
+                                            return;
+                                        }
+
+                                        if (StopRuunScript == true)
+                                        {
+                                            StopRuunScript = false;
+                                            return;
+                                        }
                                     }
                                 }
                             }
