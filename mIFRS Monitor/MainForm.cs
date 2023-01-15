@@ -312,9 +312,6 @@ namespace Monitor
         private Button button38;
         private Button button37;
         private ListBox listBox_SMSCommands;
-        private GroupBox groupBox42;
-        private RadioButton radioButton_TCPIP;
-        private RadioButton radioButton_SerialPort;
         private Button button_WriteCatalinas;
         private RichTextBox textBox_FilesToWriteForTheCatalinas;
         private RichTextBox richTextBox_SyntisazerL1;
@@ -424,8 +421,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -558,9 +555,6 @@ namespace Monitor
             this.checkBox_RecordMiniAda = new System.Windows.Forms.CheckBox();
             this.checkBox_PauseMiniAda = new System.Windows.Forms.CheckBox();
             this.button_ClearMiniAda = new System.Windows.Forms.Button();
-            this.groupBox42 = new System.Windows.Forms.GroupBox();
-            this.radioButton_TCPIP = new System.Windows.Forms.RadioButton();
-            this.radioButton_SerialPort = new System.Windows.Forms.RadioButton();
             this.button_OpenFolder = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.S1_Configuration = new System.Windows.Forms.GroupBox();
@@ -771,7 +765,6 @@ namespace Monitor
             this.groupBox_CLISendCommand.SuspendLayout();
             this.tabPage2_Script.SuspendLayout();
             this.groupBox32.SuspendLayout();
-            this.groupBox42.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.S1_Configuration.SuspendLayout();
             this.groupBox12.SuspendLayout();
@@ -1483,17 +1476,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea2.AxisX.Title = "Freq";
-            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.AxisY.Title = "Power [dBm]";
-            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2403,44 +2396,6 @@ namespace Monitor
             this.button_ClearMiniAda.TabIndex = 6;
             this.button_ClearMiniAda.Text = "Clear";
             this.button_ClearMiniAda.UseVisualStyleBackColor = true;
-            // 
-            // groupBox42
-            // 
-            this.groupBox42.Controls.Add(this.radioButton_TCPIP);
-            this.groupBox42.Controls.Add(this.radioButton_SerialPort);
-            this.groupBox42.Location = new System.Drawing.Point(1427, 400);
-            this.groupBox42.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox42.Name = "groupBox42";
-            this.groupBox42.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox42.Size = new System.Drawing.Size(183, 80);
-            this.groupBox42.TabIndex = 33;
-            this.groupBox42.TabStop = false;
-            this.groupBox42.Text = "Communication gatway";
-            // 
-            // radioButton_TCPIP
-            // 
-            this.radioButton_TCPIP.AutoSize = true;
-            this.radioButton_TCPIP.Location = new System.Drawing.Point(18, 54);
-            this.radioButton_TCPIP.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton_TCPIP.Name = "radioButton_TCPIP";
-            this.radioButton_TCPIP.Size = new System.Drawing.Size(66, 22);
-            this.radioButton_TCPIP.TabIndex = 1;
-            this.radioButton_TCPIP.TabStop = true;
-            this.radioButton_TCPIP.Text = "TCP/IP";
-            this.radioButton_TCPIP.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_SerialPort
-            // 
-            this.radioButton_SerialPort.AutoSize = true;
-            this.radioButton_SerialPort.Checked = true;
-            this.radioButton_SerialPort.Location = new System.Drawing.Point(18, 25);
-            this.radioButton_SerialPort.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton_SerialPort.Name = "radioButton_SerialPort";
-            this.radioButton_SerialPort.Size = new System.Drawing.Size(90, 22);
-            this.radioButton_SerialPort.TabIndex = 0;
-            this.radioButton_SerialPort.TabStop = true;
-            this.radioButton_SerialPort.Text = "Serial Port";
-            this.radioButton_SerialPort.UseVisualStyleBackColor = true;
             // 
             // button_OpenFolder
             // 
@@ -4364,7 +4319,7 @@ namespace Monitor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1543, 728);
+            this.ClientSize = new System.Drawing.Size(1543, 711);
             this.Controls.Add(this.checkBox_Openall);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_ClentTCPStatus);
@@ -4375,7 +4330,6 @@ namespace Monitor
             this.Controls.Add(this.tabControl_Main);
             this.Controls.Add(this.groupBox36);
             this.Controls.Add(this.groupBox_PhoneNumber);
-            this.Controls.Add(this.groupBox42);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -4422,8 +4376,6 @@ namespace Monitor
             this.tabPage2_Script.PerformLayout();
             this.groupBox32.ResumeLayout(false);
             this.groupBox32.PerformLayout();
-            this.groupBox42.ResumeLayout(false);
-            this.groupBox42.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.S1_Configuration.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
@@ -10780,134 +10732,11 @@ namespace Monitor
 
         }
 
-        private void tabPage_GenericFrame_Enter(object sender, EventArgs e)
-        {
 
-        }
-
-        private void tabPage_GenericFrame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button_Send_Click(this, new EventArgs());
-            }
-        }
-
-        private void groupBox_clientTX_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button_Send_Click(this, new EventArgs());
-            }
-        }
-
-        private void textBox_Preamble_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button_Send_Click(this, new EventArgs());
-            }
-        }
-
-        private void textBox_Opcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button_Send_Click(this, new EventArgs());
-            }
-        }
-
-        private void textBox_data_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button_Send_Click(this, new EventArgs());
-            }
-        }
-
-        private void SendThrouthSerialPort()
-        {
-            //button_Send_Click(null, null);
-
-            if (serialPort.IsOpen == false)
-            {
-                SystemLogger.LogMessage(Color.Red, Color.White, "Serial Port is not open", true, true);
-
-                
-
-
-                //textBox_SystemStatus.Text = "Serial Port is not open";
-                //textBox_SystemStatus.BackColor = Color.Orange;
-                //textBox_SystemStatus_Timer = 3;
-                return;
-            }
-            else
-            {
-                //button_SendProtocolSerialPort_Click(null, null);
-                //button_SendProtocolSerialPort.PerformClick();
-
-
-            }
-        }
-
-        private void SendThrouthTCPIP()
-        {
-
-        }
-
-        private void SendDataToSystem()
-        {
-            if (radioButton_SerialPort.Checked == true)
-            {
-                SendThrouthSerialPort();
-            }
-
-            if (radioButton_TCPIP.Checked == true)
-            {
-                SendThrouthTCPIP();
-
-            }
-
-
-        }
-
-        private void button_GetSoftwareVersion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-
-        }
+   
 
 
 
-
-
-        private void button48_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-
-
-            SendDataToSystem();
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
-
-
-            SendDataToSystem();
-        }
 
 
 
@@ -10920,91 +10749,10 @@ namespace Monitor
 
 
 
+      
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_RxClientPreamble_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button59_MouseClick(object sender, MouseEventArgs e)
-        {
-
-
-        }
-
-        private void button59_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set register value to synthesizer L1
-Command: 	0x1E
-TX data: 	4 bytes – 32bit register value
-TX frame: 	0x004D 0x0016 + Tx Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x0016 0x00000000 0x63
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button61_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"Help:
-Set Tx AD936X data :
-4 bytes 
-byte – band type: 0x00 - L1, 0x01 - L2 
-2 bytes – address 
-1 bytes - data");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
-
-
-
-        private void textBox_SetSyestemState_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            string WithoutSpaces = Regex.Replace(txtbox.Text, @"\s+", "");
-            byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            if (buffer != null)
-            {
-                txtbox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
 
 
 
@@ -11081,464 +10829,21 @@ byte – band type: 0x00 - L1, 0x01 - L2
         }
 
 
-        private void button72_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"4.2.2.12	Store data in Flash 
-Description:   Store data in flash device 
-Command: 	0x0030
-TX data: 	8 bytes + N byte:
-		4 bytes – address
-		4 bytes – size of data to be stored
-		N bytes – data to be stored
-TX frame: 	0x0044 0x0030 + size + TX Data + CRC
-RX data: 	N.A
-RX frame: 	0x0044 0x0030 0x00000000 + CRC
 
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
 
 
 
-        private void button73_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"4.2.2.13	Load data from Flash by address 
-Description:   Load data from flash by address
-Command: 	0x0031
-TX data: 	8 bytes:
-4 byte – address
-4 bytes – bytes to read. 
-TX frame: 	0x0044 0x0031 0x00000008 + TX Data + CRC
-RX data: 	N bytes – read data content 
-RX frame: 	0x0044 0x0031 + size + RX Data + CRC
 
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
 
 
 
-        private void button78_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"Help:
-4.2.3.7	AD9361 Rx RF PLL lock detect 
+ 
 
-Description:   Get RF PLL lock detect
-Command: 	0x5C
-TX data: 	2 byte
-1 byte – Xcvr ID: 0x0 ÷ 0x3
-1 byte – RF Synth.: 0x1 = Tx; 0x0 = Rx	
-TX frame: 	0x004D 0x005C 0x00000002 + TX Data + checksum
-RX data: 	1 byte 
-Lock detect: 0x1=Locked; 0x0 = Not locked
-RX frame: 	0x004D 0x005C 0x00000001 + RX Data + checksum
 
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
 
 
 
 
-
-
-
-
-
-        private void textBox_WriteQSPIFlashData_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtbox = (TextBox)sender;
-            string WithoutSpaces = Regex.Replace(txtbox.Text, @"\s+", "");
-            byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            if (buffer != null)
-            {
-                txtbox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                txtbox.BackColor = Color.Red;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-        private void button90_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "5B 00";
-            //textBox_data.Text = textBox_GetInternalLOFreq.Text;
-
-            //SendDataToSystem();
-        }
-
-        private void button_RecordIQData_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-                4.2.5.1 Record IQ data - day 1
-
-Description: Initiate recording of I/ Q data and send the data on completion
-Command: 	0x80
-TX data: 	5 bytes
-1 byte -Number of data blocks
-4 byte -Number of samples
-TX frame: 	0x004D 0x0080 0x00000005 + Tx Data + checksum
-RX data: 	N bytes
-Recorded samples
-RX frame: 	0x004D 0x0080 + Length + RX Data + checksum
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-
-        }
-
-        private void button77_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set the Gain to the RX channels
-Command: 	0x56
-TX data: 	2 bytes 
-1 byte – band: 	0 – Broadcast; 1 – Band L1; 2 – Band L2
-1 byte - Gain Value 1 ÷ 76 (dB)
-TX frame: 	0x004D 0x0056 + Tx Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x0056 0x00000000 0xA3
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button76_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-                4.2.5.1 Record IQ data - day 1
-
-Description: Initiate recording of I/ Q data and send the data on completion
-Command: 	0x80
-TX data: 	5 bytes
-1 byte -Number of data blocks
-4 byte -Number of samples
-TX frame: 	0x004D 0x0080 0x00000005 + Tx Data + checksum
-RX data: 	N bytes
-Recorded samples
-RX frame: 	0x004D 0x0080 + Length + RX Data + checksum
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button75_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set DCA in the system
-Command: 	0x58
-TX data: 	4 bytes 
-DCA value [Float]
-TX frame: 	0x004D 0x0058 + Tx Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x0058 0x00000000 0xA5
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button91_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set internal LO frequency in Hz
-Command: 	0x5A
-TX data: 	9 byte
-		1 byte – Band type: 0x0 – L1; 0x1 – L2
-		8 byte - Frequency [Hz]		
-TX frame: 	0x004D 0x005A 0x00000009 + TX Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x005A 0x00000000 0xA7
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button69_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-4.2.2.11	Set TCXO Trim 
-Description:   Change the frequency of the clock generation TCXO
-Command: 	0x2F
-TX data: 	4 byte – fraction of pulse per minute [-10:10]
-TX frame: 	0x004D 0x002F 0x00000004+ TX Data + checksum
-RX data: 	N.A
-RX frame: 	0x004D 0x002F 0x00000000 0x7A
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void button84_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Initiate recording of I/Q data and send the data on completion
-Command: 	0x81
-TX data: 	3 bytes 
-1 byte – Record source :
- 0x00 - Xcvr RX
- 0x01 – Playback
- 0x02 -  Counter
- 0x03 -  Zero
-		1 byte - Channel 1 data source:
-0x00 – Catalina 1, channel 1
-0x01 – Catalina 1, channel 2
-0x02 -  Catalina 2, channel 1
-0x03 -  Catalina 2 channel 2
-0x04 – Catalina 3, channel 1
-0x05 – Catalina 3, channel 2
-0x06 -  Catalina 4, channel 1
-0x07 -  Catalina 4 channel 2
-
-1 byte - Channel 2 data source – same as Channel 1			  
-		
-TX frame: 	0x004D 0x0081 0x00000001 + Tx Data + checksum
-RX data: 	N.A 
-RX frame: 	0x004D 0x0081 0x00000000 0xCE
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-            }
-        }
-
-        private void button85_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseEventArgs me = e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                string str = string.Format(@"
-Description:   Set the state to RX Channel
-Command: 	0x87
-TX data: 	2 bytes 
-1 byte - Channel number: 0 ÷7
-1 byte – State: 0x0 – Rx; 0x1 - CAL
-TX frame: 	0x004D 0x0087 0x00000002 + Tx Data + checksum
-RX data: 	N.A 
-RX frame: 	0x004D 0x0087 0x00000000 0xD4
-
-
-");
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, "Help: ", true, true);
-                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, true, false);
-
-
-            }
-        }
-
-        private void textBox_PlayIQData_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_PlayIQData.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            //if (buffer != null )
-            //{
-            //    textBox_PlayIQData.BackColor = Color.LightGreen;
-            //}
-            //else
-            //{
-            //    textBox_PlayIQData.BackColor = Color.Red;
-            //}
-        }
-
-        private void button93_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "82 00";
-            //textBox_data.Text = textBox_PlayIQData.Text;
-
-            //SendDataToSystem();
-        }
-
-        private void textBox_RetriveIQData_TextChanged(object sender, EventArgs e)
-        {
-            //string WithoutSpaces = Regex.Replace(textBox_RetriveIQData.Text, @"\s+", "");
-            //byte[] buffer = StringToByteArray(WithoutSpaces);
-
-            //if (buffer != null)
-            //{
-            //    if (buffer.Length == 5)
-            //    { 
-            //        textBox_RetriveIQData.BackColor = Color.LightGreen;
-            //    }
-            //    else
-            //    {
-            //        textBox_RetriveIQData.BackColor = Color.Red;
-            //    }
-            //}
-        }
-
-        private void button92_Click(object sender, EventArgs e)
-        {
-            //textBox_Preamble.Text = PREAMBLE;
-            //textBox_Opcode.Text = "84 00";
-            //textBox_data.Text = textBox_RetriveIQData.Text;
-
-            //SendDataToSystem();
-        }
-
-        private void button94_Click(object sender, EventArgs e)
-        {
-            //// Generate a test signal,
-            ////  1 Vrms at 20,000 Hz
-            ////  Sampling Rate = 100,000 Hz
-            ////  DFT Length is 1000 Points
-            //double amplitude = 1.0;
-            //double frequency = 20000;
-            //uint length = 1000;
-            //double samplingRate = 100000;
-            //double[] inputSignal = DSP.Generate.ToneSampling(amplitude, frequency, samplingRate, length);
-            //// Instantiate a new DFT
-            //DFT dft = new DFT();
-            //// Initialize the DFT
-            //// You only need to do this once or if you change any of the DFT parameters.
-            //dft.Initialize(length);
-            //// Call the DFT and get the scaled spectrum back
-            //Complex[] cSpectrum = dft.Execute(inputSignal);
-            //// Convert the complex spectrum to magnitude
-            //double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
-            //// Note: At this point, lmSpectrum is a 501 byte array that 
-            //// contains a properly scaled Spectrum from 0 - 50,000 Hz (1/2 the Sampling Frequency)
-            //// For plotting on an XY Scatter plot, generate the X Axis frequency Span
-            //double[] freqSpan = dft.FrequencySpan(samplingRate);
-            //// At this point a XY Scatter plot can be generated from,
-            //// X axis => freqSpan
-            //// Y axis => lmSpectrum
-            //// In this example, the maximum value of 1 Vrms is located at bin 200 (20,000 Hz)
-            //Series series = new Series("Freq");
-            //Series series2 = new Series("Time");
-            //listBox_Charts.Items.Add(series.Name);
-            //listBox_Charts.Items.Add(series2.Name);
-            //// Frist parameter is X-Axis and Second is Collection of Y- Axis
-            //series.Points.DataBindXY(freqSpan, lmSpectrum);
-
-            //for (int i = 0; i < inputSignal.Length / 10; i++)
-            //{
-            //    series2.Points.AddXY(i, inputSignal[i]);
-            //}
-            //series2.ChartType = SeriesChartType.Line;
-            //chart1.Series.Add(series);
-            //chart1.Series.Add(series2);
-
-        }
-
-        private void button95_Click(object sender, EventArgs e)
-        {
-            //// Same Input Signal as Example 1 - Except a fractional cycle for frequency.
-            //double amplitude = 1.0; double frequency = 20000.5;
-            //uint length = 1000; uint zeroPadding = 9000; // NOTE: Zero Padding
-            //double samplingRate = 100000;
-            ////double[] inputSignal = DSPLib.DSP.Generate.ToneSampling(amplitude, frequency, samplingRate, length);
-            ////// Apply window to the Input Data & calculate Scale Factor
-            ////double[] wCoefs = DSP.Window.Coefficients(DSP.Window.Type.FTNI, length);
-            ////double[] wInputData = DSP.Math.Multiply(inputSignal, wCoefs);
-            ////double wScaleFactor = DSP.Window.ScaleFactor.Signal(wCoefs);
-            ////// Instantiate & Initialize a new DFT
-            ////DSPLib.DFT dft = new DSPLib.DFT();
-            ////dft.Initialize(length, zeroPadding); // NOTE: Zero Padding
-            ////                                     // Call the DFT and get the scaled spectrum back
-            ////Complex[] cSpectrum = dft.Execute(wInputData);
-            ////// Convert the complex spectrum to note: Magnitude Format
-            ////double[] lmSpectrum = DSPLib.DSP.ConvertComplex.ToMagnitude(cSpectrum);
-            //// Properly scale the spectrum for the added window
-            ////lmSpectrum = DSP.Math.Multiply(lmSpectrum, wScaleFactor);
-            //// For plotting on an XY Scatter plot generate the X Axis frequency Span
-            ////double[] freqSpan = dft.FrequencySpan(samplingRate);
-            //// At this point a XY Scatter plot can be generated from,
-            //// X axis => freqSpan
-            //// Y axis => lmSpectrum
-
-            //Series series = new Series("Freq 2");
-            //Series series2 = new Series("Time 2");
-            //listBox_Charts.Items.Add(series.Name);
-            //listBox_Charts.Items.Add(series2.Name);
-            //// Frist parameter is X-Axis and Second is Collection of Y- Axis
-            //series.Points.DataBindXY(freqSpan, lmSpectrum);
-
-            //for (int i = 0; i < inputSignal.Length / 10; i++)
-            //{
-            //    series2.Points.AddXY(i, inputSignal[i]);
-            //}
-            //series2.ChartType = SeriesChartType.Line;
-            //chart1.Series.Add(series);
-            //chart1.Series.Add(series2);
-        }
 
         private void textBox_MinXAxis_TextChanged(object sender, EventArgs e)
         {
