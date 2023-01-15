@@ -7371,7 +7371,7 @@ namespace Monitor
 
         void DecodeWriteCommand(byte[] i_IncomingBytes)
         {
-            SystemLogger.LogMessage(Color.Blue, Color.LightGreen, String.Format("Write Recieved: OK"), true, true);
+            SystemLogger.LogMessage(Color.Blue, Color.LightSkyBlue, String.Format("Write Recieved: OK"), true, true);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
            // SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
@@ -14484,32 +14484,32 @@ This Process can take 1 minute.";
                     case Keys.Tab:
                         e.Handled = false;
                         e.SuppressKeyPress = true;
-                        List<string> Strlist = new List<string>();
-                        foreach (string str in Monitor.Properties.Settings.Default.CLICommad_History)
+                        List<CommandClass> Cmdlist = new List<CommandClass>();
+                        foreach (CommandClass cmd in List_AllCommands)
                         {
-                            if (str.StartsWith(textBox_CLISendCommands.Text))
+                            if (cmd.Command_name.StartsWith(textBox_CLISendCommands.Text))
                             {
-                                Strlist.Add(str);
+                                Cmdlist.Add(cmd);
                             }
                         }
 
-                        if (Strlist.Count > 1)
+                        if (Cmdlist.Count > 1)
                         {
-                            SystemLogger.LogMessage(Color.Black, Color.AliceBlue, "History commands: " + Strlist.Count.ToString() + " ", New_Line = true, Show_Time = true);
-                            foreach (string str in Strlist)
+                            SystemLogger.LogMessage(Color.Black, Color.AliceBlue, "History commands: " + Cmdlist.Count.ToString() + " ", New_Line = true, Show_Time = true);
+                            foreach (CommandClass cmd in Cmdlist)
                             {
-                                if (CLI_HistoryIndex == Strlist.IndexOf(str))
+                                if (CLI_HistoryIndex == Cmdlist.IndexOf(cmd))
                                 {
                                     SystemLogger.LogMessage(Color.Black, Color.Chartreuse, CLI_HistoryIndex + " <------", New_Line = false, Show_Time = false);
                                 }
 
-                                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, New_Line = true, Show_Time = false);
+                                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, cmd.Command_name, New_Line = true, Show_Time = false);
                             }
                         }
                         else
-                        if (Strlist.Count == 1)
+                        if (Cmdlist.Count == 1)
                         {
-                            textBox_CLISendCommands.Text = Strlist[0];
+                            textBox_CLISendCommands.Text = Cmdlist[0].Example;
                         }
                         break;
 
