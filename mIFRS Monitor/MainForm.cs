@@ -421,8 +421,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -537,6 +537,7 @@ namespace Monitor
             this.checkBox_CLIDeleteAfterSend = new System.Windows.Forms.CheckBox();
             this.button_CLISend = new System.Windows.Forms.Button();
             this.tabPage2_Script = new System.Windows.Forms.TabPage();
+            this.button_ScriptRunFromFile = new System.Windows.Forms.Button();
             this.button_StopRunScrip = new System.Windows.Forms.Button();
             this.checkBox_RepeatCLIScript = new System.Windows.Forms.CheckBox();
             this.button_CheckScriptValidity = new System.Windows.Forms.Button();
@@ -741,7 +742,6 @@ namespace Monitor
             this.saveFileDialog_Local = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Local = new System.Windows.Forms.OpenFileDialog();
             this.checkBox_Openall = new System.Windows.Forms.CheckBox();
-            this.button_ScriptRunFromFile = new System.Windows.Forms.Button();
             this.groupBox_ServerSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
@@ -1476,17 +1476,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea6.AxisX.Title = "Freq";
-            chartArea6.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea6.AxisY.Title = "Power [dBm]";
-            chartArea6.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea6.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea6);
-            legend6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend6.IsTextAutoFit = false;
-            legend6.Name = "Legend1";
-            legend6.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend6);
+            chartArea1.AxisX.Title = "Freq";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Power [dBm]";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2130,7 +2130,7 @@ namespace Monitor
             this.textBox_CLISendCommands.TabIndex = 110;
             this.textBox_CLISendCommands.Text = "";
             this.textBox_CLISendCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_CLISendCommands_KeyDown);
-            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_CLISendCommands_PreviewKeyDown);
+            this.textBox_CLISendCommands.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TextBox_SendSerialPort_PreviewKeyDown);
             // 
             // button_DeleteCommandsHistory
             // 
@@ -2205,6 +2205,17 @@ namespace Monitor
             this.tabPage2_Script.TabIndex = 1;
             this.tabPage2_Script.Text = "Scripts";
             this.tabPage2_Script.UseVisualStyleBackColor = true;
+            // 
+            // button_ScriptRunFromFile
+            // 
+            this.button_ScriptRunFromFile.BackColor = System.Drawing.Color.SkyBlue;
+            this.button_ScriptRunFromFile.Location = new System.Drawing.Point(463, 219);
+            this.button_ScriptRunFromFile.Name = "button_ScriptRunFromFile";
+            this.button_ScriptRunFromFile.Size = new System.Drawing.Size(89, 45);
+            this.button_ScriptRunFromFile.TabIndex = 83;
+            this.button_ScriptRunFromFile.Text = "Run From File";
+            this.button_ScriptRunFromFile.UseVisualStyleBackColor = false;
+            this.button_ScriptRunFromFile.Click += new System.EventHandler(this.button_ScriptRunFromFile_Click);
             // 
             // button_StopRunScrip
             // 
@@ -4302,17 +4313,6 @@ namespace Monitor
             this.checkBox_Openall.Text = "Open all Tabs";
             this.checkBox_Openall.UseVisualStyleBackColor = true;
             this.checkBox_Openall.CheckedChanged += new System.EventHandler(this.checkBox_Openall_CheckedChanged);
-            // 
-            // button_ScriptRunFromFile
-            // 
-            this.button_ScriptRunFromFile.BackColor = System.Drawing.Color.SkyBlue;
-            this.button_ScriptRunFromFile.Location = new System.Drawing.Point(463, 219);
-            this.button_ScriptRunFromFile.Name = "button_ScriptRunFromFile";
-            this.button_ScriptRunFromFile.Size = new System.Drawing.Size(89, 45);
-            this.button_ScriptRunFromFile.TabIndex = 83;
-            this.button_ScriptRunFromFile.Text = "Run From File";
-            this.button_ScriptRunFromFile.UseVisualStyleBackColor = false;
-            this.button_ScriptRunFromFile.Click += new System.EventHandler(this.button_ScriptRunFromFile_Click);
             // 
             // MainForm
             // 
@@ -14558,6 +14558,15 @@ This Process can take 1 minute.";
             SystemLogger.LogMessage(Color.Purple, Color.Yellow, i_Message, true, false);
         }
 
+
+        void ShowCLIHistory()
+        {
+            SystemLogger.LogMessage(Color.Black, Color.AliceBlue, "History commands: " + Monitor.Properties.Settings.Default.CLICommad_History.Count.ToString() + " ", New_Line = true, Show_Time = true);
+            foreach (String str in Monitor.Properties.Settings.Default.CLICommad_History)
+            {
+                SystemLogger.LogMessage(Color.Black, Color.Chartreuse, str, New_Line = true, Show_Time = false);
+            }
+        }
         /// <summary>
         /// Gil: Each command implemintation return string if the arguments doesn't valit or empty string if every thing OK.
         /// </summary>
@@ -14597,6 +14606,11 @@ This Process can take 1 minute.";
 
                         case "clear":
                             button_ClearMiniAda.PerformClick();
+                            break;
+
+                        case "history":
+                            //  button_ClearMiniAda.PerformClick();
+                            ShowCLIHistory();
                             break;
 
                         default:
@@ -15257,6 +15271,28 @@ clear
 
 
             List_AllCommands.Add(Clear);
+
+            CommandClass History = new CommandClass("history",
+@"
+Description: 
+show all the commands history
+
+Number of arguments:
+0
+
+Syntax 2 arguments:
+history
+
+
+Examples:
+
+history
+
+",
+"history");
+
+
+            List_AllCommands.Add(History);
 
 
 
