@@ -421,8 +421,8 @@ namespace Monitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox_ServerSettings = new System.Windows.Forms.GroupBox();
             this.textBox_ServerOpen = new System.Windows.Forms.TextBox();
@@ -1476,17 +1476,17 @@ namespace Monitor
             // 
             // chart1
             // 
-            chartArea1.AxisX.Title = "Freq";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Power [dBm]";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chart1.Legends.Add(legend1);
+            chartArea5.AxisX.Title = "Freq";
+            chartArea5.AxisX.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea5.AxisY.Title = "Power [dBm]";
+            chartArea5.AxisY.TitleFont = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
+            legend5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend5.IsTextAutoFit = false;
+            legend5.Name = "Legend1";
+            legend5.TitleFont = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chart1.Legends.Add(legend5);
             this.chart1.Location = new System.Drawing.Point(178, 2);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
@@ -2410,7 +2410,7 @@ namespace Monitor
             // 
             // button_OpenFolder
             // 
-            this.button_OpenFolder.Location = new System.Drawing.Point(1427, 345);
+            this.button_OpenFolder.Location = new System.Drawing.Point(1427, 340);
             this.button_OpenFolder.Margin = new System.Windows.Forms.Padding(2);
             this.button_OpenFolder.Name = "button_OpenFolder";
             this.button_OpenFolder.Size = new System.Drawing.Size(174, 25);
@@ -3683,7 +3683,7 @@ namespace Monitor
             this.groupBox_SerialPort.Controls.Add(this.Label_SerialPortTx);
             this.groupBox_SerialPort.Controls.Add(this.label_SerialPortConnected);
             this.groupBox_SerialPort.Controls.Add(this.Label_SerialPortRx);
-            this.groupBox_SerialPort.Location = new System.Drawing.Point(1427, 180);
+            this.groupBox_SerialPort.Location = new System.Drawing.Point(1427, 176);
             this.groupBox_SerialPort.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_SerialPort.Name = "groupBox_SerialPort";
             this.groupBox_SerialPort.Padding = new System.Windows.Forms.Padding(2);
@@ -3708,18 +3708,18 @@ namespace Monitor
             this.groupBox4.Controls.Add(this.progressBar_UserStatus);
             this.groupBox4.Controls.Add(this.button97);
             this.groupBox4.Controls.Add(this.textBox_SystemStatus);
-            this.groupBox4.Location = new System.Drawing.Point(1427, 404);
+            this.groupBox4.Location = new System.Drawing.Point(1427, 417);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(172, 288);
+            this.groupBox4.Size = new System.Drawing.Size(172, 275);
             this.groupBox4.TabIndex = 114;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "User information";
             // 
             // progressBar_UserStatus
             // 
-            this.progressBar_UserStatus.Location = new System.Drawing.Point(11, 258);
+            this.progressBar_UserStatus.Location = new System.Drawing.Point(9, 241);
             this.progressBar_UserStatus.Name = "progressBar_UserStatus";
             this.progressBar_UserStatus.Size = new System.Drawing.Size(158, 23);
             this.progressBar_UserStatus.Step = 1;
@@ -3727,7 +3727,7 @@ namespace Monitor
             // 
             // button97
             // 
-            this.button97.Location = new System.Drawing.Point(116, 231);
+            this.button97.Location = new System.Drawing.Point(116, 214);
             this.button97.Margin = new System.Windows.Forms.Padding(2);
             this.button97.Name = "button97";
             this.button97.Size = new System.Drawing.Size(53, 22);
@@ -3739,12 +3739,12 @@ namespace Monitor
             // textBox_SystemStatus
             // 
             this.textBox_SystemStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_SystemStatus.Location = new System.Drawing.Point(3, 19);
+            this.textBox_SystemStatus.Location = new System.Drawing.Point(3, 20);
             this.textBox_SystemStatus.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_SystemStatus.Multiline = true;
             this.textBox_SystemStatus.Name = "textBox_SystemStatus";
             this.textBox_SystemStatus.ReadOnly = true;
-            this.textBox_SystemStatus.Size = new System.Drawing.Size(163, 204);
+            this.textBox_SystemStatus.Size = new System.Drawing.Size(163, 185);
             this.textBox_SystemStatus.TabIndex = 113;
             this.textBox_SystemStatus.TabStop = false;
             // 
@@ -3765,7 +3765,7 @@ namespace Monitor
             this.groupBox_ClentTCPStatus.Controls.Add(this.Label_TCPClientTx);
             this.groupBox_ClentTCPStatus.Controls.Add(this.label_ClientTCPConnected);
             this.groupBox_ClentTCPStatus.Controls.Add(this.Label_TCPClientRx);
-            this.groupBox_ClentTCPStatus.Location = new System.Drawing.Point(1427, 268);
+            this.groupBox_ClentTCPStatus.Location = new System.Drawing.Point(1427, 263);
             this.groupBox_ClentTCPStatus.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_ClentTCPStatus.Name = "groupBox_ClentTCPStatus";
             this.groupBox_ClentTCPStatus.Padding = new System.Windows.Forms.Padding(2);
@@ -4275,11 +4275,11 @@ namespace Monitor
             // label_Projectname
             // 
             this.label_Projectname.AutoSize = true;
-            this.label_Projectname.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Projectname.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Projectname.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label_Projectname.Location = new System.Drawing.Point(6, 14);
             this.label_Projectname.Name = "label_Projectname";
-            this.label_Projectname.Size = new System.Drawing.Size(127, 26);
+            this.label_Projectname.Size = new System.Drawing.Size(90, 18);
             this.label_Projectname.TabIndex = 116;
             this.label_Projectname.Text = "Project name";
             // 
@@ -4288,7 +4288,7 @@ namespace Monitor
             this.groupBox1.Controls.Add(this.label_Projectname);
             this.groupBox1.Location = new System.Drawing.Point(1427, 125);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 50);
+            this.groupBox1.Size = new System.Drawing.Size(172, 46);
             this.groupBox1.TabIndex = 117;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project name";
@@ -4306,7 +4306,7 @@ namespace Monitor
             // checkBox_Openall
             // 
             this.checkBox_Openall.AutoSize = true;
-            this.checkBox_Openall.Location = new System.Drawing.Point(1433, 375);
+            this.checkBox_Openall.Location = new System.Drawing.Point(1433, 370);
             this.checkBox_Openall.Name = "checkBox_Openall";
             this.checkBox_Openall.Size = new System.Drawing.Size(109, 22);
             this.checkBox_Openall.TabIndex = 118;
@@ -15394,7 +15394,7 @@ Use the arrows Up, Down and Tab for autocomplition.
                 //    version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 //}
                 Text = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
-                label_Projectname.Text = Text;
+                label_Projectname.Text = version;
                 Text = Text + " [ " + ", Version: " + version + ", Compiled: " + RetrieveLinkerTimestamp().ToString() + " ]";
                 
 
