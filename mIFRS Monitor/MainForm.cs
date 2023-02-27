@@ -11,7 +11,6 @@ using System.IO.Ports;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -1090,7 +1089,6 @@ namespace Monitor
             this.checkBox_RecordGeneral.TabIndex = 7;
             this.checkBox_RecordGeneral.Text = "Record Log";
             this.checkBox_RecordGeneral.UseVisualStyleBackColor = true;
-            this.checkBox_RecordGeneral.CheckedChanged += new System.EventHandler(this.CheckBox_RecordGeneral_CheckedChanged);
             // 
             // PauseCheck
             // 
@@ -5009,7 +5007,7 @@ namespace Monitor
         //    System.Windows.Forms.Application.Exit();
         //}
         private TextBox_Logger SystemLogger;
-        private TextBox_Logger ServerLogger ;
+        private TextBox_Logger ServerLogger;
         private TextBox_Logger SerialPortLogger;
 
         //   Logger LogIWatcher;
@@ -5154,9 +5152,9 @@ namespace Monitor
 
         static List<DataGridView> List_AllDataGrids = new List<DataGridView>();
         static List<CommandClass> List_AllCommands = new List<CommandClass>();
- 
 
-      
+
+
 
         private void FindControls(Control ctl)
         {
@@ -5575,8 +5573,7 @@ namespace Monitor
                     button_ClientConnect.BackColor = default;
                 }
                 else
-
-                    if (ClientSocket.Connected && ClientSocket.Client.Connected && ClientSocket.GetStream() != null)
+                if (ClientSocket.Connected && ClientSocket.Client.Connected && ClientSocket.GetStream() != null)
                 {
                     button_ClientConnect.BackColor = Color.LightGreen;
                 }
@@ -5584,9 +5581,6 @@ namespace Monitor
                 {
                     button_ClientConnect.BackColor = default;
                 }
-
-
-
 
             }
             catch
@@ -5720,16 +5714,16 @@ namespace Monitor
                 RxLabelTimerBlink--;
                 //if (Timer_100ms % 2 == 0)
                 //{
-                    SerialRxBlinklled = !SerialRxBlinklled;
-                    if (SerialRxBlinklled == true)
-                    {
-                        Label_SerialPortRx.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        Label_SerialPortRx.BackColor = default;
-                    }
-           //     }
+                SerialRxBlinklled = !SerialRxBlinklled;
+                if (SerialRxBlinklled == true)
+                {
+                    Label_SerialPortRx.BackColor = Color.Green;
+                }
+                else
+                {
+                    Label_SerialPortRx.BackColor = default;
+                }
+                //     }
             }
             else
             if (RxLabelTimerBlink == 0)
@@ -5742,16 +5736,16 @@ namespace Monitor
                 TxLabelTimerBlink--;
                 //if (Timer_100ms % 2 == 0)
                 //{
-                    SerialTxBlinklled = !SerialTxBlinklled;
-                    if (SerialTxBlinklled == true)
-                    {
-                        Label_SerialPortTx.BackColor = Color.Green;
-                    }
-                    else
-                    {
-                        Label_SerialPortTx.BackColor = default;
-                    }
-             //   }
+                SerialTxBlinklled = !SerialTxBlinklled;
+                if (SerialTxBlinklled == true)
+                {
+                    Label_SerialPortTx.BackColor = Color.Green;
+                }
+                else
+                {
+                    Label_SerialPortTx.BackColor = default;
+                }
+                //   }
             }
             else
             if (TxLabelTimerBlink == 0)
@@ -6957,7 +6951,7 @@ namespace Monitor
 
 
 
-                
+
             }
             catch (Exception ex)
             {
@@ -7253,7 +7247,7 @@ namespace Monitor
 
         void DecodeStatus(byte[] i_IncomingBytes)
         {
-            if(ShowStatus == false)
+            if (ShowStatus == false)
             {
                 return;
             }
@@ -7293,7 +7287,7 @@ namespace Monitor
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V2_UV_COUNTER : [{0}]", i_IncomingBytes[69]), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V8_OV_COUNTER : [{0}]", i_IncomingBytes[70]), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_1V8_UV_COUNTER : [{0}]", i_IncomingBytes[71]), true, false);
-          //  SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95_UV_COUNTER : [{0}]", i_IncomingBytes[72]), true, false);
+            //  SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("AFE79XX_0V95_UV_COUNTER : [{0}]", i_IncomingBytes[72]), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("SUM_COUNTER_ALARMS : [{0} {1}]", i_IncomingBytes[73], i_IncomingBytes[74]), true, false);
 
 
@@ -7313,10 +7307,10 @@ namespace Monitor
         {
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Recieved:"), true, true);
             byte[] Counter = i_IncomingBytes.Skip(2).Take(2).ToArray();
-          // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(),0)) , true, false);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString( i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
-            GlobalReadRegister = BitConverter.ToInt32(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray(),0);
+            // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
+            GlobalReadRegister = BitConverter.ToInt32(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray(), 0);
             SystemLogger.LogMessage(Color.Black, Color.Lime, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
@@ -7327,7 +7321,7 @@ namespace Monitor
             SystemLogger.LogMessage(Color.Blue, Color.LightSkyBlue, String.Format("Write Recieved: OK"), true, true);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Register Address: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(4).Take(4).Reverse().ToArray())), true, false);
-           // SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
+            // SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Read Data: [{0}]", ConvertByteArraytToString(i_IncomingBytes.Skip(8).Take(4).Reverse().ToArray())), true, false);
 
             DecodeStatus(i_IncomingBytes);
         }
@@ -7337,21 +7331,21 @@ namespace Monitor
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Set Full Params:"), true, true);
             // int x = BitConverter.ToInt32(i_IncomingBytes.Skip(3).Take(2).Reverse().ToArray(), 0);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Counter: [{0}]", BitConverter.ToInt16(i_IncomingBytes.Skip(2).Take(2).ToArray(), 0)), true, false);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Length [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(4).Take(4).ToArray(),0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Length [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(4).Take(4).ToArray(), 0)), true, false);
             SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Activation [{0}]", i_IncomingBytes[8]), true, false);
-            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Message Time [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(12).Take(4).ToArray(),0)), true, false);
+            SystemLogger.LogMessage(Color.Blue, Color.Azure, String.Format("Message Time [{0}]", BitConverter.ToInt32(i_IncomingBytes.Skip(12).Take(4).ToArray(), 0)), true, false);
             DecodeStatus(i_IncomingBytes);
         }
-        
+
         void ParseOneIFRSFrame(byte[] i_IncomingBytes)
         {
-            if(i_IncomingBytes[0] != 0x83)
+            if (i_IncomingBytes[0] != 0x83)
             {
                 SystemLogger.LogMessage(Color.Orange, Color.LightGray, String.Format("Frame not start with 0x83"), true, true);
                 return;
             }
 
-            switch(i_IncomingBytes[1])
+            switch (i_IncomingBytes[1])
             {
                 //Read conmmand
                 case 0x22:
@@ -7418,7 +7412,7 @@ namespace Monitor
             }
             else
             {
-                SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, String.Format( "Frame check sum error Recieved [{0}] Claculated [{1}]", RecievedCheckSum.ToString("X8"), CalculatedCheckSum.ToString("X8")), New_Line = true, Show_Time = true);
+                SystemLogger.LogMessage(Color.OrangeRed, Color.Azure, String.Format("Frame check sum error Recieved [{0}] Claculated [{1}]", RecievedCheckSum.ToString("X8"), CalculatedCheckSum.ToString("X8")), New_Line = true, Show_Time = true);
             }
             i_IncomingBytes = i_IncomingBytes.Skip(80).ToArray();
 
@@ -7428,7 +7422,7 @@ namespace Monitor
         {
             try
             {
-                if ((i_IncomeBuffer.Length == 0) || (i_IncomeBuffer.Length < 80) || (i_IncomeBuffer[0] != 0x83) )
+                if ((i_IncomeBuffer.Length == 0) || (i_IncomeBuffer.Length < 80) || (i_IncomeBuffer[0] != 0x83))
                 {
                     return;
                 }
@@ -7764,7 +7758,7 @@ namespace Monitor
         //List<byte> temp_serialBuff = new List<byte>();
         void WriteBufferInfo(byte[] i_buffer)
         {
-            SerialPortLogger.LogMessage(Color.Green, Color.White, String.Format("Total bytes: [{0}]" ,i_buffer.Length.ToString()), New_Line = true, Show_Time = false);
+            SerialPortLogger.LogMessage(Color.Green, Color.White, String.Format("Total bytes: [{0}]", i_buffer.Length.ToString()), New_Line = true, Show_Time = false);
             SerialPortLogger.LogMessage(Color.Green, Color.White, "Check sum calculation", New_Line = true, Show_Time = false);
             SerialPortLogger.LogMessage(Color.Green, Color.White, FrameAnalizer, New_Line = true, Show_Time = false);
         }
@@ -7813,7 +7807,7 @@ namespace Monitor
 
 
 
-            
+
 
             // Obtain the number of bytes waiting in the port's buffer
             int bytes = serialPort.BytesToRead;
@@ -7851,9 +7845,9 @@ namespace Monitor
                     SerialPortLogger.LogMessage(Color.Blue, Color.Azure, IncomingHexMessage, New_Line = true, Show_Time = false);
                 }
 
-                
 
-                
+
+
 
 
 
@@ -8103,181 +8097,10 @@ namespace Monitor
         }
         private static readonly Mutex mutexACKSMSReceived = new Mutex();
 
-        private void ParseSerialPortSMSString(string IncomingString)
-        {
-
-        }
-
-        private void ParseSerialPortString(string IncomingString)
-        {
-            // Boolean ret;
-            try
-            {
-                ParseUnitVersion(IncomingString.Replace(System.Environment.NewLine, " "));
-                IncomingString = IncomingString.Replace(System.Environment.NewLine, "");
-                //ParseConfigCommand(IncomingString);
-                //ret = ParseSMSCommand(IncomingString);
-
-               // ParseStatuPos(IncomingString);
-
-                // ParseUnitVersion(IncomingString);
 
 
 
 
-
-            }
-            catch (Exception ex)
-            {
-                SerialPortLogger.LogMessage(Color.Red, Color.LightGray, ex.ToString(), New_Line = true, Show_Time = true);
-                //    return;
-            }
-        }
-
-        private bool ParseSMSCommand(string IncomingString)
-        {
-            bool ret = false;
-            bool IsCommandFound = true;
-            while (IsCommandFound == true)
-            {
-
-                int StartCommand = IncomingString.IndexOf("{COMMAND_SMS_START}");
-                int EndCommand = IncomingString.IndexOf("{COMMAND_SMS_END}");
-                if (StartCommand >= 0 && EndCommand >= 0 && (EndCommand > StartCommand))
-                {
-                    ret = true;
-                    StartCommand += "{COMMAND_SMS_START}".Length;
-                    string CommandString = IncomingString.Substring(StartCommand, EndCommand - StartCommand);
-
-                    //       LogSMS.LogMessage(Color.Cyan, Color.White, CommandString, New_Line = true, Show_Time = true);
-
-                    EndCommand += "{COMMAND_SMS_END}".Length;
-                    IncomingString = IncomingString.Substring(EndCommand);
-                    IsCommandFound = true;
-
-                    //ModemStatus mdmStat = new ModemStatus(ref CommandString);
-
-
-
-                    if (CommandString.Contains("SMS was Send To the Modem"))
-                    {
-                        mutexACKSMSReceived.WaitOne();
-                        //   ACKSMSReceived = true;
-                        mutexACKSMSReceived.ReleaseMutex();
-
-                        //LogSMS.LogMessage(Color.DarkBlue, Color.White, "SMS Send ACK received", New_Line = true, Show_Time = true);
-
-                        if (checkBox_SMSencrypted.Checked == true)
-                        {
-                            string[] temp = CommandString.Split('[', ']');
-                            //   LogSMS.LogMessage(Color.Black, Color.White, "", New_Line = false, Show_Time = true);
-                            //   LogSMS.LogMessage(Color.Green, Color.White, "Encrypted SMS (Copy to server Tab):\n" + temp[5], New_Line = true, Show_Time = false);
-
-                            txtDataTx.Invoke(new EventHandler(delegate
-                            {
-                                txtDataTx.Text = temp[5];
-                            }));
-
-                        }
-                    }
-                    else
-                    if (CommandString.Contains("Modem ring to Contact."))
-                    {
-                        string[] temp = CommandString.Split('[', ']');
-                        //LogSMS.LogMessage(Color.DarkBlue, Color.White, "Ring to contact, Phone Number: " + temp[3] + " Hangout: " + temp[5], New_Line = true, Show_Time = true);
-
-                    }
-
-                    if (CommandString.Contains("SMS_received Decrypted"))
-                    {
-                        string[] strsplit = CommandString.Split('[', ']');
-
-
-                        ParseSMSText(strsplit[1], strsplit[3], Color.Brown);
-                    }
-                    else
-                        if (CommandString.Contains("SMS_received"))
-                    {
-                        string[] strsplit = CommandString.Split('[', ']');
-
-
-                        ParseSMSText(strsplit[1], strsplit[3], Color.Blue);
-                    }
-                }
-                else
-                {
-                    IsCommandFound = false;
-                }
-            }
-
-            return ret;
-        }
-
-        private bool IsDigitsOnly(string str)
-        {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9')
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private void ParseSMSText(string i_Subscriber, string i_SMSText, Color i_ColorDisplay)
-        {
-
-
-
-
-        }
-
-        private string UnitVersion;
-
-        private void ParseUnitVersion(string IncomingString)
-        {
-            if (IncomingString.Contains("******START******") == true)
-            {
-                int StartConfig = IncomingString.IndexOf("******START******");
-                StartConfig += "******START******".Length;
-                UnitVersion = IncomingString.Substring(StartConfig);
-                int EndConfig = UnitVersion.IndexOf("*********************");
-                UnitVersion = UnitVersion.Substring(0, EndConfig);
-
-
-
-            }
-
-        }
-
-        private void ParseConfigCommand(string IncomingString)
-        {
-            int StartConfig = IncomingString.IndexOf("{CONFIG_START}");
-            int EndConfig = IncomingString.IndexOf("{CONFIG_END}");
-            if (StartConfig >= 0 && EndConfig > 0 && (EndConfig > StartConfig))
-            {
-                StartConfig += "{CONFIG_START}".Length;
-                string ConfigString = IncomingString.Substring(StartConfig, EndConfig - StartConfig);
-
-                if (ConfigString.Contains("CONFIGOK"))
-                {
-                    //TextBox_GenerateConfigFile_Text("Config OK", Color.LightGreen);
-                }
-                else
-                {
-                    //SendToConfigPage(ConfigString, "Serial Port");
-                }
-            }
-        }
-
-
-        private void Button_StopPeriodaclly_Click(object sender, EventArgs e)
-        {
-
-
-        }
 
         private DateTime RetrieveLinkerTimestamp()
         {
@@ -8353,39 +8176,9 @@ namespace Monitor
 
         }
 
-        private void Button_AddDendSingleCommand_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //textBox_AddSendSingleCommand.Text = CommandsDescription[comboBox_AddSendSingleCommand.SelectedIndex].Format;
-            }
-            catch
-            {
-            }
-        }
-
-        private void ComboBox_AddSendSingleCommand_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button_ValidateCommand_Click(object sender, EventArgs e)
-        {
 
 
-        }
 
-
-        private void Button6_Click(object sender, EventArgs e)
-        {
-            //button_ValidateCommand.Enabled = true;
-        }
-
-        private void Button6_Click_1(object sender, EventArgs e)
-        {
-            //Config_Sys.Enabled = true;
-            //ConfigProcessExit = true;
-        }
 
 
         private void CheckBox_EchoResponse_CheckedChanged(object sender, EventArgs e)
@@ -8393,50 +8186,16 @@ namespace Monitor
 
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private readonly Dictionary<int, string> FOTAData = new Dictionary<int, string>();
-        private void Button5_Click(object sender, EventArgs e)
-        {
 
 
 
 
 
-        }
 
 
 
 
 
-        private void TextBox_TotalFrames256Bytes_TextChanged(object sender, EventArgs e)
-        {
-            //if (textBox_TotalFrames256Bytes.Text.Length > 0)
-            //{
-            //    textBox_TotalFrames256Bytes.BackColor = Color.White;
-            //}
-        }
-
-        private void Button33_Click(object sender, EventArgs e)
-        {
-            //if (textBox_TotalFrames1280Bytes.Text.Length > 0 && textBox_TotalFileLength.Text.Length > 0)
-            //{
-            //    //txtDataTx.Text = ";<" + Monitor.Properties.Settings.Default.SystemPassword + ">STARTFOTA=," + textBox_TotalFrames1280Bytes.Text + "," + textBox_TotalFileLength.Text + ",;";
-            //    txtDataTx.Text = string.Format(";<{0}>STARTFOTA=,{1},{2},;", Monitor.Properties.Settings.Default.SystemPassword, textBox_TotalFrames1280Bytes.Text, textBox_TotalFileLength.Text);           
-            //}
-
-
-            ServerLogger.LogMessage(Color.Blue, Color.White, "****************** System ID's Status ****************** ", New_Line = true, Show_Time = true);
-            foreach (KeyValuePair<string, string> pair in IDToFOTA_Status)
-            {
-                ServerLogger.LogMessage(Color.Blue, Color.White, pair.Key + "   " + pair.Value + " \n", New_Line = false, Show_Time = false);
-
-            }
-        }
 
 
 
@@ -8449,18 +8208,18 @@ namespace Monitor
 
         private void UpdateCommandCLIHistory(string i_SendString)
         {
-        Monitor.Properties.Settings.Default.CLICommad_History.Remove(i_SendString);
-        Monitor.Properties.Settings.Default.CLICommad_History.Add(i_SendString);
-        Monitor.Properties.Settings.Default.CLICommad_History.Remove("");
-        Monitor.Properties.Settings.Default.Save();
-            
-        CLI_HistoryIndex = Settings.Default.CLICommad_History.Count;
+            Monitor.Properties.Settings.Default.CLICommad_History.Remove(i_SendString);
+            Monitor.Properties.Settings.Default.CLICommad_History.Add(i_SendString);
+            Monitor.Properties.Settings.Default.CLICommad_History.Remove("");
+            Monitor.Properties.Settings.Default.Save();
+
+            CLI_HistoryIndex = Settings.Default.CLICommad_History.Count;
 
         }
 
-            private void UpdateSerialPortHistory(string i_SendString)
+        private void UpdateSerialPortHistory(string i_SendString)
         {
-            if(i_SendString == "")
+            if (i_SendString == "")
             {
                 return;
             }
@@ -8521,396 +8280,7 @@ namespace Monitor
         }
 
 
-      
-
-
-
-   
-
-        private void Button3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button6_Click_2(object sender, EventArgs e)
-        {
-            //   textBox_SendSerialPort.Text = "<1234>READ?,;";
-            //TextBox_SourceConfig_Clear();
-
-            string Sendstr = string.Format(";READ?,;");
-            byte[] buffer = Encoding.ASCII.GetBytes(Sendstr);
-            bool IsSent = SerialPortSendData(buffer);
-
-            if (IsSent == true)
-            {
-                //textBox_SourceConfig.Text = "Command sent";
-
-            }
-
-        }
-
-
-
-
-        private enum ConfigDataType
-        {
-            PosPeriod5Sec,
-            AutoARM,
-            Angel,
-            PeriodStatus,
-            SpeedLimit,
-            Number,
-            Float,
-            BatLevel,
-            JammingSens,
-            EveryThing,
-            AlarmViaSMS,
-            Unit_ID,
-            Subscriber,
-            Password,
-            Boolean,
-            IpAddress,
-            Port,
-            GPRSDisconnectNum,
-            GPSType,
-            DISARMCODE,
-            CutSpeed
-        };
-
-        private bool CheckSubscriberValid(string i_String, ConfigDataType i_DataType)
-        {
-            bool ret;
-            try
-            {
-
-
-                switch (i_DataType)
-                {
-                    case ConfigDataType.CutSpeed:
-                        if (i_String.Length <= 3 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 0 && Num <= 20 || Num == 255)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-                    case ConfigDataType.DISARMCODE:
-                        if (i_String.Length == 4 && (Regex.IsMatch(i_String, @"^[1-5]+$") || Regex.IsMatch(i_String, @"^[0]+$") || i_String == "9999"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-                    case ConfigDataType.GPSType:
-                        if (i_String.Length == 1 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 0 && Num <= 2)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.PosPeriod5Sec:
-                        if (i_String.Length < 5 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num > 0)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.AutoARM:
-                        if (i_String.Length < 5 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 2 && Num <= 300)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.EveryThing:
-                        ret = true;
-                        break;
-
-                    case ConfigDataType.PeriodStatus:
-
-                        if (i_String.Length < 5 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 0 && Num <= 96)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.Angel:
-
-                        if (i_String.Length < 5 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 0 && Num <= 360)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.SpeedLimit:
-
-                        ret = false;
-
-                        break;
-
-                    case ConfigDataType.BatLevel:
-
-                        if (i_String.Length < 3 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Num = int.Parse(i_String);
-
-                            if (Num >= 0 && Num <= 9)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.JammingSens:
-
-                        if (i_String.Length < 3 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            int Jamming = int.Parse(i_String);
-
-                            if (Jamming >= 20 && Jamming <= 70)
-                            {
-                                ret = true;
-                            }
-                            else
-                            {
-                                ret = false;
-                            }
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.Float:
-                        float f;
-
-                        if (float.TryParse(i_String, out f))
-                        {
-
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-
-
-
-                        break;
-
-                    case ConfigDataType.Number:
-                        if (Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-                    case ConfigDataType.GPRSDisconnectNum:
-                        if (i_String.Length < 6 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-                    case ConfigDataType.Port:
-                        if (i_String.Length < 6 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.AlarmViaSMS:
-                        if (i_String.Length < 8 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            ret = true;
-                            UpdateAlarmCheckBoxes();
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.IpAddress:
-                        //                IPAddress address;
-                        //if (IPAddress.TryParse(i_String, out address))
-                        if (i_String.Length > 4)
-                        {
-                            //Valid IP, with address containing the IP
-                            ret = true;
-                        }
-                        else
-                        {
-                            //Invalid IP
-                            ret = false;
-                        }
-                        break;
-                    case ConfigDataType.Subscriber:
-                        if (i_String == "0")
-                        {
-                            ret = true;
-                        }
-                        else
-                        if (i_String.Length < 6)
-                        {
-                            ret = false;
-                        }
-                        else
-                            if (i_String.Length < 20 && (i_String.StartsWith("+") || i_String.StartsWith("00")) && Regex.IsMatch(i_String.Substring(1), @"^[0-9]+$"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.Password:
-
-                        if (i_String.Length < 15)
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.Boolean:
-                        if (i_String == "0" || i_String == "1")
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    case ConfigDataType.Unit_ID:
-                        if (i_String.Length > 14 && i_String.Length < 17 && Regex.IsMatch(i_String, @"^[0-9]+$"))
-                        {
-                            ret = true;
-                        }
-                        else
-                        {
-                            ret = false;
-                        }
-                        break;
-
-                    default:
-                        ret = false;
-                        break;
-                }
-            }
-            catch
-            {
-                //TextBox_GenerateConfigFile_Text(ex.ToString(), Color.Red);
-                ret = false;
-            }
-
-            return ret;
-        }
+       
 
         private bool CheckAllTextboxConfig()
         {
@@ -8930,53 +8300,11 @@ namespace Monitor
             return true;
         }
 
-        private void TextBox_Config1_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Subscriber);
-        }
 
-        private void TextBox_Config2_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Subscriber);
-        }
 
-        private void TextBox_Config3_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Subscriber);
-        }
 
-        private void CheckConfigTextboxValidData(TextBox i_TextBox, ConfigDataType i_ConfigDataType)
-        {
+       
 
-            i_TextBox.Invoke(new EventHandler(delegate
-            {
-                if (i_TextBox.Text == "" || i_TextBox.Text == "@%@")
-                {
-                    i_TextBox.Text = "";
-                    i_TextBox.BackColor = default;
-                }
-                else
-                    if (CheckSubscriberValid(i_TextBox.Text, i_ConfigDataType) == true)
-                {
-                    i_TextBox.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    //  i_TextBox.Visible = true;
-                    i_TextBox.BackColor = Color.Red;
-                }
-            }));
-        }
-
-        private void TextBox_Config4_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Password);
-        }
-
-        private void TextBox_Config5_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.BatLevel);
-        }
 
         //void TextBox_SourceConfig_Clear()
         //{
@@ -8984,18 +8312,7 @@ namespace Monitor
         //    textBox_SourceConfig.Text = "";
         //}
 
-        private void Button3_Click_2(object sender, EventArgs e)
-        {
-            //   textBox_SendSerialPort.Text = "<1234>READ?,;"
 
-            //TextBox_SourceConfig_Clear();
-
-        }
-
-        private void Password_form_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private string GenerateConfigCommand()
         {
@@ -9027,369 +8344,25 @@ namespace Monitor
         //    textBox_GenerateConfigFile.BackColor = default(Color);
         //}
 
-        private void Button28_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox_GenerateConfigFile_Clear();
+     
 
-                bool IsAllGreen = CheckAllTextboxConfig();
+     
 
-                if (IsAllGreen == false)
-                {
-                    //textBox_GenerateConfigFile.Text = " Some Of filds are Red!!!";
-                    //textBox_GenerateConfigFile.BackColor = Color.Red;
-                    return;
-                }
-                else
-                {
-                    //textBox_GenerateConfigFile.BackColor = Color.LightGreen;
-                }
-
-
-
-
-
-
-                //string Config_file_name = "Config_Date-" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + "_UnitID-" + UnitID + ".txt";
-
-
-                // This text is always added, making the file longer over time 
-                // if it is not deleted. 
-
-                //List<S1_Protocol.S1_Messege_Builder.Command_Description> ret = S1_Protocol.S1_Messege_Builder.NonCommand_GetALLconfigCommandsDescription();
-
-
-
-
-                //textBox_GenerateConfigFile.BackColor = Color.Green;
-
-            }
-            catch (Exception ex)
-            {
-                ex.ToString(); //Gil: just remove warning.
-                //textBox_GenerateConfigFile.Text = ex.ToString();
-            }
-        }
-
-        private void Button2_Click_2(object sender, EventArgs e)
-        {
-            try
-            {
-                TextBox_GenerateConfigFile_Clear();
-                bool IsAllGreen = CheckAllTextboxConfig();
-
-                if (IsAllGreen == false)
-                {
-                    //textBox_GenerateConfigFile.Text = " Some Of filds are Red!!!";
-                    //textBox_GenerateConfigFile.BackColor = Color.Red;
-                    return;
-                }
-                else
-                {
-
-                }
-
-
-                //string Config_file_name = "Config_Date-" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + "_UnitID-" + UnitID + ".txt";
-
-
-                // This text is always added, making the file longer over time 
-                // if it is not deleted. 
-
-                //List<S1_Protocol.S1_Messege_Builder.Command_Description> ret = S1_Protocol.S1_Messege_Builder.NonCommand_GetALLconfigCommandsDescription();
-
-                string SendStr = GenerateConfigCommand();
-
-                SendStr = SendStr.Replace(";", ",");
-
-                byte[] buf = Encoding.ASCII.GetBytes(SendStr);
-                int Size = buf.Length;
-                byte CheckSum = CalcCheckSumbufferSize(buf);
-
-
-                SendStr = ";{CONFIG_START}," + SendStr + "," + Size + "," + CheckSum + ",{CONFIG_END};";
-                byte[] buffer = Encoding.ASCII.GetBytes(SendStr);
-                bool IsSent = SerialPortSendData(buffer);
-
-                if (IsSent == true)
-                {
-                    //textBox_GenerateConfigFile.BackColor = Color.Yellow;
-                    //textBox_GenerateConfigFile.Text = "Config has been sent";
-
-                }
-
-                //textBox_GenerateConfigFile.BackColor = Color.Green;
-                //textBox_GenerateConfigFile.Text = "File " +  + " saved in directory \n" + Directory.GetCurrentDirectory();
-            }
-            catch (Exception ex)
-            {
-                ex.ToString(); //Gil: just remove warning.
-                //textBox_GenerateConfigFile.Text = ex.ToString();
-            }
-        }
-
-        private void Button30_Click(object sender, EventArgs e)
-        {
-
-        }
 
         //textBox_UnitVersion
 
 
 
-        private void TextBox_GenerateConfigFile_Clear()
-        {
-            //textBox_GenerateConfigFile.Invoke(new EventHandler(delegate
-            //    {
-            //        textBox_GenerateConfigFile.Text = "";
-            //        textBox_GenerateConfigFile.BackColor = default(Color);
-            //    }));
-        }
 
 
 
 
-        private void TextBox_ConfigUnitID_TextChanged(object sender, EventArgs e)
-        {
 
-        }
 
-        private void ComboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            //List<string> list = new List<string>(Dictionary_ConfigurationTextBoxes.Keys);
-            //// Loop through list
 
-            //foreach (string k in list)
-            //{
-            //    TextBox temp = Dictionary_ConfigurationTextBoxes[k];
-            //    temp.Visible = true;
-            //}
 
-        }
 
-        private void Label26_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void GroupBox_LoadedConfig_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void TextBox_Config13_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.AlarmViaSMS);
-
-        }
-
-        private void UpdateAlarmCheckBoxes()
-        {
-
-        }
-
-        private void CheckBox_config_Bit0_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void UpdateTextBox13()
-        {
-
-
-
-        }
-
-        private void CheckBox_config_Bit4_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit5_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit6_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit7_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit8_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit9_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void CheckBox_config_Bit10_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void Button32_Click(object sender, EventArgs e)
-        {
-            UpdateTextBox13();
-        }
-
-        private void TextBox_Config10_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.IpAddress);
-        }
-
-        private void TextBox_Config11_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.IpAddress);
-        }
-
-        private void TextBox_Config12_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Port);
-        }
-
-        private void TextBox_Config24_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Boolean);
-        }
-
-        private void TextBox_Config23_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Boolean);
-        }
-
-        private void TextBox_Config27_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.GPRSDisconnectNum);
-        }
-
-        private void TextBox_Config9_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.EveryThing);
-        }
-
-        private void TextBox_Config29_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Boolean);
-        }
-
-        private void TextBox_Config26_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.JammingSens);
-        }
-
-        private void TextBox_Config6_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Port);
-        }
-
-        private void TextBox_Config7_TextChanged(object sender, EventArgs e)
-        {
-
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.SpeedLimit);
-
-
-        }
-
-        private void TextBox_Config8_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.PeriodStatus);
-        }
-
-        private void TextBox_Config14_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Angel);
-        }
-
-        private void TextBox_Config15_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config16_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config17_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Angel);
-        }
-
-        private void TextBox_Config18_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config19_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config20_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Angel);
-        }
-
-        private void TextBox_Config21_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config22_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.PosPeriod5Sec);
-        }
-
-        private void TextBox_Config28_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config30_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
-
-        private void TextBox_Config25_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Float);
-        }
-
-        private void CheckBox_RecordGeneral_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void TextBox_IDKey_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void TxtPortNo_TextChanged(object sender, EventArgs e)
         {
@@ -9552,42 +8525,12 @@ namespace Monitor
             //}
         }
 
-        private void Button_SMSOpenPort_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TextBox_Config31_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.AutoARM);
-        }
-
-        private void PictureBox_logo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button_SetConfigSMS_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void TextBox_Config32_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.GPSType);
-        }
 
         private void CheckBox_S1RecordLog_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void Button_AddToSendSMS_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
 
@@ -9779,21 +8722,6 @@ namespace Monitor
 
         }
 
-        private void GroupBox39_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TextBox_Config40_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.CutSpeed);
-        }
-
-        private void TextBox1_TextChanged_1(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Boolean);
-        }
-
 
 
 
@@ -9867,10 +8795,6 @@ namespace Monitor
 
         }
 
-        private void TextBox_Config42_TextChanged(object sender, EventArgs e)
-        {
-            CheckConfigTextboxValidData((TextBox)sender, ConfigDataType.Number);
-        }
 
         private bool IsTimerRunning = false;
         private int TimerMemory = 0;
@@ -10227,10 +9151,10 @@ namespace Monitor
                 else
                 {
                     Monitor.Properties.Settings.Default.IP_Client = textBox_ClientIP.Text;
-                    Monitor.Properties.Settings.Default.Port_Client= textBox_ClientPort.Text;
+                    Monitor.Properties.Settings.Default.Port_Client = textBox_ClientPort.Text;
                     Monitor.Properties.Settings.Default.Save();
 
-                }    
+                }
                 // we have connected
                 ClientSocket.EndConnect(result);
 
@@ -10251,7 +9175,6 @@ namespace Monitor
             }
         }
 
-        private int ClentSendData = 0;
         private void Button3_Click_4(object sender, EventArgs e)
         {
             try
@@ -10270,8 +9193,8 @@ namespace Monitor
 
                 //WaitforBufferFull = 1;
 
-                ClentSendData++;
-                richTextBox_ClientTx.Text = "Send Data to Server " + ClentSendData;
+                //ClentSendData++;
+                //richTextBox_ClientTx.Text = "Send Data to Server " + ClentSendData;
 
                 // byte[] bb = new byte[100];
 
@@ -10355,11 +9278,11 @@ namespace Monitor
 
                     case Keys.Up:
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
-                        if(CommandsHistoy.Count == 0)
+                        if (CommandsHistoy.Count == 0)
                         {
                             return;
                         }
-                        
+
                         if (HistoryIndex > CommandsHistoy.Count - 1 || HistoryIndex < 0)
                         {
                             HistoryIndex = CommandsHistoy.Count;
@@ -10439,15 +9362,15 @@ namespace Monitor
         {
             try
             {
-            if (serialPort.IsOpen == false)
-            {
-                
+                if (serialPort.IsOpen == false)
+                {
+
                     button_OpenPort.BackColor = Color.Yellow;
                     label_SerialPortConnected.BackColor = Color.Yellow;
 
-                //    ComPortClosing = false;
+                    //    ComPortClosing = false;
 
-                  //  CloseSerialPortTimer = false;
+                    //  CloseSerialPortTimer = false;
 
 
 
@@ -10493,33 +9416,33 @@ namespace Monitor
                     Monitor.Properties.Settings.Default.Save();
 
 
-               
 
 
 
 
-            }
-            else
-            {
 
-                //  ComPortClosing = true;
-                
-                button_OpenPort.BackColor = default;
-                label_SerialPortConnected.BackColor = default;
-                label_SerialPortStatus.Text = "";
-                gbPortSettings.Enabled = true;
-                serialPort.Close();
-                //checkBox_ComportOpen.Enabled = false;
-                //button_OpenPort.Text = "Open";
+                }
+                else
+                {
 
-                //CloseSerialPortTimer = true;
-                //CloseSerialPortConter = 0;
+                    //  ComPortClosing = true;
+
+                    button_OpenPort.BackColor = default;
+                    label_SerialPortConnected.BackColor = default;
+                    label_SerialPortStatus.Text = "";
+                    gbPortSettings.Enabled = true;
+                    serialPort.Close();
+                    //checkBox_ComportOpen.Enabled = false;
+                    //button_OpenPort.Text = "Open";
+
+                    //CloseSerialPortTimer = true;
+                    //CloseSerialPortConter = 0;
 
 
 
 
-                //groupBox_ServerSettings.Enabled = true;
-            }
+                    //groupBox_ServerSettings.Enabled = true;
+                }
 
             }
             catch (Exception ex)
@@ -10533,37 +9456,6 @@ namespace Monitor
             }
         }
 
-        private void TabControl1_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.F1:
-                        SerialTerminalPrintHelp();
-
-                        break;
-
-                    case Keys.F2:
-                        SerialPortLogger.LogMessage(Color.Black, Color.Chartreuse, "F2 function reads all commands to history", New_Line = true, Show_Time = true);
-                        break;
-
-                    case Keys.Enter:
-                        if (tabControl_Main.SelectedIndex == 3 && button_ClientConnect.BackColor == Color.LightGreen)
-                        {
-                            button_Send_Click(this, new EventArgs());
-                        }
-                        break;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                SerialPortLogger.LogMessage(Color.Black, Color.Red, ex.Message, New_Line = true, Show_Time = true);
-            }
-
-        }
 
         private int ChartUpdateTime = 100;
         private void ComboBox_ChartUpdateTime_SelectedIndexChanged(object sender, EventArgs e)
@@ -10657,8 +9549,8 @@ namespace Monitor
                     //textBox_AllDataSent.Text = String.Format("Preamble: [{0}] Opcode: [{1}] Data : [{2}] Data length: [{3}] CheckSum: [{4}]",Ret.Preamble,Ret.Opcode,Ret.Data,Ret.DataLength,Ret.CheckSum);
 
 
-                //    byte[] WriteData = Kratos_Protocol.EncodeKratusProtocol_Standard(SentFrame);
-//                      stm.Write(WriteData, 0, WriteData.Length);
+                    //    byte[] WriteData = Kratos_Protocol.EncodeKratusProtocol_Standard(SentFrame);
+                    //                      stm.Write(WriteData, 0, WriteData.Length);
                 }
 
 
@@ -10734,7 +9626,6 @@ namespace Monitor
         }
 
 
-   
 
 
 
@@ -10742,7 +9633,6 @@ namespace Monitor
 
 
 
-        
 
 
 
@@ -10750,7 +9640,9 @@ namespace Monitor
 
 
 
-      
+
+
+
 
 
 
@@ -10838,7 +9730,7 @@ namespace Monitor
 
 
 
- 
+
 
 
 
@@ -11427,7 +10319,7 @@ Raw4 - Catalina 4
         /// <returns></returns>
         private string ReverseHexStringLittleBigEndian(string i_HexString)
         {
-            if(i_HexString == null)
+            if (i_HexString == null)
             {
                 return "";
             }
@@ -12019,7 +10911,7 @@ Note: eStatus enum 
 
         }
 
-  
+
 
 
         private void textBox_SelectLOSource_TextChanged(object sender, EventArgs e)
@@ -12048,8 +10940,8 @@ Note: eStatus enum 
 
 
 
-     //   private KratosProtocolFrame SentFrameGlobal = null;
-        
+        //   private KratosProtocolFrame SentFrameGlobal = null;
+
 
 
 
@@ -12101,8 +10993,8 @@ Note: eStatus enum 
 
 
 
-      
-     
+
+
 
 
 
@@ -12155,8 +11047,8 @@ Note: eStatus enum 
 
         private void button74_Click_1(object sender, EventArgs e)
         {
-           
-            
+
+
 
 
         }
@@ -12468,7 +11360,7 @@ Note: eStatus enum 
             SetTextBoxTextChangedColor((TextBox)sender);
         }
 
-        
+
 
         private void textBox95_TextChanged(object sender, EventArgs e)
         {
@@ -12810,11 +11702,11 @@ Note: eStatus enum 
 
 
 
-    
 
 
 
-  
+
+
 
         private void textBox_SPA_Ton_TextChanged(object sender, EventArgs e)
         {
@@ -13056,15 +11948,15 @@ Note: eStatus enum 
 
 
 
-       
-
-      
-
-        
 
 
 
-  
+
+
+
+
+
+
 
 
 
@@ -13208,7 +12100,7 @@ Note: eStatus enum 
 
 
 
-       
+
 
         void dgGrid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -13567,12 +12459,12 @@ This Process can take 1 minute.";
 
 
 
-       
 
 
 
 
- 
+
+
 
         private void button136_Click(object sender, EventArgs e)
         {
@@ -13587,7 +12479,7 @@ This Process can take 1 minute.";
         private void button_SendSerialPort_Click(object sender, EventArgs e)
         {
             bool IsSent = false;
-           // 
+            // 
 
             if (serialPort.IsOpen == false)
             {
@@ -13741,7 +12633,7 @@ This Process can take 1 minute.";
 
                         //SerialPortLogger.LogMessage(Color.Purple, Color.LightGray, " History Index: " + HistoryIndex.ToString(), New_Line = true, Show_Time = false);
                         if (CLI_HistoryIndex <= Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex > 0)
-                        { 
+                        {
 
                             CLI_HistoryIndex--;
                         }
@@ -13773,7 +12665,7 @@ This Process can take 1 minute.";
 
                         if (CLI_HistoryIndex < Monitor.Properties.Settings.Default.CLICommad_History.Count - 1 && CLI_HistoryIndex >= 0)
                         {
- 
+
                             CLI_HistoryIndex++;
                         }
                         else
@@ -13822,9 +12714,9 @@ This Process can take 1 minute.";
                         m_textBox.SelectionLength = 0;
                         break;
 
-                    //default:
-                    //    CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
-                    //    break;
+                        //default:
+                        //    CLI_HistoryIndex = Monitor.Properties.Settings.Default.CLICommad_History.Count - 1;
+                        //    break;
                 }
 
 
@@ -13867,7 +12759,7 @@ This Process can take 1 minute.";
         }
 
         Int32 GlobalReadRegister = 0;
-       // bool GlobalReadRegisterWritten = false;
+        // bool GlobalReadRegisterWritten = false;
         int MessageCounter = 0;
         async Task<String> WriteReg32(String i_Command, bool i_OnlyCheckValidity)
         {
@@ -13881,9 +12773,9 @@ This Process can take 1 minute.";
             /////////////////////////////////////////////////////////////////
             ///
 
-            
+
             int NumOfArguments = tempStr.Length;
-            if ( !(NumOfArguments == 5 || NumOfArguments == 3))
+            if (!(NumOfArguments == 5 || NumOfArguments == 3))
             {
                 ret += String.Format("\n Arguments number should be 3 or 5, see example", NumOfArguments);
                 return ret;
@@ -13899,7 +12791,7 @@ This Process can take 1 minute.";
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[1]);
-             //   return ret;
+                //   return ret;
             }
 
 
@@ -13909,7 +12801,7 @@ This Process can take 1 minute.";
             if (buffer == null || buffer.Length != 4)
             {
                 ret += String.Format("\n Argument [{0}] invalid not hex value or not 4 bytes", tempStr[2]);
-            //    return ret;
+                //    return ret;
             }
 
             if (NumOfArguments == 5)
@@ -13946,15 +12838,15 @@ This Process can take 1 minute.";
                 //String NotMaskValue = "FFFFFFFF";
                 //if (MaskString != NotMaskValue)
                 //{
-                    GlobalReadRegister = 0;
+                GlobalReadRegister = 0;
                 //GlobalReadRegisterWritten = false;
-                    Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
-                    Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
+                Int32 MaskInt32 = Int32.Parse(MaskString, System.Globalization.NumberStyles.HexNumber);
+                Int32 DataToWrite = Int32.Parse(DataToWrite32bits, System.Globalization.NumberStyles.HexNumber);
 
                 //ReadReg32(String.Format("ReadReg {0}", RegisterAddress32bits), false);
-                await ExecuteCLICommand(String.Format("ReadReg32 {0}", RegisterAddress32bits),false);
+                await ExecuteCLICommand(String.Format("ReadReg32 {0}", RegisterAddress32bits), false);
 
-                    await Task.Delay(DelayBetweenReadWrite);
+                await Task.Delay(DelayBetweenReadWrite);
 
                 //while (GlobalReadRegisterWritten == false)
                 //{
@@ -13964,14 +12856,14 @@ This Process can take 1 minute.";
                 // prefer number = number & ~(1 << n) | (x << n); for Changing the n-th bit to x. – 
 
                 for (int i = 0; i < 32; i++)
+                {
+                    if (((MaskInt32 >> i) & 1U) == 0)
                     {
-                        if (((MaskInt32 >> i) & 1U) == 0)
-                        {
-                            int BitStatus = (DataToWrite >> i) & 1;
-                            GlobalReadRegister = (GlobalReadRegister & ~(1 << i)) | (BitStatus << i);
-                        }
-
+                        int BitStatus = (DataToWrite >> i) & 1;
+                        GlobalReadRegister = (GlobalReadRegister & ~(1 << i)) | (BitStatus << i);
                     }
+
+                }
 
                 //await WriteReg32(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")),false);
                 await ExecuteCLICommand(String.Format("WriteReg32 {0} {1}", RegisterAddress32bits, GlobalReadRegister.ToString("X8")), false);
@@ -14088,7 +12980,7 @@ This Process can take 1 minute.";
                 return ret;
             }
 
-            int i =0;
+            int i = 0;
             String Command = tempStr[0];
             if (tempStr[1].Contains("_s") == true)
             {
@@ -14138,7 +13030,7 @@ This Process can take 1 minute.";
             }
             else
             {
-                ret += String.Format("\n Argument 1 [{0}] invalid ",CMD_Activation);
+                ret += String.Format("\n Argument 1 [{0}] invalid ", CMD_Activation);
             }
 
             //Spare
@@ -14158,9 +13050,9 @@ This Process can take 1 minute.";
             if (SystemMode.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 7);
-                SystemMode =  SystemMode.Remove(SystemMode.Length - 1);
+                SystemMode = SystemMode.Remove(SystemMode.Length - 1);
             }
-            if (int.TryParse(SystemMode, out Num) && (Num >=0  && Num <= 3))
+            if (int.TryParse(SystemMode, out Num) && (Num >= 0 && Num <= 3))
             {
                 SendFrame[19] = (byte)Num;
 
@@ -14209,7 +13101,7 @@ This Process can take 1 minute.";
             if (TxInputPower.EndsWith("x"))
             {
                 SendFrame[16] |= (1 << 3);
-                TxInputPower =  TxInputPower.Remove(TxInputPower.Length - 1);
+                TxInputPower = TxInputPower.Remove(TxInputPower.Length - 1);
             }
             if (int.TryParse(TxInputPower, out Num) && (Num >= 0 && Num <= 80))
             {
@@ -14331,7 +13223,7 @@ This Process can take 1 minute.";
             }
             else
             {
-                ret += String.Format("\n Argument 12 [{0}] invalid ",  RxChGRDAtt);
+                ret += String.Format("\n Argument 12 [{0}] invalid ", RxChGRDAtt);
             }
             i++;
 
@@ -14407,7 +13299,7 @@ This Process can take 1 minute.";
                 return ret;
             }
 
-            if(tempStr[1].Contains("_s") == true)
+            if (tempStr[1].Contains("_s") == true)
             {
                 tempStr[1] = tempStr[1].Replace("_s", "");
                 ShowStatus = true;
@@ -14421,7 +13313,7 @@ This Process can take 1 minute.";
                 return ret;
             }
 
-            if (i_OnlyCheckValidity == true )
+            if (i_OnlyCheckValidity == true)
             {
                 return ret;
             }
@@ -14502,7 +13394,7 @@ This Process can take 1 minute.";
             return ret;
         }
 
-        
+
         /// <summary>
         /// Gil: Each command implemintation return string if the arguments doesn't valit or empty string if every thing OK.
         /// </summary>
@@ -14576,14 +13468,14 @@ This Process can take 1 minute.";
         /// 
         async private Task<String> ExecuteCLICommand(String i_Command, bool i_OnlyCheckValidity)
         {
-            
+
             String[] tempStr = i_Command.Split(' ');
             String CommandName = tempStr[0];
             String ret = "";
             bool IsCommandFound = false;
             foreach (CommandClass cmd in List_AllCommands)
             {
-                if(cmd.Command_name == CommandName)
+                if (cmd.Command_name == CommandName)
                 {
                     IsCommandFound = true;
 
@@ -14615,7 +13507,7 @@ This Process can take 1 minute.";
 
                         default:
                             ret = String.Format("[{0}] command not implemented", i_Command);
-                             SystemLogger.LogMessage(Color.Orange, Color.LightGray, ret, true, true);
+                            SystemLogger.LogMessage(Color.Orange, Color.LightGray, ret, true, true);
 
                             break;
 
@@ -14641,9 +13533,9 @@ This Process can take 1 minute.";
 
         }
 
-        private async  void button_CLISend_Click(object sender, EventArgs e)
+        private async void button_CLISend_Click(object sender, EventArgs e)
         {
-            await ExecuteCLICommand(textBox_CLISendCommands.Text,false);
+            await ExecuteCLICommand(textBox_CLISendCommands.Text, false);
 
             if (checkBox_CLIDeleteAfterSend.Checked == true)
             {
@@ -14661,7 +13553,7 @@ This Process can take 1 minute.";
         private void textBox_CLIsendperodically_TextChanged(object sender, EventArgs e)
         {
             TextBox Txtbx = (TextBox)sender;
-            if (int.TryParse(Txtbx.Text,out int result) == true)
+            if (int.TryParse(Txtbx.Text, out int result) == true)
             {
                 Txtbx.BackColor = Color.LightGreen;
             }
@@ -14678,12 +13570,12 @@ This Process can take 1 minute.";
 
         private void listBox_CLI_ALLCommands_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 textBox_CLISendCommands.Text = List_AllCommands[listBox_CLI_ALLCommands.SelectedIndex].Example;
             }
             catch { }
-            
+
         }
 
         private void textBox_CLISendCommands_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -14738,10 +13630,10 @@ This Process can take 1 minute.";
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         String[] filelines = File.ReadAllLines(filePath);
-                        foreach(String line in filelines)
+                        foreach (String line in filelines)
                         {
 
-                                MyAppendText(richTextBox_Scripts, line + "\r\n", default, default);
+                            MyAppendText(richTextBox_Scripts, line + "\r\n", default, default);
                         }
 
                         button_CheckScriptValidity_Click(null, null);
@@ -14838,8 +13730,8 @@ This Process can take 1 minute.";
                         {
                             //textBox_CLISendCommands.Text = line;
                             //button_CLISend_Click(null, null);
-                            
-                            SystemLogger.LogMessage(Color.White, Color.Black, i.ToString()+ ":  ", false, false);
+
+                            SystemLogger.LogMessage(Color.White, Color.Black, i.ToString() + ":  ", false, false);
                             await ExecuteCLICommand(line, false);
                             i++;
                             await Task.Delay(Delay);
@@ -14850,7 +13742,7 @@ This Process can take 1 minute.";
                                 return;
                             }
 
-                            if(StopRuunScript == true)
+                            if (StopRuunScript == true)
                             {
                                 StopRuunScript = false;
                                 return;
@@ -14915,7 +13807,7 @@ This Process can take 1 minute.";
         }
         void Gil_DelaySleep(int i_MiliSeconds)
         {
-            for(int i =0; i< i_MiliSeconds; i++)
+            for (int i = 0; i < i_MiliSeconds; i++)
             {
                 Thread.Sleep(1);
             }
@@ -14943,7 +13835,7 @@ This Process can take 1 minute.";
                     Monitor.Properties.Settings.Default.Script.Add(line);
                 }
             }
-            
+
 
             Monitor.Properties.Settings.Default.Save();
 
@@ -14958,7 +13850,7 @@ This Process can take 1 minute.";
             IsTimerRunning = false;
             button_StartStopTimer.BackColor = default;
         }
-        bool StopRuunScript = false; 
+        bool StopRuunScript = false;
         private void button_StopRunScrip_Click(object sender, EventArgs e)
         {
             StopRuunScript = true;
@@ -14978,7 +13870,7 @@ This Process can take 1 minute.";
             int cursorPosition = m_richtext.SelectionStart;
             int lineIndex = m_richtext.GetLineFromCharIndex(cursorPosition);
             //m_richtext.WordWrap = true;
-            toolTip1.Show("Line: " + (lineIndex+1).ToString(), m_richtext,2000);
+            toolTip1.Show("Line: " + (lineIndex + 1).ToString(), m_richtext, 2000);
         }
 
         private void checkBox_Debug_CheckedChanged(object sender, EventArgs e)
@@ -15007,7 +13899,7 @@ This Process can take 1 minute.";
             }
         }
 
-        private async  void button_ScriptRunFromFile_Click(object sender, EventArgs e)
+        private async void button_ScriptRunFromFile_Click(object sender, EventArgs e)
         {
             int i = 0;
             bool IsFirstTime = false;
@@ -15079,7 +13971,7 @@ This Process can take 1 minute.";
 
 
 
-           
+
         }
 
         private void Button_ResetTimer_Click(object sender, EventArgs e)
@@ -15189,7 +14081,7 @@ WriteReg32 00000000_s 1234ABCD
 
 
 
-            
+
 
             CommandClass ReadReg32 = new CommandClass("ReadReg32",
 @"
@@ -15337,7 +14229,7 @@ Use the arrows Up, Down and Tab for autocomplition.
             cmb_PortName.Text = Monitor.Properties.Settings.Default.Comport_Port;
             textBox_TimeBetweenComands.Text = Monitor.Properties.Settings.Default.TimeBetweenCLICommands;
             textBox_ClientIP.Text = Monitor.Properties.Settings.Default.IP_Client;
-             textBox_ClientPort.Text = Monitor.Properties.Settings.Default.Port_Client ;
+            textBox_ClientPort.Text = Monitor.Properties.Settings.Default.Port_Client;
 
             foreach (String line in Monitor.Properties.Settings.Default.Script)
             {
@@ -15355,7 +14247,7 @@ Use the arrows Up, Down and Tab for autocomplition.
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
                 tabControl_Main.TabPages.RemoveAt(0);
-                
+
 
 
                 textBox_CommandHelp.Text = CLI_Help;
@@ -15368,7 +14260,7 @@ Use the arrows Up, Down and Tab for autocomplition.
 
 
 
-               // KratosProtocolLogger = new TextBox_Logger("Kratos_Protocol", richTextBox_KratosProtocol, button_ClearKratosProtocol, null, checkBox_RecordKratosProtocol, null, null, null, null);
+                // KratosProtocolLogger = new TextBox_Logger("Kratos_Protocol", richTextBox_KratosProtocol, button_ClearKratosProtocol, null, checkBox_RecordKratosProtocol, null, null, null, null);
                 ServerLogger = new TextBox_Logger("Server", TextBox_Server, button_ClearServer, checkBox_ServerPause, checkBox_ServerRecord, null, null, null, checkBox_StopLogging);
                 SerialPortLogger = new TextBox_Logger("Serial_Port", SerialPortLogger_TextBox, button_ClearSerialPort, checkBox_SerialPortPause, checkBox_SerialPortRecordLog, textBox_SerialPortRecognizePattern, textBox_SerialPortRecognizePattern2, textBox_SerialPortRecognizePattern3, null);
                 SystemLogger = new TextBox_Logger("SystemLogger", richTextBox_SSPA, button_ClearMiniAda, checkBox_PauseMiniAda, checkBox_RecordMiniAda, textBox_CLIrecognize1, textBox_CLIrecognize2, textBox_CLIrecognize3, checkBox_StopLogging);
@@ -15396,7 +14288,7 @@ Use the arrows Up, Down and Tab for autocomplition.
                 Text = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
                 label_Projectname.Text = version;
                 Text = Text + " [ " + ", Version: " + version + ", Compiled: " + RetrieveLinkerTimestamp().ToString() + " ]";
-                
+
 
 
 
