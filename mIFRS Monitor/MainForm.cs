@@ -10528,6 +10528,12 @@ namespace Monitor
 
                 //SerialException = true;
 
+                button_OpenPort.BackColor = default;
+                label_SerialPortConnected.BackColor = default;
+                label_SerialPortStatus.Text = "";
+                gbPortSettings.Enabled = true;
+                serialPort.Close();
+
                 SerialPortLogger.LogMessage(Color.Red, Color.LightGray, ex.Message.ToString(), New_Line = true, Show_Time = true);
                 return;
             }
