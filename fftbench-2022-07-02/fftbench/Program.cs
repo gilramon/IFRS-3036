@@ -21,7 +21,7 @@ namespace fftbench
 
             try
             {
-                var task = Run(size, repeat);
+                var task = Run(19, 1);
 
                 task.Wait();
             }
